@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping"/>
+    <bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter"/>
+
+    <!-- 注解支持 -->
+    <context:annotation-config/>
+    <context:component-scan base-package="com.fingard.rabbit.websys.web.controller">
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service"/>
+    </context:component-scan>
+    <!--<bean class="com.fingard.rabbit.websys.common.util.Globals"/>-->
+
+    <bean class="org.springframework.session.data.redis.config.annotation.web.http.RedisHttpSessionConfiguration"/>
+
+    <!-- 文件上传支持 -->
+    <!--<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">-->
+        <!--<property name="maxUploadSize">-->
+            <!--<value>10000000000</value> &lt;!&ndash; 以字节byte为单位 &ndash;&gt;-->
+        <!--</property>-->
+        <!--<property name="defaultEncoding">-->
+            <!--<value>UTF-8</value>-->
+        <!--</property>-->
+    <!--</bean>-->
+
+    <!--<import resource="classpath*:applicationContext-cache.xml" />-->
+    <!--<import resource="classpath*:applicationContext-config-consumer.xml" />-->
+    <!--<import resource="classpath*:applicationContext-fundbudsys-consumer.xml" />-->
+    <!--<import resource="classpath*:applicationContext-basecore-consumer.xml" />-->
+    <!--<import resource="classpath*:applicationContext-billsys-consumer.xml" />-->
+	<!--<import resource="classpath*:applicationContext-usercore-consumer.xml" />-->
+    <!--<import resource="classpath*:applicationContext-tasker-consumer.xml"/>-->
+    <!--<import resource="classpath*:applicationContext-workflow-consumer.xml" />-->
+    <!--<import resource="classpath*:applicationContext-intraccsys-consumer.xml" />-->
+    <!--<import resource="classpath*:applicationContext-warningser-consumer.xml" />-->
+    <!--<import resource="classpath*:applicationContext-homepage-consumer.xml" />-->
+    <!--<import resource="classpath*:applicationContext-checksys-consumer.xml" />-->
+    <!--<import resource="classpath*:applicationContext-settlesys-consumer.xml"/>-->
+</beans>

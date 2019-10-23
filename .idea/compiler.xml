@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="emailuser-api" />
+        <module name="emailuser-biz" />
+        <module name="emailuser-common" />
+        <module name="emailuser-consumer" />
+        <module name="emailuser-dao" />
+        <module name="emailuser-dto" />
+        <module name="emailuser-service-provider" />
+        <module name="emailweb-common" />
+        <module name="emailweb-consumer" />
+        <module name="emailweb-dto" />
+        <module name="emailweb-web" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="emailuser" target="1.5" />
+      <module name="emailuser-api" target="1.5" />
+      <module name="emailuser-biz" target="1.5" />
+      <module name="emailuser-common" target="1.5" />
+      <module name="emailuser-consumer" target="1.5" />
+      <module name="emailuser-dao" target="1.5" />
+      <module name="emailuser-dto" target="1.5" />
+      <module name="emailuser-service-provider" target="1.5" />
+      <module name="emailweb" target="1.8" />
+      <module name="emailweb-common" target="1.8" />
+      <module name="emailweb-consumer" target="1.8" />
+      <module name="emailweb-dto" target="1.8" />
+      <module name="emailweb-web" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

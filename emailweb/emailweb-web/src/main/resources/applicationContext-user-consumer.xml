@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <!--&lt;!&ndash; 多币种账户&ndash;&gt;-->
+    <!--<dubbo:reference id="multiCurrcyAccountApi" interface="com.fingard.rabbit.acccore.api.bankaccount.MultiCurrcyAccountApi"/>-->
+
+    <!--&lt;!&ndash; 单币种账户&ndash;&gt;-->
+    <!--<dubbo:reference id="singleCurrcyAccountApi" interface="com.fingard.rabbit.acccore.api.bankaccount.SingleCurrcyAccountApi"/>-->
+
+    <!--&lt;!&ndash; 账户性质&ndash;&gt;-->
+    <!--<dubbo:reference id="accountTypeApi" interface="com.fingard.rabbit.acccore.api.bankaccount.AccountTypeApi"/>-->
+
+
+</beans>

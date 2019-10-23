@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/emailuser-api/emailuserapi.iml" filepath="$PROJECT_DIR$/emailuser-api/emailuserapi.iml" />
+      <module fileurl="file://$PROJECT_DIR$/emailuser-biz/emailuserbiz.iml" filepath="$PROJECT_DIR$/emailuser-biz/emailuserbiz.iml" />
+      <module fileurl="file://$PROJECT_DIR$/emailuser-common/emailusercommon.iml" filepath="$PROJECT_DIR$/emailuser-common/emailusercommon.iml" />
+      <module fileurl="file://$PROJECT_DIR$/emailuser-consumer/emailuserconsumer.iml" filepath="$PROJECT_DIR$/emailuser-consumer/emailuserconsumer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/emailuser-dao/emailuserdao.iml" filepath="$PROJECT_DIR$/emailuser-dao/emailuserdao.iml" />
+      <module fileurl="file://$PROJECT_DIR$/emailuser-dto/emailuserdto.iml" filepath="$PROJECT_DIR$/emailuser-dto/emailuserdto.iml" />
+      <module fileurl="file://$PROJECT_DIR$/emailuser-service-provider/emailuserserviceprovider.iml" filepath="$PROJECT_DIR$/emailuser-service-provider/emailuserserviceprovider.iml" />
+    </modules>
+  </component>
+</project>

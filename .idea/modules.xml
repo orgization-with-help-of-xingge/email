@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/email.iml" filepath="$PROJECT_DIR$/.idea/email.iml" />
+      <module fileurl="file://$PROJECT_DIR$/emailuser/emailuser.iml" filepath="$PROJECT_DIR$/emailuser/emailuser.iml" />
+      <module fileurl="file://$PROJECT_DIR$/emailuser/emailuser-api/emailuser-api.iml" filepath="$PROJECT_DIR$/emailuser/emailuser-api/emailuser-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/emailuser/emailuser-biz/emailuser-biz.iml" filepath="$PROJECT_DIR$/emailuser/emailuser-biz/emailuser-biz.iml" />
+      <module fileurl="file://$PROJECT_DIR$/emailuser/emailuser-common/emailuser-common.iml" filepath="$PROJECT_DIR$/emailuser/emailuser-common/emailuser-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/emailuser/emailuser-consumer/emailuser-consumer.iml" filepath="$PROJECT_DIR$/emailuser/emailuser-consumer/emailuser-consumer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/emailuser/emailuser-dao/emailuser-dao.iml" filepath="$PROJECT_DIR$/emailuser/emailuser-dao/emailuser-dao.iml" />
+      <module fileurl="file://$PROJECT_DIR$/emailuser/emailuser-dto/emailuser-dto.iml" filepath="$PROJECT_DIR$/emailuser/emailuser-dto/emailuser-dto.iml" />
+      <module fileurl="file://$PROJECT_DIR$/emailuser/emailuser-service-provider/emailuser-service-provider.iml" filepath="$PROJECT_DIR$/emailuser/emailuser-service-provider/emailuser-service-provider.iml" />
+      <module fileurl="file://$PROJECT_DIR$/emailweb/emailweb.iml" filepath="$PROJECT_DIR$/emailweb/emailweb.iml" />
+      <module fileurl="file://$PROJECT_DIR$/emailweb/emailweb-common/emailweb-common.iml" filepath="$PROJECT_DIR$/emailweb/emailweb-common/emailweb-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/emailweb/emailweb-consumer/emailweb-consumer.iml" filepath="$PROJECT_DIR$/emailweb/emailweb-consumer/emailweb-consumer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/emailweb/emailweb-dto/emailweb-dto.iml" filepath="$PROJECT_DIR$/emailweb/emailweb-dto/emailweb-dto.iml" />
+      <module fileurl="file://$PROJECT_DIR$/emailweb/emailweb-web/emailweb-web.iml" filepath="$PROJECT_DIR$/emailweb/emailweb-web/emailweb-web.iml" />
+    </modules>
+  </component>
+</project>
