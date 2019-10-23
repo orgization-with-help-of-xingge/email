@@ -1,0 +1,10 @@
+邮件服务器地址：mail.sixl.xyz
+账号：
+test123@sixl.xyz/test123
+test234@sixl.xyz/test234
+
+
+
+mariadb地址：
+主：49.232.175.59：3306  root/123456
+从：47.94.232.136：3306  root/123456
