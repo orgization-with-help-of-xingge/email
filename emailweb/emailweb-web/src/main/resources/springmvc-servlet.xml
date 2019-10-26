@@ -11,16 +11,7 @@
     <bean id="contentNegotiationManager" class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
         <property name="favorPathExtension" value="false"/>
     </bean>
-    <mvc:annotation-driven content-negotiation-manager="contentNegotiationManager">
-<!--        &lt;!&ndash; 返回页面个性化处理 &ndash;&gt;-->
-<!--        <mvc:message-converters>-->
-<!--            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">-->
-<!--                <property name="objectMapper">-->
-<!--                    <bean class="com.fingard.rabbit.websys.common.util.JsonObjectMapper"/>-->
-<!--                </property>-->
-<!--            </bean>-->
-<!--        </mvc:message-converters>-->
-    </mvc:annotation-driven>
+    <mvc:annotation-driven content-negotiation-manager="contentNegotiationManager"/>
 
     <context:component-scan base-package="com.hdu.email.controller">
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service"/>
@@ -29,19 +20,9 @@
 
     <!-- 注解支持 -->
     <context:annotation-config/>
-    <!--避免IE执行AJAX时，返回JSON出现下载文件 -->
-    <bean id="mappingJackson2HttpMessageConverter"
-          class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
-        <property name="supportedMediaTypes">
-            <list>
-                <value>text/html;charset=UTF-8</value>
-                <value>text/json;charset=UTF-8</value>
-                <value>application/json;charset=UTF-8</value>
-            </list>
-        </property>
-    </bean>
 
-    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter"/>
+
+<!--    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter"/>-->
 
     <!--<mvc:resources location="/WEB-INF/page/js/" mapping="/page/js/**"/>-->
     <!--<mvc:resources location="/WEB-INF/workflow/editor-app/" mapping="/editor-app/**"/>-->
@@ -52,52 +33,30 @@
     <!--<mvc:resources location="/template/" mapping="/template/**"/>-->
     <!--<mvc:resources location="/cab/" mapping="/cab/**"/>-->
 
-    <!--<mvc:interceptors>-->
-        <!--<mvc:interceptor>-->
-            <!--<mvc:mapping path="/**"/>-->
-            <!--<bean class="com.fingard.rabbit.websys.web.interceptor.LoginInterceptor"/>-->
-        <!--</mvc:interceptor>-->
-        <!--<mvc:interceptor>-->
-            <!--<mvc:mapping path="/**"/>-->
-            <!--<bean class="com.fingard.rabbit.websys.web.interceptor.LoggingInterceptor"/>-->
-        <!--</mvc:interceptor>-->
-        <!--<mvc:interceptor>-->
-            <!--<mvc:mapping path="/**/*.do"/>-->
-            <!--<bean class="com.fingard.rabbit.websys.web.interceptor.UserRequestInterceptor">-->
-                <!--<property name="enable" value="true"/>-->
-            <!--</bean>-->
-        <!--</mvc:interceptor>-->
-        <!--<mvc:interceptor>-->
-            <!--<mvc:mapping path="/**"/>-->
-            <!--<bean class="com.fingard.rabbit.websys.web.filter.TraceLoggingHandlerFilter">-->
-                <!--<property name="application" value="${dubbo.application}" />-->
-            <!--</bean>-->
-        <!--</mvc:interceptor>-->
-    <!--</mvc:interceptors>-->
 
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/"/>
         <property name="suffix" value=".jsp"/>
     </bean>
 
-    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
-        <property name="messageConverters">
-            <list>
-                <bean class="org.springframework.http.converter.StringHttpMessageConverter">
-                    <property name="supportedMediaTypes">
-                        <list>
-                            <value>text/html;charset=UTF-8</value>
-                        </list>
-                    </property>
-                </bean>
-                <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
-                    <property name="supportedMediaTypes">
-                        <list>
-                            <value>application/json;charset=UTF-8</value>
-                        </list>
-                    </property>
-                </bean>
-            </list>
-        </property>
-    </bean>
+<!--    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">-->
+<!--        <property name="messageConverters">-->
+<!--            <list>-->
+<!--                <bean class="org.springframework.http.converter.StringHttpMessageConverter">-->
+<!--                    <property name="supportedMediaTypes">-->
+<!--                        <list>-->
+<!--                            <value>text/html;charset=UTF-8</value>-->
+<!--                        </list>-->
+<!--                    </property>-->
+<!--                </bean>-->
+<!--                <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">-->
+<!--                    <property name="supportedMediaTypes">-->
+<!--                        <list>-->
+<!--                            <value>application/json;charset=UTF-8</value>-->
+<!--                        </list>-->
+<!--                    </property>-->
+<!--                </bean>-->
+<!--            </list>-->
+<!--        </property>-->
+<!--    </bean>-->
 </beans>
