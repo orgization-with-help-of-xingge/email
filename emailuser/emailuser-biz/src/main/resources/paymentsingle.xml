@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ATSYH>
+  <TransResp>
+    <BankCode>ICBC02</BankCode>
+    <TransType>1908</TransType>
+    <TransSeqID>1353378607</TransSeqID>
+    <TransParam>
+      <DetailRecord>
+        <RespCode>0</RespCode>
+        <RespInfo>付方余额不足</RespInfo>
+        <TransState>0+6</TransState>
+        <ReqSeqID>0000001s</ReqSeqID>
+        <PayInfoCode>4102</PayInfoCode>
+        <TransAmt />
+      </DetailRecord>
+    </TransParam>
+  </TransResp>
+</ATSYH>

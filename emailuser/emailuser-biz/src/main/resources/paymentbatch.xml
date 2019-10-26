@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ATSYH>
+  <TransResp>
+    <BankCode>ICBC02</BankCode>
+    <TransType>1988</TransType>
+    <TransSeqID>1700097952</TransSeqID>
+    <TransParam>
+      <DetailRecord>
+        <NewReqSeqID />
+        <RespCode>0</RespCode>
+        <RespInfo>已受理</RespInfo>
+        <TransState>0</TransState>
+        <ReqSeqID>RN0000002b</ReqSeqID>
+        <PayInfoCode>0</PayInfoCode>
+      </DetailRecord>
+    </TransParam>
+  </TransResp>
+</ATSYH>

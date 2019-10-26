@@ -11,5 +11,20 @@
 
     <artifactId>emailuser-api</artifactId>
 
+    <properties>
+        <skip_.maven.deploy>false</skip_.maven.deploy>
+    </properties>
+    <dependencies>
 
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>dubbo</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.javassist</groupId>
+            <artifactId>javassist</artifactId>
+        </dependency>
+
+
+    </dependencies>
 </project>

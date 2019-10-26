@@ -10,6 +10,72 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>emailuser-biz</artifactId>
+    <properties>
+        <skip_.maven.deploy>true</skip_.maven.deploy>
+    </properties>
+    <dependencies>
+<!--        <dependency>-->
+<!--            <groupId>com.fingard.rabbit.acccore</groupId>-->
+<!--            <artifactId>acccore-dao</artifactId>-->
+<!--            <version>${project.parent.version}</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>com.fingard.rabbit.acccore</groupId>-->
+<!--            <artifactId>acccore-consumer</artifactId>-->
+<!--            <version>${project.parent.version}</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>com.fingard.rabbit.checksys</groupId>-->
+<!--            <artifactId>checksys-extbean</artifactId>-->
+<!--        </dependency>-->
 
+<!--        <dependency>-->
+<!--            <groupId>com.fingard.rabbit.acccore</groupId>-->
+<!--            <artifactId>acccore-cache</artifactId>-->
+<!--            <version>${project.parent.version}</version>-->
+<!--        </dependency>-->
+
+        <dependency>
+            <groupId>com.hdu</groupId>
+            <artifactId>emailuser-dao</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.hdu</groupId>
+            <artifactId>emailuser-consumer</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-tx</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.sgroschupf</groupId>
+            <artifactId>zkclient</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>cglib</groupId>
+            <artifactId>cglib-nodep</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-deploy-plugin</artifactId>
+                    <version>2.5</version>
+                    <configuration>
+                        <skip>true</skip>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
 
 </project>
