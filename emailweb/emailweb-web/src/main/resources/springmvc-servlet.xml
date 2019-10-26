@@ -12,19 +12,19 @@
         <property name="favorPathExtension" value="false"/>
     </bean>
     <mvc:annotation-driven content-negotiation-manager="contentNegotiationManager">
-        <!-- 返回页面个性化处理 -->
-        <mvc:message-converters>
-            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
-                <property name="objectMapper">
-                    <bean class="com.fingard.rabbit.websys.common.util.JsonObjectMapper"/>
-                </property>
-            </bean>
-        </mvc:message-converters>
+<!--        &lt;!&ndash; 返回页面个性化处理 &ndash;&gt;-->
+<!--        <mvc:message-converters>-->
+<!--            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">-->
+<!--                <property name="objectMapper">-->
+<!--                    <bean class="com.fingard.rabbit.websys.common.util.JsonObjectMapper"/>-->
+<!--                </property>-->
+<!--            </bean>-->
+<!--        </mvc:message-converters>-->
     </mvc:annotation-driven>
 
-    <!--<context:component-scan base-package="com.fingard.rabbit.websys.web.controller">-->
-        <!--<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service"/>-->
-    <!--</context:component-scan>-->
+    <context:component-scan base-package="com.hdu.email.controller">
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service"/>
+    </context:component-scan>
 
 
     <!-- 注解支持 -->

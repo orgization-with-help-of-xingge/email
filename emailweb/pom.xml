@@ -84,35 +84,6 @@
 
     <dependencyManagement>
         <dependencies>
-            <!-- RUI -->
-            <dependency>
-                <groupId>com.fingard.rui</groupId>
-                <artifactId>rui-core</artifactId>
-                <version>${rui.version}</version>
-                <exclusions>
-                    <exclusion>
-                        <artifactId>slf4j-log4j12</artifactId>
-                        <groupId>org.slf4j</groupId>
-                    </exclusion>
-                    <exclusion>
-                        <artifactId>log4j</artifactId>
-                        <groupId>log4j</groupId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-
-            <dependency>
-                <groupId>com.fingard.rui</groupId>
-                <artifactId>rui-template</artifactId>
-                <version>${rui.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.fingard.rui</groupId>
-                <artifactId>rui-web</artifactId>
-                <version>${rui.version}</version>
-                <classifier>nolib</classifier>
-                <type>war</type>
-            </dependency>
 
             <!-- Servlet&JSP -->
             <dependency>
@@ -334,11 +305,7 @@
                 <version>${spring.data.redis.version}</version>
             </dependency>
 
-            <dependency>
-                <groupId>com.fingard.rabbit.cachemanager</groupId>
-                <artifactId>cachemanager-api</artifactId>
-                <version>${cachemanager.version}</version>
-            </dependency>
+
 
         </dependencies>
     </dependencyManagement>
@@ -396,14 +363,14 @@
     </build>
 
     <profiles>
-        <profile>
-            <id>local</id>
-            <build>
-                <filters>
-                    <filter>../emailweb-local.properties</filter>
-                </filters>
-            </build>
-        </profile>
+<!--        <profile>-->
+<!--            <id>local</id>-->
+<!--            <build>-->
+<!--                <filters>-->
+<!--                    <filter>../emailweb-local.properties</filter>-->
+<!--                </filters>-->
+<!--            </build>-->
+<!--        </profile>-->
         <profile>
             <id>test</id>
             <build>
@@ -423,22 +390,22 @@
                 </filters>
             </build>
         </profile>
-        <profile>
-            <id>docker</id>
+<!--        <profile>-->
+<!--            <id>docker</id>-->
 
-            <build>
-                <filters>
-                    <filter>../emailweb-docker.properties</filter>
-                </filters>
-            </build>
-        </profile>
-        <profile>
-            <id>online</id>
-            <build>
-                <filters>
-                    <filter>../emailweb-online.properties</filter>
-                </filters>
-            </build>
-        </profile>
+<!--            <build>-->
+<!--                <filters>-->
+<!--                    <filter>../emailweb-docker.properties</filter>-->
+<!--                </filters>-->
+<!--            </build>-->
+<!--        </profile>-->
+<!--        <profile>-->
+<!--            <id>online</id>-->
+<!--            <build>-->
+<!--                <filters>-->
+<!--                    <filter>../emailweb-online.properties</filter>-->
+<!--                </filters>-->
+<!--            </build>-->
+<!--        </profile>-->
     </profiles>
 </project>

@@ -94,9 +94,9 @@
 	</appender>   -->
 
     <!-- controller -->
-    <logger name="com.fingard.rabbit.websys.web" level="${logback.level}">
-        <appender-ref ref="ASYNC_CONTROLLER"/>
-    </logger>
+<!--    <logger name="com.fingard.rabbit.websys.web" level="${logback.level}">-->
+<!--        <appender-ref ref="ASYNC_CONTROLLER"/>-->
+<!--    </logger>-->
 
     <root level="${logback.level}">
         <appender-ref ref="CONSOLE"/>
