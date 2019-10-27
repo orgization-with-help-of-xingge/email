@@ -23,7 +23,13 @@
         <dependency>
             <groupId>com.hdu</groupId>
             <artifactId>emailuser-dto</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>${project.parent.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.hdu</groupId>
+            <artifactId>emailuser-common</artifactId>
+            <version>${project.parent.version}</version>
         </dependency>
 
 

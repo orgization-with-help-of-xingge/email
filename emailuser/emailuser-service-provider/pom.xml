@@ -23,21 +23,6 @@
             <artifactId>emailuser-biz</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>com.fingard.rabbit.acccore</groupId>-->
-<!--            <artifactId>acccore-biz</artifactId>-->
-<!--            <version>${project.parent.version}</version>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>com.fingard.rabbit.acccore</groupId>-->
-<!--            <artifactId>acccore-api</artifactId>-->
-<!--            <version>${project.parent.version}</version>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId></groupId>-->
-<!--            <artifactId>emailuser-biz</artifactId>-->
-
-<!--        </dependency>-->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>dubbo</artifactId>

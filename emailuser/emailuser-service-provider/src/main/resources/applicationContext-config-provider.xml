@@ -9,12 +9,11 @@
 	<dubbo:protocol id="dubbo" name="${dubbo.protocol}" port="${dubbo.protocol.provider.port}" threadpool="cached"/>
 	<dubbo:registry protocol="zookeeper" address="${zookeeper.address}" timeout="${dubbo.timeout}" register="${dubbo.register}"/>
 	<dubbo:provider version="${dubbo.interface.version}"  timeout="${dubbo.timeout}" retries="${dubbo.retries}"
-					filter="${dubbo.filter}" accesslog="${dubbo.accesslog.path}" writenull="${dubbo.accesslog.writenull}"/>
+					filter="${dubbo.filter}" accesslog="${dubbo.accesslog.path}"/>
 	<dubbo:consumer check="false" version="${dubbo.interface.version}"/>
 
 	<!-- 异步消息监控 -->
 	<!--<dubbo:monitor protocol="registry" />-->
-	<bean class="com.alibaba.dubbo.mq.utils.SpringAppCtxUtil" />
 	<!--
 	<bean id="rabbitmqMessagePublisher" class="com.alibaba.dubbo.mq.dubbo.RabbitmqMessagePublisherImpl" init-method="init">
 		<property name="host" value="${mq.host}" />

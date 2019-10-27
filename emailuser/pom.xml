@@ -80,7 +80,7 @@
         <mysql.version>8.0.16</mysql.version>
 
         <!-- dubbo -->
-        <dubbo.version>2.6.0.FG-SNAPSHOT</dubbo.version>
+        <dubbo.version>2.6.2</dubbo.version>
 
         <!-- Test -->
         <junit.version>4.12</junit.version>
@@ -89,7 +89,7 @@
         <groovy.version>2.4.15</groovy.version>
         <objenesis.version>2.6</objenesis.version>
         <h2database.version>1.4.197</h2database.version>
-        <mariaDB4j.version>2.4.0</mariaDB4j.version>
+        <mariaDB4j.version>2.3.0</mariaDB4j.version>
         <!-- rabbitmq -->
         <rabbitmq.version>3.5.1</rabbitmq.version>
 
@@ -305,12 +305,6 @@
                 <artifactId>spring-data-redis</artifactId>
                 <version>${spring.data.redis.version}</version>
             </dependency>
-            <!--oracle-->
-            <dependency>
-                <groupId>com.oracle</groupId>
-                <artifactId>ojdbc14</artifactId>
-                <version>${oracle.version}</version>
-            </dependency>
             <!--mysql-->
             <dependency>
                 <groupId>mysql</groupId>
@@ -321,7 +315,8 @@
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>dubbo</artifactId>
-                <version>${dubbo.version}</version>
+                <version>2.6.2</version>
+                <!--<version>${dubbo.version}</version>-->
                 <exclusions>
                     <exclusion>
                         <groupId>org.springframework</groupId>
@@ -636,6 +631,12 @@
             </plugin>
         </plugins>
         <resources>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                </includes>
+            </resource>
             <resource>
                 <directory>src/main/resources</directory>
                 <filtering>true</filtering>
