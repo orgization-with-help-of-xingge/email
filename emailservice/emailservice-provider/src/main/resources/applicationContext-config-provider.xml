@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+	http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+	<dubbo:application name="${dubbo.application}"/>
+	<dubbo:protocol id="dubbo" name="${dubbo.protocol}" port="${dubbo.protocol.provider.port}" threadpool="cached"/>
+	<dubbo:registry protocol="zookeeper" address="${zookeeper.address}" timeout="${dubbo.timeout}" register="${dubbo.register}"/>
+	<dubbo:provider version="${dubbo.interface.version}"  timeout="${dubbo.timeout}" retries="${dubbo.retries}"
+					filter="${dubbo.filter}" accesslog="${dubbo.accesslog.path}"/>
+	<dubbo:consumer check="false" version="${dubbo.interface.version}"/>
+
+	<!-- 异步消息监控 -->
+	<!--<dubbo:monitor protocol="registry" />-->
+	<!--
+	<bean id="rabbitmqMessagePublisher" class="com.alibaba.dubbo.mq.dubbo.RabbitmqMessagePublisherImpl" init-method="init">
+		<property name="host" value="${mq.host}" />
+		<property name="port" value="${mq.port}" />
+		<property name="username" value="${mq.username}" />
+		<property name="password" value="${mq.password}" />
+		<property name="virtualhost" value="${mq.virtualhost}" />
+	</bean>
+	-->
+
+</beans>

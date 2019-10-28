@@ -15,10 +15,7 @@
         <module>emailservice-dao</module>
         <module>emailservice-consumer</module>
         <module>emailservice-dto</module>
-        <module>emailservice-service-provider</module>
-        <module>emailservice-service-provider</module>
-        <module>emailservice-service-provider</module>
-        <module>emailservice-service-provider</module>
+        <module>emailservice-provider</module>
     </modules>
 
 
