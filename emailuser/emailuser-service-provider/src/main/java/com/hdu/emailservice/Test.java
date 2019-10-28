@@ -1,11 +1,9 @@
-package com.hdu.emailuser;
+package com.hdu.emailservice;
 
 import com.hdu.email.dto.Users;
 import com.hdu.email.mybatis.mapper.UsersMapper;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextInitializer;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 

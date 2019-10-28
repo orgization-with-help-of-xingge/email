@@ -1,0 +1,742 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.hdu</groupId>
+  <artifactId>emailservice</artifactId>
+    <packaging>pom</packaging>
+  <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>emailservice-api</module>
+        <module>emailservice-biz</module>
+        <module>emailservice-common</module>
+        <module>emailservice-dao</module>
+        <module>emailservice-consumer</module>
+        <module>emailservice-dto</module>
+        <module>emailservice-service-provider</module>
+        <module>emailservice-service-provider</module>
+        <module>emailservice-service-provider</module>
+        <module>emailservice-service-provider</module>
+    </modules>
+
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.7</maven.compiler.source>
+        <maven.compiler.target>1.7</maven.compiler.target>
+        <!-- 系统设置 -->
+        <java.source.version>1.8</java.source.version>
+        <java.target.version>1.8</java.target.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.deploy.skip>false</maven.deploy.skip>
+
+        <!-- Maven插件 -->
+        <maven.compiler.plugin.version>3.7.0</maven.compiler.plugin.version>
+        <maven.war.plugin.version>3.2.0</maven.war.plugin.version>
+        <maven.source.plugin.version>3.0.1</maven.source.plugin.version>
+        <maven.deploy.plugin.version>2.8.2</maven.deploy.plugin.version>
+
+        <!-- 任务框架 -->
+        <elastic.job.version>1.1.0-SNAPSHOT</elastic.job.version>
+
+
+        <!-- Servlet&Jsp -->
+        <servlet.version>3.1.0</servlet.version>
+
+        <!-- 日志 -->
+        <slf4j.version>1.7.25</slf4j.version>
+        <logback.version>1.2.3</logback.version>
+        <logstash.version>5.3</logstash.version>
+        <logback-classic.version>1.1.3</logback-classic.version>
+        <logback-core.version>1.1.3</logback-core.version>
+        <logback-access.version>1.1.3</logback-access.version>
+        <logback.api.version>1.7.2</logback.api.version>
+        <!-- Zookeeper -->
+        <zookeeper.version>3.4.11</zookeeper.version>
+        <curator.version>2.12.0</curator.version>
+        <zkclient.version>0.1</zkclient.version>
+
+        <!-- 工具类 -->
+        <commons.io.version>2.6</commons.io.version>
+        <commons.lang3.version>3.7</commons.lang3.version>
+        <commons.beanutils>1.9.3</commons.beanutils>
+        <commons.pool2.version>2.5.0</commons.pool2.version>
+        <commons.codec.version>1.11</commons.codec.version>
+        <jackson.version>2.9.3</jackson.version>
+        <protostuff.version>1.6.0</protostuff.version>
+        <lombok.version>1.16.20</lombok.version>
+        <guava.version>20.0</guava.version>
+        <gson.version>2.8.2</gson.version>
+        <javassist.version>3.18.2-GA</javassist.version>
+        <fastjson.version>1.2.60</fastjson.version>
+        <cglib.version>3.2.6</cglib.version>
+        <hutool.version>4.5.0</hutool.version>
+        <!-- Spring -->
+        <spring.version>4.3.15.RELEASE</spring.version>
+
+        <!-- Mybatis -->
+        <mybatis.version>3.5.1</mybatis.version>
+        <mybatis.spring.version>2.0.0</mybatis.spring.version>
+        <mybatis-plus.version>3.1.2</mybatis-plus.version>
+        <!-- 数据库 -->
+        <oracle.version>10.2.0.3.0</oracle.version>
+        <druid.version>1.1.6</druid.version>
+        <mysql.version>8.0.16</mysql.version>
+
+        <!-- dubbo -->
+        <dubbo.version>2.6.2</dubbo.version>
+
+        <!-- Test -->
+        <junit.version>4.12</junit.version>
+        <dbsetup.version>2.1.0</dbsetup.version>
+        <spock.version>1.1-groovy-2.4</spock.version>
+        <groovy.version>2.4.15</groovy.version>
+        <objenesis.version>2.6</objenesis.version>
+        <h2database.version>1.4.197</h2database.version>
+        <mariaDB4j.version>2.3.0</mariaDB4j.version>
+        <!-- rabbitmq -->
+        <rabbitmq.version>3.5.1</rabbitmq.version>
+
+        <!-- 缓存 -->
+        <jedis.version>2.9.0</jedis.version>
+        <spring.data.redis.version>1.8.12.RELEASE</spring.data.redis.version>
+
+        <!--cloud-tools-->
+        <cloud-tools.version>1.3.0-mysql-SNAPSHOT</cloud-tools.version>
+
+    </properties>
+
+
+    <!-- scope不是compile的依赖不会传递，需要单独声明 -->
+    <dependencies>
+        <!--test-->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.11</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- spock framework -->
+        <dependency>
+            <groupId>org.spockframework</groupId>
+            <artifactId>spock-core</artifactId>
+            <version>${spock.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.spockframework</groupId>
+            <artifactId>spock-spring</artifactId>
+            <version>${spock.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- Optional dependencies for using Spock -->
+        <dependency>
+            <groupId>org.codehaus.groovy</groupId>
+            <artifactId>groovy-all</artifactId>
+            <version>${groovy.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.objenesis</groupId>
+            <artifactId>objenesis</artifactId>
+            <version>${objenesis.version}</version>
+        </dependency>
+
+        <!-- h2database -->
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>${h2database.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.ninja-squad</groupId>
+            <artifactId>DbSetup</artifactId>
+            <version>${dbsetup.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>ch.vorburger.mariaDB4j</groupId>
+            <artifactId>mariaDB4j</artifactId>
+            <version>${mariaDB4j.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.fingard.rabbit.cloud-tools</groupId>
+                <artifactId>cloud-tools</artifactId>
+                <version>${cloud-tools.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fingard.rabbit.basecore</groupId>
+                <artifactId>basecore-extbean</artifactId>
+                <version>${basecore.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fingard.rabbit.basecore</groupId>
+                <artifactId>basecore-api</artifactId>
+                <version>${basecore.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fingard.rabbit.usercore</groupId>
+                <artifactId>usercore-extbean</artifactId>
+                <version>${usercore.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fingard.rabbit.usercore</groupId>
+                <artifactId>usercore-api</artifactId>
+                <version>${usercore.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fingard.rabbit.settlesys</groupId>
+                <artifactId>settlesys-extbean</artifactId>
+                <version>${settlesys.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fingard.rabbit.settlesys</groupId>
+                <artifactId>settlesys-api</artifactId>
+                <version>${settlesys.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fingard.rabbit.checksys</groupId>
+                <artifactId>checksys-extbean</artifactId>
+                <version>${checksys.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fingard.rabbit.checksys</groupId>
+                <artifactId>checksys-api</artifactId>
+                <version>${checksys.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fingard.rabbit.checksys</groupId>
+                <artifactId>checksys-dto</artifactId>
+                <version>${checksys.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fingard.rabbit.cachemanager</groupId>
+                <artifactId>cachemanager-api</artifactId>
+                <version>${cachemanager.version}</version>
+            </dependency>
+
+
+
+            <!-- Servlet&JSP -->
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>javax.servlet-api</artifactId>
+                <version>${servlet.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>javax.servlet.jsp</groupId>
+                <artifactId>jsp-api</artifactId>
+                <version>2.1</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>jstl</artifactId>
+                <version>1.2</version>
+            </dependency>
+
+            <!-- spring -->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-framework-bom</artifactId>
+                <version>${spring.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-test</artifactId>
+                <version>${spring.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-core</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context-support</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-web</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-webmvc</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-tx</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-jdbc</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.integration</groupId>
+                <artifactId>spring-integration-amqp</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+
+            <!-- redis -->
+            <dependency>
+                <groupId>redis.clients</groupId>
+                <artifactId>jedis</artifactId>
+                <version>${jedis.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.data</groupId>
+                <artifactId>spring-data-redis</artifactId>
+                <version>${spring.data.redis.version}</version>
+            </dependency>
+            <!--mysql-->
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql.version}</version>
+            </dependency>
+            <!-- dubbo -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>dubbo</artifactId>
+                <version>2.6.2</version>
+                <!--<version>${dubbo.version}</version>-->
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.springframework</groupId>
+                        <artifactId>spring</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.apache.curator</groupId>
+                        <artifactId>curator-client</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.javassist</groupId>
+                        <artifactId>javassist</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+            <dependency>
+                <groupId>org.javassist</groupId>
+                <artifactId>javassist</artifactId>
+                <version>${javassist.version}</version>
+            </dependency>
+            <!-- hutool -->
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${hutool.version}</version>
+            </dependency>
+            <!-- Test libs -->
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${junit.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <!-- Log libs -->
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${slf4j.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-classic</artifactId>
+                <version>${logback.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-core</artifactId>
+                <version>${logback.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-access</artifactId>
+                <version>${logback.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>net.logstash.logback</groupId>
+                <artifactId>logstash-logback-encoder</artifactId>
+                <version>${logstash.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>commons-logging</groupId>
+                <artifactId>commons-logging-api</artifactId>
+                <version>${jcl.version}</version>
+            </dependency>
+            <!-- Zookeeper  -->
+            <dependency>
+                <groupId>org.apache.zookeeper</groupId>
+                <artifactId>zookeeper</artifactId>
+                <version>${zookeeper.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <artifactId>slf4j-log4j12</artifactId>
+                        <groupId>org.slf4j</groupId>
+                    </exclusion>
+                    <exclusion>
+                        <artifactId>log4j</artifactId>
+                        <groupId>log4j</groupId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+            <dependency>
+                <groupId>com.github.sgroschupf</groupId>
+                <artifactId>zkclient</artifactId>
+                <version>${zkclient.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.curator</groupId>
+                <artifactId>curator-framework</artifactId>
+                <version>${curator.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.curator</groupId>
+                <artifactId>curator-recipes</artifactId>
+                <version>${curator.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.curator</groupId>
+                <artifactId>curator-client</artifactId>
+                <version>${curator.version}</version>
+            </dependency>
+
+            <!-- jackson -->
+            <dependency>
+                <groupId>com.fasterxml.jackson.dataformat</groupId>
+                <artifactId>jackson-dataformat-xml</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-core</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+
+
+            <!-- 序列化 -->
+            <dependency>
+                <groupId>io.protostuff</groupId>
+                <artifactId>protostuff-core</artifactId>
+                <version>${protostuff.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.protostuff</groupId>
+                <artifactId>protostuff-runtime</artifactId>
+                <version>${protostuff.version}</version>
+            </dependency>
+            <!-- guava  -->
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guava.version}</version>
+            </dependency>
+            <!-- fastjson  -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fastjson.version}</version>
+            </dependency>
+
+            <!-- 数据库 -->
+            <dependency>
+                <groupId>org.mybatis</groupId>
+                <artifactId>mybatis</artifactId>
+                <version>${mybatis.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mybatis</groupId>
+                <artifactId>mybatis-spring</artifactId>
+                <version>${mybatis.spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus</artifactId>
+                <version>${mybatis-plus.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-generator</artifactId>
+                <version>${mybatis-plus.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid</artifactId>
+                <version>${druid.version}</version>
+            </dependency>
+            <!-- 公共工具类 -->
+            <dependency>
+                <groupId>org.codehaus.jackson</groupId>
+                <artifactId>jackson-mapper-lgpl</artifactId>
+                <version>1.8.5</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-lang</groupId>
+                <artifactId>commons-lang</artifactId>
+                <version>2.5</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${commons.lang3.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-beanutils</groupId>
+                <artifactId>commons-beanutils</artifactId>
+                <version>${commons.beanutils}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-pool2</artifactId>
+                <version>${commons.pool2.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>${commons.io.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-codec</groupId>
+                <artifactId>commons-codec</artifactId>
+                <version>${commons.codec.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cglib</groupId>
+                <artifactId>cglib-nodep</artifactId>
+                <version>${cglib.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>net.sf.json-lib</groupId>
+                <artifactId>json-lib</artifactId>
+                <version>2.4</version>
+                <classifier>jdk15</classifier>
+            </dependency>
+
+            <dependency>
+                <groupId>com.fasterxml.uuid</groupId>
+                <artifactId>java-uuid-generator</artifactId>
+                <version>3.1.2</version>
+            </dependency>
+
+            <!-- rabbitmq -->
+            <dependency>
+                <groupId>com.rabbitmq</groupId>
+                <artifactId>amqp-client</artifactId>
+                <version>${rabbitmq.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.amqp</groupId>
+                <artifactId>spring-rabbit</artifactId>
+                <version>1.4.5.RELEASE</version>
+            </dependency>
+
+            <!-- ftp -->
+            <dependency>
+                <groupId>commons-net</groupId>
+                <artifactId>commons-net</artifactId>
+                <version>3.3</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.pdfbox</groupId>
+                <artifactId>pdfbox</artifactId>
+                <version>2.0.12</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${maven.compiler.plugin.version}</version>
+                    <configuration>
+                        <source>${java.source.version}</source>
+                        <target>${java.target.version}</target>
+                        <encoding>${project.build.sourceEncoding}</encoding>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-deploy-plugin</artifactId>
+                    <version>${maven.deploy.plugin.version}</version>
+                    <configuration>
+                        <skip>${maven.deploy.skip}</skip>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.gmavenplus</groupId>
+                <artifactId>gmavenplus-plugin</artifactId>
+                <version>1.6</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>compile</goal>
+                            <goal>compileTests</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+            </plugin>
+        </plugins>
+        <resources>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+    </build>
+
+    <!--    &lt;!&ndash; 远程仓库配置 &ndash;&gt;-->
+    <!--    <distributionManagement>-->
+    <!--        <repository>-->
+    <!--            <id>fingard_rdp_escp_hosted_releases</id>-->
+    <!--            <url>http://ats.fingard.net:9561/nexus/content/repositories/fingard_rdp_escp_hosted_releases</url>-->
+    <!--        </repository>-->
+    <!--        <snapshotRepository>-->
+    <!--            <id>fingard_rdp_escp_hosted_snapshots</id>-->
+    <!--            <url>http://ats.fingard.net:9561/nexus/content/repositories/fingard_rdp_escp_hosted_snapshots</url>-->
+    <!--        </snapshotRepository>-->
+    <!--    </distributionManagement>-->
+    <profiles>
+        <!--        <profile>-->
+        <!--            <id>local</id>-->
+        <!--            <build>-->
+        <!--                <filters>-->
+        <!--                    <filter>../acccore-local.properties</filter>-->
+        <!--                </filters>-->
+        <!--            </build>-->
+        <!--        </profile>-->
+        <!--        <profile>-->
+        <!--            <id>test</id>-->
+        <!--            <build>-->
+        <!--                <filters>-->
+        <!--                    <filter>../acccore-test.properties</filter>-->
+        <!--                </filters>-->
+        <!--            </build>-->
+        <!--        </profile>-->
+        <!--        <profile>-->
+        <!--            <id>cmbc-mysql-test</id>-->
+        <!--            <build>-->
+        <!--                <filters>-->
+        <!--                    <filter>../acccore-cmbc-mysql-test.properties</filter>-->
+        <!--                </filters>-->
+        <!--            </build>-->
+        <!--        </profile>-->
+        <!--        <profile>-->
+        <!--            <id>docker</id>-->
+        <!--            <build>-->
+        <!--                <filters>-->
+        <!--                    <filter>../acccore-docker.properties</filter>-->
+        <!--                </filters>-->
+        <!--            </build>-->
+        <!--        </profile>-->
+        <profile>
+            <id>dev</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <build>
+                <filters>
+                    <filter>../emailservice-dev.properties</filter>
+                </filters>
+            </build>
+        </profile>
+        <!--        <profile>-->
+        <!--            <id>online</id>-->
+        <!--            <build>-->
+        <!--                <filters>-->
+        <!--                    <filter>../acccore-online.properties</filter>-->
+        <!--                </filters>-->
+        <!--            </build>-->
+        <!--        </profile>-->
+        <!--        <profile>-->
+        <!--            <id>press</id>-->
+        <!--            <build>-->
+        <!--                <filters>-->
+        <!--                    <filter>../acccore-press.properties</filter>-->
+        <!--                </filters>-->
+        <!--            </build>-->
+        <!--        </profile>-->
+        <!--        <profile>-->
+        <!--            <id>demo</id>-->
+        <!--            <build>-->
+        <!--                <filters>-->
+        <!--                    <filter>../acccore-demo.properties</filter>-->
+        <!--                </filters>-->
+        <!--            </build>-->
+        <!--        </profile>-->
+    </profiles>
+
+
+
+</project>
