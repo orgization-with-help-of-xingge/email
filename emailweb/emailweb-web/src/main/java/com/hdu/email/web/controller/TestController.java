@@ -19,6 +19,6 @@ public class TestController {
 
     @RequestMapping("/login")
     public String login(){
-        return "index";
+        return "main";
     }
 }

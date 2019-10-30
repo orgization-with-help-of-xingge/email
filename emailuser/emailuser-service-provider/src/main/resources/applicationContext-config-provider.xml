@@ -12,16 +12,5 @@
 					filter="${dubbo.filter}" accesslog="${dubbo.accesslog.path}"/>
 	<dubbo:consumer check="false" version="${dubbo.interface.version}"/>
 
-	<!-- 异步消息监控 -->
-	<!--<dubbo:monitor protocol="registry" />-->
-	<!--
-	<bean id="rabbitmqMessagePublisher" class="com.alibaba.dubbo.mq.dubbo.RabbitmqMessagePublisherImpl" init-method="init">
-		<property name="host" value="${mq.host}" />
-		<property name="port" value="${mq.port}" />
-		<property name="username" value="${mq.username}" />
-		<property name="password" value="${mq.password}" />
-		<property name="virtualhost" value="${mq.virtualhost}" />
-	</bean>
-	-->
 
 </beans>

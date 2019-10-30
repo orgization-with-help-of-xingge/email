@@ -1,4 +1,4 @@
-package com.hdu.emailservice;
+package com.hdu.email.provider;
 
 import com.hdu.email.dto.Users;
 import com.hdu.email.mybatis.mapper.UsersMapper;

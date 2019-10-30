@@ -81,7 +81,7 @@
 
        $.ajax({
             type:"POST",
-            url:"/doAjaxLogin",
+            url:"/asylogin",
            data:{
                 "username":loginaccount,
                "password":loginpassword
