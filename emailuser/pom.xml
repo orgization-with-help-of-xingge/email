@@ -105,6 +105,7 @@
 
     <!-- scope不是compile的依赖不会传递，需要单独声明 -->
     <dependencies>
+
         <!--test-->
         <dependency>
             <groupId>org.projectlombok</groupId>

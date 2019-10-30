@@ -11,7 +11,7 @@
     <bean id="contentNegotiationManager" class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
         <property name="favorPathExtension" value="false"/>
     </bean>
-    <mvc:annotation-driven content-negotiation-manager="contentNegotiationManager"/>
+    <!--<mvc:annotation-driven content-negotiation-manager="contentNegotiationManager"/>-->
 
     <context:component-scan base-package="com.hdu.email.web.controller">
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service"/>
@@ -22,11 +22,13 @@
     <context:annotation-config/>
 
 
-<!--    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter"/>-->
+    <mvc:annotation-driven />
+    <!--<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter"/>-->
 
     <!--<mvc:resources location="/WEB-INF/page/js/" mapping="/page/js/**"/>-->
     <mvc:resources location="/WEB-INF/jsp/" mapping="/jsp/**"/>
     <mvc:resources location="/css/" mapping="/css/**"/>
+    <mvc:resources location="/bootstrap/" mapping="/bootstrap/**"/>
     <mvc:resources location="/layer/" mapping="/layer/**"/>
     <mvc:resources location="/jquery/" mapping="/jquery/**"/>
     <mvc:resources location="/script/" mapping="/script/**"/>

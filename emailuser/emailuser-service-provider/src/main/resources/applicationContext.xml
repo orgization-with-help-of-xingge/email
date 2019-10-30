@@ -11,8 +11,8 @@
 		http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
 		
 	<context:annotation-config/>
-	<context:component-scan base-package="com.hdu.emailservice.provider" />
-	<context:component-scan base-package="com.hdu.emailservice.controller" />
+	<context:component-scan base-package="com.hdu.email.provider.*" />
+	<!--<context:component-scan base-package="com.hdu.email.controller" />-->
 
 	<import resource="classpath*:applicationContext-biz.xml"/>
 

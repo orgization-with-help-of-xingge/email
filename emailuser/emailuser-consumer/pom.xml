@@ -11,30 +11,22 @@
 
     <artifactId>emailuser-consumer</artifactId>
 
-    <properties>
-        <skip_.maven.deploy>true</skip_.maven.deploy>
-    </properties>
+    <!--<properties>-->
+        <!--<skip_.maven.deploy>true</skip_.maven.deploy>-->
+    <!--</properties>-->
 
-    <dependencies>
-        <dependency>
-            <groupId>com.hdu</groupId>
-            <artifactId>emailuser-api</artifactId>
-            <version>${project.parent.version}</version>
-        </dependency>
-    </dependencies>
-
-    <build>
-        <pluginManagement>
-            <plugins>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-deploy-plugin</artifactId>
-                    <version>2.5</version>
-                    <configuration>
-                        <skip>true</skip>
-                    </configuration>
-                </plugin>
-            </plugins>
-        </pluginManagement>
-    </build>
+    <!--<build>-->
+        <!--<pluginManagement>-->
+            <!--<plugins>-->
+                <!--<plugin>-->
+                    <!--<groupId>org.apache.maven.plugins</groupId>-->
+                    <!--<artifactId>maven-deploy-plugin</artifactId>-->
+                    <!--<version>2.5</version>-->
+                    <!--<configuration>-->
+                        <!--<skip>true</skip>-->
+                    <!--</configuration>-->
+                <!--</plugin>-->
+            <!--</plugins>-->
+        <!--</pluginManagement>-->
+    <!--</build>-->
 </project>
