@@ -46,7 +46,7 @@
             <!--日志文件保留天数-->
             <maxHistory>90</maxHistory>
         </rollingPolicy>
-        <encoder charset="UTF-8" class="net.logstash.logback.encoder.LogstashEncoder"/>
+<!--        <encoder charset="UTF-8" class="net.logstash.logback.encoder.LogstashEncoder"/>-->
     </appender>
     <!-- 异步输出 -->
     <appender name="ASYNC_ROLLINGFILE_SKYWALKING" class="ch.qos.logback.classic.AsyncAppender">

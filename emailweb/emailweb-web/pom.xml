@@ -33,6 +33,11 @@
         <!-- Servlet&JSP -->
         <dependency>
             <groupId>com.hdu</groupId>
+            <artifactId>emailweb-common</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.hdu</groupId>
             <artifactId>emailuser-api</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
