@@ -18,8 +18,8 @@
 						http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring.xsd
 						http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 <!--    &lt;!&ndash; 结构账户余额&ndash;&gt;-->
-    <dubbo:service interface="com.hdu.emailuser.api.user.UserApi"
-                   ref="userProvider" protocol="dubbo"/>
+    <dubbo:service interface="com.hdu.emailuser.api.user.EmailUserApi"
+                   ref="emailUserProvider" protocol="dubbo"/>
 <!--    &lt;!&ndash; 账户性质&ndash;&gt;-->
 <!--    <dubbo:service interface="com.fingard.rabbit.acccore.api.bankaccount.AccountTypeApi"-->
 <!--                   ref="accountTypeProvider" protocol="dubbo"/>-->

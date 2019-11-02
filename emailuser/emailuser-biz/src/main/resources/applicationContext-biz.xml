@@ -8,13 +8,16 @@
 						http://www.springframework.org/schema/context/spring-context.xsd ">
 
 	<context:annotation-config />
-    <context:component-scan base-package="com.hdu.emailuser.biz.**" />
+    <context:component-scan base-package="com.hdu.emailuser.biz.service" />
 <!--	<context:component-scan base-package="com.fingard.rabbit.cloudtools.common"/>-->
+
 
 	<import resource="classpath*:applicationContext-dao.xml" />
 
     <!-- 加载Spring上下文环境 -->
-	<import resource="classpath:applicationContext-basecore-consumer.xml"/>
+	<import resource="classpath*:applicationContext-basecore-consumer.xml"/>
+
+    <context:property-placeholder location="classpath:passwdAlgorithm.properties" ignore-unresolvable="true"/>
 
 </beans>
 

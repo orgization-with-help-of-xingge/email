@@ -1,12 +1,14 @@
-package com.hdu.email.common.transfer;
+package com.hdu.email.common.util.transfer;
 
-import com.hdu.email.common.enums.ENMsgCode;
+import com.hdu.email.common.util.enums.ENMsgCode;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
+
 @Getter
 @Setter
-public class BaseReturnResult {
+public class BaseReturnResult implements Serializable {
     private String code;
     private String info;
     private String value;

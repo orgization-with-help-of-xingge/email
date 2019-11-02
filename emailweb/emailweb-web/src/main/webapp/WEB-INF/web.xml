@@ -8,10 +8,11 @@
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>
-            classpath:applicationContext.xml,
+            classpath:applicationContext.xml
 <!--            classpath:spring/applicationContext-*.xml-->
         </param-value>
     </context-param>
+
 
     <!-- 字符集过滤器 -->
     <filter>
@@ -31,22 +32,18 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
-<!--    <filter>-->
-<!--        <filter-name>springSessionRepositoryFilter</filter-name>-->
-<!--        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>-->
-<!--    </filter>-->
-<!--    <filter-mapping>-->
-<!--        <filter-name>springSessionRepositoryFilter</filter-name>-->
-<!--        <url-pattern>/*</url-pattern>-->
-<!--    </filter-mapping>-->
-
 
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
+    <!-- 加载Spring框架中的log4j监听器Log4jConfigListener -->
+    <listener>
+        <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+    </listener>
+
 
     <servlet>
-        <servlet-name>atscloud</servlet-name>
+        <servlet-name>emailweb</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
         <init-param>
             <param-name>contextConfigLocation</param-name>
@@ -61,10 +58,6 @@
     <servlet-mapping>
         <servlet-name>default</servlet-name>
         <url-pattern>*.cab</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>default</servlet-name>
-        <url-pattern>/RUI/*</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>default</servlet-name>
@@ -83,7 +76,7 @@
         <url-pattern>/theme/*</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>atscloud</servlet-name>
+        <servlet-name>emailweb</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
 

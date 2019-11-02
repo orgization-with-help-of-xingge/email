@@ -16,7 +16,7 @@
 						http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
 						http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring.xsd">
 
-    <context:property-placeholder location="classpath:database.properties" />
+    <context:property-placeholder location="classpath:database.properties" ignore-unresolvable="true" />
 
 
     <!-- 数据源 -->

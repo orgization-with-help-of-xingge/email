@@ -1,4 +1,4 @@
-package com.hdu.email.common.enums;
+package com.hdu.email.common.util.enums;
 
 public enum  ENMsgCode implements BasicEnum {
 

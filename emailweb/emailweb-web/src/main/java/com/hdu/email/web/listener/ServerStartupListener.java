@@ -17,6 +17,7 @@ public class ServerStartupListener implements ServletContextListener {
     @Override
     public void contextDestroyed(ServletContextEvent servletContextEvent) {
         ServletContext context = servletContextEvent.getServletContext();
+
         context.removeAttribute("APP_PATH");
     }
 }

@@ -14,11 +14,13 @@
 	<context:component-scan base-package="com.hdu.email.provider.*" />
 	<!--<context:component-scan base-package="com.hdu.email.controller" />-->
 
+
 	<import resource="classpath*:applicationContext-biz.xml"/>
 
 	<import resource="classpath*:applicationContext-config-provider.xml" />
 
 	<import resource="classpath*:applicationContext-emailuser-provider.xml" />
+
 
 
 

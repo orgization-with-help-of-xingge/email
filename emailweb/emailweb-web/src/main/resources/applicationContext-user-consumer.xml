@@ -13,7 +13,7 @@
     <!--<dubbo:reference id="singleCurrcyAccountApi" interface="com.fingard.rabbit.acccore.api.bankaccount.SingleCurrcyAccountApi"/>-->
 
     <!-- 账户性质-->
-    <dubbo:reference id="userApi" interface="com.hdu.emailuser.api.user.UserApi"/>
+    <dubbo:reference id="emailUserApi" interface="com.hdu.emailuser.api.user.EmailUserApi"/>
 
 
 </beans>

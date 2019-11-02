@@ -21,6 +21,4 @@
 		<property name="virtualhost" value="${mq.virtualhost}" />
 	</bean>
 	-->
-	<!--缓存调度 -->
-	<dubbo:reference id="cacheAutoLoadApi" interface="com.fingard.rabbit.cachemanager.api.cache.CacheAutoLoadApi"/>
 </beans>

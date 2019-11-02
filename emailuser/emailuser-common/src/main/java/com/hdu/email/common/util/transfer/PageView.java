@@ -1,9 +1,10 @@
-package com.hdu.email.common.transfer;
+package com.hdu.email.common.util.transfer;
 
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.List;
+
 @Getter
 @Setter
 public class PageView<T> extends BaseReturnResult {
