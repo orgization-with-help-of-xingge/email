@@ -15,4 +15,9 @@
         select * from users where username=#{username} and pwdHash=#{pwdHash}
     </select>
 
+    <insert id="insertUser" parameterType="emailUserDto">
+        insert into users values
+        (#{username},#{pwdHash},#{pwdAlgorithm},#{useForwarding},#{forwardDestination},#{useAlias},#{alias})
+    </insert>
+
 </mapper>

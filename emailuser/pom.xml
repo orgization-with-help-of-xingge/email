@@ -74,6 +74,7 @@
         <mybatis.version>3.5.1</mybatis.version>
         <mybatis.spring.version>2.0.0</mybatis.spring.version>
         <mybatis-plus.version>3.1.2</mybatis-plus.version>
+        <mybatis-aspect>1.8.4</mybatis-aspect>
         <!-- 数据库 -->
         <oracle.version>10.2.0.3.0</oracle.version>
         <druid.version>1.1.6</druid.version>
@@ -314,6 +315,11 @@
                 <groupId>org.springframework.integration</groupId>
                 <artifactId>spring-integration-amqp</artifactId>
                 <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.aspectj</groupId>
+                <artifactId>aspectjweaver</artifactId>
+                <version>${mybatis-aspect}</version>
             </dependency>
 
             <!-- redis -->

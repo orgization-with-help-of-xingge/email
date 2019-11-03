@@ -15,6 +15,6 @@ public enum  ENMsgCode implements BasicEnum {
 
     @Override
     public String getValue() {
-        return null;
+        return msgcode;
     }
 }

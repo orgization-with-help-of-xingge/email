@@ -12,4 +12,5 @@ public interface EmailUserMapper {
 
     EmailUserDto selByUserNameAndPasswd(EmailUserDto emailUserDto);
 
+    int insertUser(EmailUserDto emailUserDto);
 }

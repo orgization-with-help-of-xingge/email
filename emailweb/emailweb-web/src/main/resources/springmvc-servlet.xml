@@ -41,6 +41,28 @@
         <property name="suffix" value=".jsp"/>
     </bean>
 
+
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <!--登录注册controller，跳过拦截-->
+            <mvc:exclude-mapping path="/user/login"/>
+            <mvc:exclude-mapping path="/user/asylogin"/>
+            <mvc:exclude-mapping path="/user/register"/>
+            <mvc:exclude-mapping path="/user/asyregister"/>
+            <!--静态资源，跳过拦截-->
+            <mvc:exclude-mapping path="/bootstrap/**"/>
+            <mvc:exclude-mapping path="/css/*"/>
+            <mvc:exclude-mapping path="/font/**"/>
+            <mvc:exclude-mapping path="/img/*"/>
+            <mvc:exclude-mapping path="/jquery/*"/>
+            <mvc:exclude-mapping path="/layer/**"/>
+            <mvc:exclude-mapping path="/script/*"/>
+            <mvc:exclude-mapping path="/ztree/**"/>
+            <bean class="com.hdu.email.web.interceptor.EmailUserInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
 <!--    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">-->
 <!--        <property name="messageConverters">-->
 <!--            <list>-->

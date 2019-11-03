@@ -7,4 +7,6 @@ public interface EmailUserApi {
     EmailUserDto queryById(String id);
 
     BaseReturnResult queryByUserNameAndPasswd(EmailUserDto emailUserDto);
+
+    BaseReturnResult addUser(EmailUserDto emailUserDto);
 }
