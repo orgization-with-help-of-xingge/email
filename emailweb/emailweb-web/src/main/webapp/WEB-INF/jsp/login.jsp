@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="${APP_PATH}/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="${APP_PATH}/css/font-awesome.min.css">
     <link rel="stylesheet" href="${APP_PATH}/css/login.css">
+    <link rel="stylesheet" href="${APP_PATH}/autoemail/autoMail.1.0.min.js">
+
     <style>
 
     </style>
@@ -30,7 +32,7 @@
     <form id="loginForm" class="form-signin" action="/doLogin" role="form" method="post">
         <h2 class="form-signin-heading"><i class="glyphicon glyphicon-user"></i> 用户登录</h2>
         <div class="form-group has-success has-feedback">
-            <input type="text" name="username" class="form-control" id="loginaccount" placeholder="请输入登录账号" autofocus>
+            <input type="text" name="username" class="form-control" id="loginaccount" placeholder="请输入登录账号" onclick="autoMail()" autofocus>
             <span class="glyphicon glyphicon-user form-control-feedback"></span>
         </div>
         <div class="form-group has-success has-feedback">
@@ -61,7 +63,17 @@
 <script src="${APP_PATH}/jquery/jquery-2.1.1.min.js"></script>
 <script src="${APP_PATH}/bootstrap/js/bootstrap.min.js"></script>
 <script src="${APP_PATH}/layer/layer.js"></script>
+<script src="${APP_PATH}/autoemail/autoMail.1.0.min.js"></script>
+
 <script>
+
+    function autoMail(){
+        $('#loginaccount').autoMail({
+            emails:['qq.com','163.com','126.com','sina.com','sohu.com','yahoo.cn','gmail.com','hotmail.com','live.cn']
+        });
+    }
+
+
     function dologin() {
         var loginaccount=$("#loginaccount").val();
        if(loginaccount==""){

@@ -41,6 +41,7 @@ public class EmailUserServiceImpl implements EmailUserService {
     public EmailUserDto queryByUserNameAndPasswd(EmailUserDto emailUserDto) {
         EmailUserDto emailUserDto1=null;
         try {
+            emailUserDto.setUsername(emailUserDto.getUsername().split("@")[0]);
             emailUserDto.setPwdAlgorithm(pwdAlgorithm);
             emailUserDto.setPwdHash(DigestUtil.digestString(emailUserDto.getPasswd(),emailUserDto.getPwdAlgorithm()));
             emailUserDto1 = emailUserMapper.selByUserNameAndPasswd(emailUserDto);

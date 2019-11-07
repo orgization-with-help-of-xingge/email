@@ -34,6 +34,7 @@
     <mvc:resources location="/script/" mapping="/script/**"/>
     <mvc:resources location="/img/" mapping="/img/**"/>
     <mvc:resources location="/fonts/" mapping="/fonts/**"/>
+    <mvc:resources location="/autoemail/" mapping="/autoemail/**"/>
 
 
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -59,28 +60,10 @@
             <mvc:exclude-mapping path="/layer/**"/>
             <mvc:exclude-mapping path="/script/*"/>
             <mvc:exclude-mapping path="/ztree/**"/>
+            <mvc:exclude-mapping path="/autoemail/**"/>
             <bean class="com.hdu.email.web.interceptor.EmailUserInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>
 
-<!--    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">-->
-<!--        <property name="messageConverters">-->
-<!--            <list>-->
-<!--                <bean class="org.springframework.http.converter.StringHttpMessageConverter">-->
-<!--                    <property name="supportedMediaTypes">-->
-<!--                        <list>-->
-<!--                            <value>text/html;charset=UTF-8</value>-->
-<!--                        </list>-->
-<!--                    </property>-->
-<!--                </bean>-->
-<!--                <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">-->
-<!--                    <property name="supportedMediaTypes">-->
-<!--                        <list>-->
-<!--                            <value>application/json;charset=UTF-8</value>-->
-<!--                        </list>-->
-<!--                    </property>-->
-<!--                </bean>-->
-<!--            </list>-->
-<!--        </property>-->
-<!--    </bean>-->
+
 </beans>
