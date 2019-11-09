@@ -34,7 +34,10 @@
     <mvc:resources location="/script/" mapping="/script/**"/>
     <mvc:resources location="/img/" mapping="/img/**"/>
     <mvc:resources location="/fonts/" mapping="/fonts/**"/>
-    <mvc:resources location="/autoemail/" mapping="/autoemail/**"/>
+
+    <mvc:cors>
+        <mvc:mapping path="/**" allowed-origins="*" allow-credentials="true" max-age="1800" allowed-methods="GET,POST,OPTIONS"/>
+    </mvc:cors>
 
 
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">

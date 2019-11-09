@@ -11,7 +11,6 @@
 
 	<!--<mvc:annotation-driven />-->
 
-	<context:component-scan base-package="com.hdu.emailservice.controller"/>
-	<context:component-scan base-package="com.hdu.emailservice.provider"/>
+	<context:component-scan base-package="com.hdu.emailservice.*"/>
 
 </beans>

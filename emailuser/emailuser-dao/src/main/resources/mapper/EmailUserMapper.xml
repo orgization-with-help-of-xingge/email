@@ -8,7 +8,7 @@
     </select>
 
     <select id="selById" resultType="emailUserDto">
-        select * from users where username=#{userid}
+        select * from users where username=#{username}
     </select>
 
     <select id="selByUserNameAndPasswd" resultType="emailUserDto">

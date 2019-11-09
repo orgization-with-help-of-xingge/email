@@ -8,7 +8,7 @@ import java.util.List;
 public interface EmailUserMapper {
     List<EmailUserDto> selAll();
 
-    EmailUserDto selById(@Param(value = "userid") String userid);
+    EmailUserDto selById(@Param(value = "username") String username);
 
     EmailUserDto selByUserNameAndPasswd(EmailUserDto emailUserDto);
 

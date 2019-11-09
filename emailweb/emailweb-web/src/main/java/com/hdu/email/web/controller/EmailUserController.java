@@ -74,5 +74,17 @@ public class EmailUserController {
         return result;
     }
 
+    @RequestMapping(value = "/userInfo",method = RequestMethod.POST)
+    @ResponseBody
+    public EmailUserDto userInfo(String token){
+        EmailUserDto emailUserDto = null;
+        try{
+            emailUserDto=emailUserApi.queryById(token);
+        }catch (Exception e){
+            log.info(e.getMessage());
+        }
+        return emailUserDto;
+    }
+
 
 }
