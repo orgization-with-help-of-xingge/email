@@ -76,14 +76,14 @@ public class EmailUserController {
 
     @RequestMapping(value = "/userInfo",method = RequestMethod.POST)
     @ResponseBody
-    public EmailUserDto userInfo(String token){
-        EmailUserDto emailUserDto = null;
+    public BaseReturnResult userInfo(String token){
+        BaseReturnResult result = BaseReturnResult.getFailResult();
         try{
-            emailUserDto=emailUserApi.queryById(token);
+            result=emailUserApi.queryById(token);
         }catch (Exception e){
             log.info(e.getMessage());
         }
-        return emailUserDto;
+        return result;
     }
 
 

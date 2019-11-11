@@ -15,5 +15,6 @@ public class EmailUserDto implements Serializable {
     private String forwardDestination;
     private String useAlias;
     private String alias;
+    private String token="admin";
 
 }

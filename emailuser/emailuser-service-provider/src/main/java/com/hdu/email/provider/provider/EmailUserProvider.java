@@ -15,8 +15,17 @@ public class EmailUserProvider implements EmailUserApi {
     private EmailUserService emailUserService;
 
     @Override
-    public EmailUserDto queryById(String id) {
-        return emailUserService.queryById(id);
+    public BaseReturnResult queryById(String id) {
+        BaseReturnResult result = BaseReturnResult.getFailResult();
+        try {
+            EmailUserDto emailUserDto = emailUserService.queryById(id);
+            if(emailUserDto.getUsername() != null && !emailUserDto.getUsername().equals("")){
+                result.setWhenSuccess("操作成功", emailUserDto);
+            }
+        }catch (Exception e){
+            log.error(e.getMessage());
+        }
+        return result;
     }
 
     @Override
