@@ -1,4 +1,4 @@
-package com.hdu.email.mybatis.mapper;
+package com.hdu.email.mybatis.mapper.mapper;
 
 import com.hdu.email.dto.EmailUserDto;
 import org.apache.ibatis.annotations.Param;

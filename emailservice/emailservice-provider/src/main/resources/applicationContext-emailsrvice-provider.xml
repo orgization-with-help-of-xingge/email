@@ -21,7 +21,8 @@
 <!--    <dubbo:service interface="com.fingard.rabbit.acccore.api.bankaccount.AccountStructuresApi"-->
 <!--                   ref="accountStructuresProvider" protocol="dubbo"/>-->
 <!--    &lt;!&ndash; 账户性质&ndash;&gt;-->
-<!--    <dubbo:service interface="com.fingard.rabbit.acccore.api.bankaccount.AccountTypeApi"-->
-<!--                   ref="accountTypeProvider" protocol="dubbo"/>-->
+    <dubbo:service interface="com.hdu.emailservice.api.InboxApi"
+                   ref="inboxProvider" protocol="dubbo"/>
+
 
 </beans>

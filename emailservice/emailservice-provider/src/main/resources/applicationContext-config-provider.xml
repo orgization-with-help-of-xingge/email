@@ -7,9 +7,9 @@
 
 	<dubbo:application name="${dubbo.application}"/>
 	<dubbo:protocol id="dubbo" name="${dubbo.protocol}" port="${dubbo.protocol.provider.port}" threadpool="cached"/>
-	<dubbo:registry protocol="zookeeper" address="${zookeeper.address}" timeout="${dubbo.timeout}" register="${dubbo.register}"/>
-	<dubbo:provider version="${dubbo.interface.version}"  timeout="${dubbo.timeout}" retries="${dubbo.retries}"
-					filter="${dubbo.filter}" />
+    <dubbo:registry protocol="zookeeper" address="${zookeeper.address}" timeout="${dubbo.timeout}" register="${dubbo.register}"/>
+    <dubbo:provider version="${dubbo.interface.version}"  timeout="${dubbo.timeout}" retries="${dubbo.retries}"
+                    filter="${dubbo.filter}" />
 	<dubbo:consumer check="false" version="${dubbo.interface.version}"/>
 
 	<!-- 异步消息监控 -->

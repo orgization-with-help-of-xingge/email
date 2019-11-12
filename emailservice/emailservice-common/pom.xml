@@ -11,6 +11,11 @@
 
     <artifactId>emailservice-common</artifactId>
     <dependencies>
+        <dependency>
+            <groupId>com.hdu</groupId>
+            <artifactId>emailservice-dto</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
         <!-- Log -->
         <dependency>
             <groupId>org.slf4j</groupId>

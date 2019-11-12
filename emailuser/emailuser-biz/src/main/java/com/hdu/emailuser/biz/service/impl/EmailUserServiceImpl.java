@@ -3,7 +3,7 @@ package com.hdu.emailuser.biz.service.impl;
 import com.hdu.email.common.util.DigestUtil;
 import com.hdu.email.common.util.transfer.BaseReturnResult;
 import com.hdu.email.dto.EmailUserDto;
-import com.hdu.email.mybatis.mapper.EmailUserMapper;
+import com.hdu.email.mybatis.mapper.mapper.EmailUserMapper;
 import com.hdu.emailuser.biz.service.EmailUserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

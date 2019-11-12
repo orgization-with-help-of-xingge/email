@@ -12,10 +12,9 @@
     <artifactId>emailservice-provider</artifactId>
     <packaging>war</packaging>
 
-
-
     <properties>
         <skip_.maven.deploy>false</skip_.maven.deploy>
+        <emailuser.version>1.0-SNAPSHOT</emailuser.version>
     </properties>
     <dependencies>
 
@@ -23,6 +22,21 @@
             <groupId>com.hdu</groupId>
             <artifactId>emailservice-biz</artifactId>
             <version>${project.parent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.hdu</groupId>
+            <artifactId>emailservice-api</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.hdu</groupId>
+            <artifactId>emailuser-dto</artifactId>
+            <version>${emailuser.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.hdu</groupId>
+            <artifactId>emailuser-api</artifactId>
+            <version>${emailuser.version}</version>
         </dependency>
         <dependency>
             <groupId>com.alibaba</groupId>

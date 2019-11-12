@@ -41,5 +41,6 @@
     <!--<import resource="classpath*:applicationContext-checksys-consumer.xml" />-->
     <!--<import resource="classpath*:applicationContext-settlesys-consumer.xml"/>-->
     <import resource="applicationContext-user-consumer.xml"/>
+    <import resource="applicationContext-email-consumer.xml"/>
     <import resource="applicationContext-config-consumer.xml"/>
 </beans>

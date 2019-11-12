@@ -15,11 +15,6 @@
         <skip_.maven.deploy>false</skip_.maven.deploy>
     </properties>
     <dependencies>
-        <dependency>
-            <groupId>com.hdu</groupId>
-            <artifactId>emailservice-common</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
 
         <dependency>
             <groupId>com.alibaba</groupId>

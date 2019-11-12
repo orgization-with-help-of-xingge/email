@@ -1,4 +1,4 @@
-package com.hdu.email.web.controller;
+package com.hdu.email.web.controller.user;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

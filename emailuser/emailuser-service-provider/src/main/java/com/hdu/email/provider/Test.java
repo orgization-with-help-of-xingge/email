@@ -1,7 +1,7 @@
 package com.hdu.email.provider;
 
 import com.hdu.email.dto.EmailUserDto;
-import com.hdu.email.mybatis.mapper.EmailUserMapper;
+import com.hdu.email.mybatis.mapper.mapper.EmailUserMapper;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 

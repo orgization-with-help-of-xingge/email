@@ -1,4 +1,4 @@
-package com.hdu.email.web.controller;
+package com.hdu.email.web.controller.user;
 
 import com.hdu.email.common.util.enums.ENMsgCode;
 import com.hdu.email.common.util.transfer.BaseReturnResult;

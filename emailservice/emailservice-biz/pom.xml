@@ -12,6 +12,7 @@
     <artifactId>emailservice-biz</artifactId>
 
     <properties>
+        <emailuser.version>1.0-SNAPSHOT</emailuser.version>
         <skip_.maven.deploy>true</skip_.maven.deploy>
     </properties>
     <dependencies>
@@ -22,9 +23,25 @@
         </dependency>
         <dependency>
             <groupId>com.hdu</groupId>
+            <artifactId>emailservice-common</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.hdu</groupId>
             <artifactId>emailservice-consumer</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.hdu</groupId>
+            <artifactId>emailuser-dto</artifactId>
+            <version>${emailuser.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.hdu</groupId>
+            <artifactId>emailuser-api</artifactId>
+            <version>${emailuser.version}</version>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-tx</artifactId>
@@ -41,6 +58,14 @@
             <groupId>cglib</groupId>
             <artifactId>cglib-nodep</artifactId>
         </dependency>
+
+        <!--pagehelper：通用Mapper分页-->
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper-spring-boot-starter</artifactId>
+            <version>1.2.5</version>
+        </dependency>
+
     </dependencies>
 
     <build>

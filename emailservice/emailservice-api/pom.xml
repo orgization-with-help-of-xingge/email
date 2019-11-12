@@ -10,6 +10,27 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>emailservice-api</artifactId>
+    <properties>
+        <emailuser.version>1.0-SNAPSHOT</emailuser.version>
+        <skip_.maven.deploy>true</skip_.maven.deploy>
+    </properties>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.hdu</groupId>
+            <artifactId>emailservice-dto</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.hdu</groupId>
+            <artifactId>emailuser-dto</artifactId>
+            <version>${emailuser.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.hdu</groupId>
+            <artifactId>emailuser-api</artifactId>
+            <version>${emailuser.version}</version>
+        </dependency>
+    </dependencies>
 
 </project>
