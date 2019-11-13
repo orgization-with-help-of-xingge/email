@@ -19,14 +19,19 @@
         where T.recipients = #{recipients} and K.has_read is null ;
     </select>
 
-    <select id="selByRecipRead" resultType="inbox">
-        select * from inbox T left join t_inbox_read K
+    <select id="selByRecip" resultType="inbox">
+        select T.*,K.has_read from inbox T left join t_inbox_read K
         on T.message_name = K.message_name
-        where T.recipients = #{recipients} and K.has_read = true;
+        where T.recipients = #{recipients}
+        <if test='orderby != null and orderby !="" and sortdir != null and sortdir !="" '>
+            order by ${orderby} ${sortdir}
+        </if>
     </select>
 
-    <select id="selByRecip" resultType="inbox">
-        select * from inbox T where T.recipient = #{recipients}
+    <select id="countByRecip" resultType="inbox">
+        select count(1) from inbox T left join t_inbox_read K
+        on T.message_name = K.message_name
+        where T.recipients = #{recipients}
     </select>
 
     <select id="selBySender" resultType="inbox">

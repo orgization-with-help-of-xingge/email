@@ -9,7 +9,8 @@ import java.util.List;
 public interface InboxMapper {
     List<Inbox> selByRecipNonRead(InboxParam param);
     Integer countByRecipNonRead(InboxParam param);
-    List<Inbox> selByRecipRead(InboxParam param);
     List<Inbox> selByRecip(InboxParam param);
     List<Inbox> selBySender(String sender);
+    Integer countByRecip(InboxParam param);
+    List<Inbox> queryAll(InboxParam param);
 }

@@ -14,4 +14,5 @@ import java.util.List;
 public interface InboxService {
     PageView<Inbox> queryUnReadEmail(InboxParam param) throws Exception;
 
+    PageView<Inbox> queryAll(InboxParam param) throws Exception;
 }

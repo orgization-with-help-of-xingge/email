@@ -25,7 +25,7 @@ public class Inbox implements Serializable {
     private byte[] messageBody;
     private byte[] messageAttributes;
     private Date lastUpdated;
-    private boolean hasRead = false;
+    private Integer hasRead = 0;
     private String content;
     private Integer size;
     private String subject;

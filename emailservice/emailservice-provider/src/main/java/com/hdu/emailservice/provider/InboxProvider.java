@@ -1,5 +1,6 @@
 package com.hdu.emailservice.provider;
 
+import cn.hutool.db.Page;
 import com.hdu.email.common.util.transfer.PageView;
 import com.hdu.emailservice.api.InboxApi;
 import com.hdu.emailservice.biz.service.InboxService;
@@ -21,6 +22,17 @@ public class InboxProvider implements InboxApi {
         try {
             pageView = inboxService.queryUnReadEmail(param);
         }catch (Exception e){
+            log.error(e.getMessage());
+        }
+        return pageView;
+    }
+
+    @Override
+    public PageView<Inbox> getAll(InboxParam param) {
+        PageView<Inbox> pageView = new PageView<>();
+        try {
+            pageView=inboxService.queryAll(param);
+        } catch (Exception e) {
             log.error(e.getMessage());
         }
         return pageView;

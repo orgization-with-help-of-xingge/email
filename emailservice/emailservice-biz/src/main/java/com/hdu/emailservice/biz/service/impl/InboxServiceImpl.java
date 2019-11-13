@@ -24,9 +24,9 @@ public class InboxServiceImpl implements InboxService {
     public PageView<Inbox> queryUnReadEmail(InboxParam param) throws Exception {
         EmailContentUtil emailContentUtil = new EmailContentUtil();
         PageHelper.startPage(param.getPage(), param.getRows());
+        List<Inbox> emails = inboxMapper.selByRecipNonRead(param);
         PageView<Inbox> pageView = new PageView<>();
 
-        List<Inbox> emails = inboxMapper.selByRecipNonRead(param);
         Integer total = inboxMapper.countByRecipNonRead(param);
         PageInfo<Inbox> pageInfo = new PageInfo<>(emails);
         List<Inbox> result = pageInfo.getList();
@@ -36,6 +36,22 @@ public class InboxServiceImpl implements InboxService {
         }
         pageView.setRows(result);
         pageView.setTotal(total);
+        return pageView;
+    }
+
+    @Override
+    public PageView<Inbox> queryAll(InboxParam param) throws Exception {
+        EmailContentUtil emailContentUtil = new EmailContentUtil();
+        PageHelper.startPage(param.getPage(),param.getRows());
+        List<Inbox> inboxes = inboxMapper.selByRecip(param);
+        Integer total = inboxMapper.countByRecip(param);
+        PageView<Inbox> pageView = new PageView<>();
+        for (Inbox inbox : inboxes) {
+            emailContentUtil.getContent(inbox);
+            inbox.setMessageBody(null);
+        }
+        pageView.setTotal(total);
+        pageView.setRows(inboxes);
         return pageView;
     }
 }

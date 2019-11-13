@@ -59,11 +59,10 @@
             <artifactId>cglib-nodep</artifactId>
         </dependency>
 
-        <!--pagehelper：通用Mapper分页-->
         <dependency>
             <groupId>com.github.pagehelper</groupId>
-            <artifactId>pagehelper-spring-boot-starter</artifactId>
-            <version>1.2.5</version>
+            <artifactId>pagehelper</artifactId>
+            <version>4.1.6</version>
         </dependency>
 
     </dependencies>

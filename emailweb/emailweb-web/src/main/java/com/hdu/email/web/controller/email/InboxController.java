@@ -31,4 +31,15 @@ public class InboxController {
         return unReadEmail;
     }
 
+    @RequestMapping(value = "/getall",method = RequestMethod.POST)
+    private PageView<Inbox> queryAllEmail(InboxParam param){
+        PageView<Inbox> pageView = new PageView<>();
+        try {
+            pageView=inboxApi.getAll(param);
+        }catch (Exception e){
+            log.error(e.getMessage());
+        }
+        return  pageView;
+    }
+
 }
