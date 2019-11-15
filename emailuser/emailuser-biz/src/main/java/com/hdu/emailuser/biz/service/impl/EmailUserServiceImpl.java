@@ -74,4 +74,16 @@ public class EmailUserServiceImpl implements EmailUserService {
         }
         return result;
     }
+
+    @Override
+    public BaseReturnResult getNameById(String username) {
+        BaseReturnResult result = BaseReturnResult.getFailResult();
+        try {
+            result.setObject(emailUserMapper.getUserName(username));
+            result.setWhenSuccess();
+        }catch (Exception e){
+            log.info(e.getMessage());
+        }
+        return result;
+    }
 }

@@ -1,16 +1,20 @@
 package com.hdu.email.web.controller.email;
 
 import com.hdu.email.common.util.transfer.PageView;
+import com.hdu.email.dto.EmailUserDto;
 import com.hdu.emailservice.api.InboxApi;
 import com.hdu.emailservice.dto.Inbox;
 import com.hdu.emailservice.dto.InboxParam;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.Arrays;
+import java.util.List;
 
 @CrossOrigin /*防止跨域请求*/
 @RestController
@@ -31,8 +35,9 @@ public class InboxController {
         return unReadEmail;
     }
 
-    @RequestMapping(value = "/getall",method = RequestMethod.POST)
-    private PageView<Inbox> queryAllEmail(InboxParam param){
+    @RequestMapping(value = "/fetchlist",method = RequestMethod.POST)
+    private PageView<Inbox> queryAllEmail(@RequestHeader("X-Token") String username,InboxParam param, HttpServletRequest request, HttpSession session){
+        param.setRecipients(username + "@sixl.xyz");
         PageView<Inbox> pageView = new PageView<>();
         try {
             pageView=inboxApi.getAll(param);

@@ -20,7 +20,7 @@
     </select>
 
     <select id="selByRecip" resultType="inbox">
-        select T.*,K.has_read from inbox T left join t_inbox_read K
+        select T.*,K.has_read,K.readDate from inbox T left join t_inbox_read K
         on T.message_name = K.message_name
         where T.recipients = #{recipients}
         <if test='orderby != null and orderby !="" and sortdir != null and sortdir !="" '>
@@ -28,7 +28,7 @@
         </if>
     </select>
 
-    <select id="countByRecip" resultType="inbox">
+    <select id="countByRecip" resultType="java.lang.Integer">
         select count(1) from inbox T left join t_inbox_read K
         on T.message_name = K.message_name
         where T.recipients = #{recipients}

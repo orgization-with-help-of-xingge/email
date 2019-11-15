@@ -15,7 +15,7 @@
 	<import resource="classpath*:applicationContext-dao.xml" />
 
     <!-- 加载Spring上下文环境 -->
-	<import resource="classpath:applicationContext-basecore-consumer.xml"/>
+	<import resource="classpath:applicationContext-user-consumer.xml"/>
 
 </beans>
 

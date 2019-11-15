@@ -9,6 +9,7 @@ import com.hdu.emailservice.biz.service.InboxService;
 import com.hdu.emailservice.common.util.EmailContentUtil;
 import com.hdu.emailservice.dto.Inbox;
 import com.hdu.emailservice.dto.InboxParam;
+import com.hdu.emailuser.api.user.EmailUserApi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,9 @@ import java.util.List;
 public class InboxServiceImpl implements InboxService {
     @Autowired
     private InboxMapper inboxMapper;
+
+    @Autowired
+    private EmailUserApi emailUserApi;
 
     //异常直接抛出
     @Override
@@ -52,6 +56,7 @@ public class InboxServiceImpl implements InboxService {
         }
         pageView.setTotal(total);
         pageView.setRows(inboxes);
+        pageView.setWhenSuccess();
         return pageView;
     }
 }

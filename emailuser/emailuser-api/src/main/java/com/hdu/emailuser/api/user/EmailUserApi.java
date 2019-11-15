@@ -9,4 +9,11 @@ public interface EmailUserApi {
     BaseReturnResult queryByUserNameAndPasswd(EmailUserDto emailUserDto);
 
     BaseReturnResult addUser(EmailUserDto emailUserDto);
+
+    /*
+    *@Description: 根据用户地址查询用户name
+    *@Param:
+    *@return:
+    */
+    BaseReturnResult getNameById(String username);
 }

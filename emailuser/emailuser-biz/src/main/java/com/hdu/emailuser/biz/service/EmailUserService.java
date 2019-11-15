@@ -9,4 +9,6 @@ public interface EmailUserService {
     EmailUserDto queryByUserNameAndPasswd(EmailUserDto emailUserDto);
 
     BaseReturnResult addUser(EmailUserDto emailUserDto);
+
+    BaseReturnResult getNameById(String username);
 }

@@ -52,4 +52,15 @@ public class EmailUserProvider implements EmailUserApi {
         return result;
     }
 
+    @Override
+    public BaseReturnResult getNameById(String username) {
+        BaseReturnResult result = BaseReturnResult.getFailResult();
+        try {
+            result = emailUserService.getNameById(username);
+        }catch (Exception e){{
+            log.error(e.getMessage());
+        }}
+        return result;
+    }
+
 }

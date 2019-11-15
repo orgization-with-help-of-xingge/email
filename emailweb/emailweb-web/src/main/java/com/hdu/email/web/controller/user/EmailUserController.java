@@ -44,7 +44,7 @@ public class EmailUserController {
         try {
             result=emailUserApi.queryByUserNameAndPasswd(emailUserDto);
             if (ENMsgCode.Success.getValue().equals(result.getCode())){
-                session.setAttribute("emailUser",(EmailUserDto)result.getObject());
+                session.setAttribute(emailUserDto.getUsername(),(EmailUserDto)result.getObject());
             }
         }catch (Exception e){
             log.error(e.getMessage());

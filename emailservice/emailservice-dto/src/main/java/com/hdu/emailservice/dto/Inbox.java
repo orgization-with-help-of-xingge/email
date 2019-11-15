@@ -29,5 +29,8 @@ public class Inbox implements Serializable {
     private String content;
     private Integer size;
     private String subject;
+    private Date readDate;
+    private String recipientsName;
+    private String senderName;
 
 }

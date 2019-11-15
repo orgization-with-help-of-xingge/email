@@ -9,6 +9,7 @@
     <!--币种-->
 <!--    <dubbo:reference id="currencyApi" interface="com.fingard.rabbit.basecore.api.basicdata.CurrencyApi"/>-->
 
+    <dubbo:reference id="emailUserApi" interface="com.hdu.emailuser.api.user.EmailUserApi"/>
 
 
 </beans>

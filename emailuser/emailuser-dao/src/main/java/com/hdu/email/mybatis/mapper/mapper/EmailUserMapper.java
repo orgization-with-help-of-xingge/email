@@ -12,5 +12,7 @@ public interface EmailUserMapper {
 
     EmailUserDto selByUserNameAndPasswd(EmailUserDto emailUserDto);
 
+    String getUserName(@Param(value = "username") String username);
+
     int insertUser(EmailUserDto emailUserDto);
 }
