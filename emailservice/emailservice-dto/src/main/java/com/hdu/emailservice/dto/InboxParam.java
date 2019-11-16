@@ -14,6 +14,7 @@ import java.util.Date;
 @Getter
 @Setter
 public class InboxParam implements Serializable {
+    private String messageName;
     private String sender;
     private String recipients;
     private Date lastUpdated;
