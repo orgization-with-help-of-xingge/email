@@ -609,51 +609,7 @@
             </resource>
         </resources>
     </build>
-
-    <!--    &lt;!&ndash; 远程仓库配置 &ndash;&gt;-->
-    <!--    <distributionManagement>-->
-    <!--        <repository>-->
-    <!--            <id>fingard_rdp_escp_hosted_releases</id>-->
-    <!--            <url>http://ats.fingard.net:9561/nexus/content/repositories/fingard_rdp_escp_hosted_releases</url>-->
-    <!--        </repository>-->
-    <!--        <snapshotRepository>-->
-    <!--            <id>fingard_rdp_escp_hosted_snapshots</id>-->
-    <!--            <url>http://ats.fingard.net:9561/nexus/content/repositories/fingard_rdp_escp_hosted_snapshots</url>-->
-    <!--        </snapshotRepository>-->
-    <!--    </distributionManagement>-->
     <profiles>
-        <!--        <profile>-->
-        <!--            <id>local</id>-->
-        <!--            <build>-->
-        <!--                <filters>-->
-        <!--                    <filter>../acccore-local.properties</filter>-->
-        <!--                </filters>-->
-        <!--            </build>-->
-        <!--        </profile>-->
-        <!--        <profile>-->
-        <!--            <id>test</id>-->
-        <!--            <build>-->
-        <!--                <filters>-->
-        <!--                    <filter>../acccore-test.properties</filter>-->
-        <!--                </filters>-->
-        <!--            </build>-->
-        <!--        </profile>-->
-        <!--        <profile>-->
-        <!--            <id>cmbc-mysql-test</id>-->
-        <!--            <build>-->
-        <!--                <filters>-->
-        <!--                    <filter>../acccore-cmbc-mysql-test.properties</filter>-->
-        <!--                </filters>-->
-        <!--            </build>-->
-        <!--        </profile>-->
-        <!--        <profile>-->
-        <!--            <id>docker</id>-->
-        <!--            <build>-->
-        <!--                <filters>-->
-        <!--                    <filter>../acccore-docker.properties</filter>-->
-        <!--                </filters>-->
-        <!--            </build>-->
-        <!--        </profile>-->
         <profile>
             <id>dev</id>
             <activation>
@@ -665,30 +621,6 @@
                 </filters>
             </build>
         </profile>
-        <!--        <profile>-->
-        <!--            <id>online</id>-->
-        <!--            <build>-->
-        <!--                <filters>-->
-        <!--                    <filter>../acccore-online.properties</filter>-->
-        <!--                </filters>-->
-        <!--            </build>-->
-        <!--        </profile>-->
-        <!--        <profile>-->
-        <!--            <id>press</id>-->
-        <!--            <build>-->
-        <!--                <filters>-->
-        <!--                    <filter>../acccore-press.properties</filter>-->
-        <!--                </filters>-->
-        <!--            </build>-->
-        <!--        </profile>-->
-        <!--        <profile>-->
-        <!--            <id>demo</id>-->
-        <!--            <build>-->
-        <!--                <filters>-->
-        <!--                    <filter>../acccore-demo.properties</filter>-->
-        <!--                </filters>-->
-        <!--            </build>-->
-        <!--        </profile>-->
     </profiles>
 
 

@@ -2,6 +2,7 @@ package com.hdu.emailservice.biz.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.hdu.email.common.util.enums.ENMsgCode;
 import com.hdu.email.common.util.transfer.BaseReturnResult;
 import com.hdu.email.common.util.transfer.PageView;
 import com.hdu.email.mybatis.mapper.InboxMapper;
@@ -35,6 +36,10 @@ public class InboxServiceImpl implements InboxService {
         PageInfo<Inbox> pageInfo = new PageInfo<>(emails);
         List<Inbox> result = pageInfo.getList();
         for (Inbox inbox : result) {
+            BaseReturnResult nameById = emailUserApi.getNameById(inbox.getSender());
+            if (ENMsgCode.Success.getValue().equals(nameById.getCode())){
+                inbox.setSenderName((String) nameById.getObject());
+            }
             emailContentUtil.getContent(inbox);
             inbox.setMessageBody(null);
         }
