@@ -1,5 +1,6 @@
 package com.hdu.email.web.controller.email;
 
+import com.hdu.email.common.util.transfer.BaseReturnResult;
 import com.hdu.email.common.util.transfer.PageView;
 import com.hdu.email.dto.EmailUserDto;
 import com.hdu.emailservice.api.InboxApi;
@@ -45,6 +46,17 @@ public class InboxController {
             log.error(e.getMessage());
         }
         return  pageView;
+    }
+
+    @RequestMapping(value = "/detail", method = RequestMethod.POST)
+    private BaseReturnResult queryDetail(InboxParam param){
+        BaseReturnResult result = BaseReturnResult.getFailResult();
+        try {
+            result = inboxApi.getEmailById(param);
+        }catch (Exception e){
+            log.error(e.getMessage());
+        }
+        return result;
     }
 
 }

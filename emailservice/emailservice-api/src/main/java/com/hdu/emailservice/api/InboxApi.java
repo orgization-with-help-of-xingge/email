@@ -1,5 +1,6 @@
 package com.hdu.emailservice.api;
 
+import com.hdu.email.common.util.transfer.BaseReturnResult;
 import com.hdu.email.common.util.transfer.PageView;
 import com.hdu.emailservice.dto.Inbox;
 import com.hdu.emailservice.dto.InboxParam;
@@ -10,4 +11,6 @@ public interface InboxApi {
     PageView<Inbox> getUnReadEmail(InboxParam param);
 
     PageView<Inbox> getAll(InboxParam param);
+
+    BaseReturnResult getEmailById(InboxParam param);
 }

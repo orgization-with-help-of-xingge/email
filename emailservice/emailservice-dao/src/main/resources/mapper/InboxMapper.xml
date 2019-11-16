@@ -3,7 +3,7 @@
 <mapper namespace="com.hdu.email.mybatis.mapper.InboxMapper">
 
     <select id="selByRecipNonRead" resultType="inbox">
-        select T.*,K.has_read
+        select T*,K.has_read
         from inbox T left join t_inbox_read K
         on T.message_name = K.message_name
         where T.recipients = #{recipients} and K.has_read is null
@@ -20,7 +20,7 @@
     </select>
 
     <select id="selByRecip" resultType="inbox">
-        select T.*,K.has_read,K.readDate from inbox T left join t_inbox_read K
+        select T.message_name,T.sender,T.message_body,T.last_updated,K.has_read,K.read_date from inbox T left join t_inbox_read K
         on T.message_name = K.message_name
         where T.recipients = #{recipients}
         <if test='orderby != null and orderby !="" and sortdir != null and sortdir !="" '>
@@ -38,4 +38,8 @@
         select * from inbox where sender = #{sender}
     </select>
 
+    <select id="selById" resultType="inbox">
+        select T.* from inbox T
+        where T.message_name = #{messageName}
+    </select>
 </mapper>

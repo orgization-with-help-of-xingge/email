@@ -1,6 +1,7 @@
 package com.hdu.emailservice.provider;
 
 import cn.hutool.db.Page;
+import com.hdu.email.common.util.transfer.BaseReturnResult;
 import com.hdu.email.common.util.transfer.PageView;
 import com.hdu.emailservice.api.InboxApi;
 import com.hdu.emailservice.biz.service.InboxService;
@@ -33,8 +34,20 @@ public class InboxProvider implements InboxApi {
         try {
             pageView=inboxService.queryAll(param);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            e.printStackTrace();
+            log.info(e.getMessage());
         }
         return pageView;
+    }
+
+    @Override
+    public BaseReturnResult getEmailById(InboxParam param) {
+        BaseReturnResult result = BaseReturnResult.getFailResult();
+        try {
+            result=inboxService.queryEmailById(param);
+        } catch (Exception e) {
+            log.error(e.getMessage());
+        }
+        return result;
     }
 }

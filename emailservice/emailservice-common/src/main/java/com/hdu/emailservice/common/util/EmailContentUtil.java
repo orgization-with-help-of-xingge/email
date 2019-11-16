@@ -1,5 +1,6 @@
 package com.hdu.emailservice.common.util;
 import com.hdu.emailservice.dto.Inbox;
+import com.hdu.emailservice.dto.Recipients;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.mail.*;
@@ -11,7 +12,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 功能描述: 得到邮件内容，发件收件人的工具类
@@ -70,24 +73,57 @@ public class EmailContentUtil {
         return from;
     }
 
+    public void getSubject(Inbox email) throws MessagingException {
+        StringBuffer content = new StringBuffer(300);
+        byte[] mailInfo = email.getMessageBody();
+        InputStream is = new ByteArrayInputStream(mailInfo);
+        Message message = new MimeMessage(null, is);
+        MimeMessage msg = (MimeMessage) message;
+        email.setSubject(msg.getSubject());
+    }
+
     public String getContent(Inbox email) throws Exception {
         StringBuffer content = new StringBuffer(300);
         byte[] mailInfo = email.getMessageBody();
         InputStream is = new ByteArrayInputStream(mailInfo);
         Message message = new MimeMessage(null, is);
         MimeMessage msg = (MimeMessage) message;
+        //接收者
+        List<Recipients> recipients = new ArrayList<>();
+        Address[] addresses = msg.getRecipients(Message.RecipientType.TO);
+        for (Address address : addresses) {
+            Recipients recipient = new Recipients();
+            recipient.setRecipients(getRealFromAddress(address.toString()));
+            recipients.add(recipient);
+        }
+        email.setRecipients(recipients);
+
+        //抄送
+        List<Recipients> copys = new ArrayList<>();
+        Address[] copyAddresses = msg.getRecipients(Message.RecipientType.CC);
+        if (copyAddresses != null && copyAddresses.length > 0){
+            for (Address copyAddress : copyAddresses) {
+                Recipients copy = new Recipients();
+                copy.setRecipients(getRealFromAddress(copyAddress.toString()));
+                copys.add(copy);
+            }
+        }
+        email.setCopys(copys);
+
         int size = msg.getSize();
         email.setSize(size);
         email.setSubject(msg.getSubject());
-//        log.info("邮件的大小为———>{}", size);
-//        log.info("邮件接收时间———>{}", getSentDate(msg, null));
-//        log.info("发件人地址———>{}", getFrom(msg));
         getMailTextContent(msg, content);
         email.setContent(content.toString());
-//        log.info("邮件的正文———>{}", content);
-
-        log.info("邮件解析完成");
         return content.toString();
+    }
+
+    public String getRealFromAddress(String address){
+        if (address.contains("<")||address.contains(">")){
+            return address.split("<")[1].split(">")[0];
+        }else {
+            return address;
+        }
     }
 
 }

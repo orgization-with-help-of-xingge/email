@@ -1,5 +1,6 @@
 package com.hdu.emailservice.biz.service;
 
+import com.hdu.email.common.util.transfer.BaseReturnResult;
 import com.hdu.email.common.util.transfer.PageView;
 import com.hdu.emailservice.dto.Inbox;
 import com.hdu.emailservice.dto.InboxParam;
@@ -15,4 +16,6 @@ public interface InboxService {
     PageView<Inbox> queryUnReadEmail(InboxParam param) throws Exception;
 
     PageView<Inbox> queryAll(InboxParam param) throws Exception;
+
+    BaseReturnResult queryEmailById(InboxParam param) throws Exception;
 }
