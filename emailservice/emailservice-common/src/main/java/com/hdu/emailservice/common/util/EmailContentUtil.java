@@ -118,10 +118,11 @@ public class EmailContentUtil {
         return content.toString();
     }
 
+    //根据address，得到真实邮件地址
     public String getRealFromAddress(String address){
         if (address.contains("<")||address.contains(">")){
             return address.split("<")[1].split(">")[0];
-        }else {
+        } else {
             return address;
         }
     }

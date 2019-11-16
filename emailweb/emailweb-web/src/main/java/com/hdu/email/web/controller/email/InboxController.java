@@ -27,7 +27,7 @@ public class InboxController {
 
     @RequestMapping(value = "/unread",method = RequestMethod.POST)
     private PageView<Inbox> queryUnreadMail(InboxParam param) {
-        PageView<Inbox> unReadEmail = null;
+        PageView<Inbox> unReadEmail = new PageView<>();
         try {
             unReadEmail = inboxApi.getUnReadEmail(param);
         } catch (Exception e){

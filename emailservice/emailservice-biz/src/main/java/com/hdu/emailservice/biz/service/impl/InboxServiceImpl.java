@@ -86,6 +86,10 @@ public class InboxServiceImpl implements InboxService {
                 copy.setRecipientsName((String) nameById.getObject());
             }
         }
+        BaseReturnResult nameById = emailUserApi.getNameById(inbox.getSender());
+        if (nameById.getSuccess()){
+            inbox.setSenderName((String) nameById.getObject());
+        }
         inbox.setMessageBody(null);
         result.setObject(inbox);
         result.setWhenSuccess();
