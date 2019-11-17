@@ -13,4 +13,8 @@ public interface InboxApi {
     PageView<Inbox> getAll(InboxParam param);
 
     BaseReturnResult getEmailById(InboxParam param);
+
+    PageView<Inbox> getSend(InboxParam param);
+
+    BaseReturnResult changeStar(InboxParam param);
 }

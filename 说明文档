@@ -3,6 +3,10 @@
 test123@sixl.xyz/test123
 test234@sixl.xyz/test234
 
+数据库启停：
+systemctl start mariadb.service
+systemctl stop mariadb.service
+systemctl restart mariadb.service
 
 
 mariadb地址：

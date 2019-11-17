@@ -15,6 +15,7 @@ import java.util.List;
 @Getter
 @Setter
 public class Inbox implements Serializable {
+    private String urid;
     private String messageName;
     private String repositoryName;
     private String messageState;
@@ -34,5 +35,6 @@ public class Inbox implements Serializable {
     private Integer size;
     private String subject;
     private Date readDate;
+    private Boolean isStar = false;
 
 }

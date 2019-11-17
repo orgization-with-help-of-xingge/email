@@ -50,4 +50,28 @@ public class InboxProvider implements InboxApi {
         }
         return result;
     }
+
+    @Override
+    public PageView<Inbox> getSend(InboxParam param) {
+
+        PageView<Inbox> pageView = new PageView<>();
+        try {
+            pageView=inboxService.querySend(param);
+        } catch (Exception e) {
+            e.printStackTrace();
+            log.info(e.getMessage());
+        }
+        return pageView;
+    }
+
+    @Override
+    public BaseReturnResult changeStar(InboxParam param) {
+        BaseReturnResult result = BaseReturnResult.getFailResult();
+        try{
+            result=inboxService.changeStar(param);
+        }catch (Exception e){
+            log.error(e.getMessage());
+        }
+        return null;
+    }
 }

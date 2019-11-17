@@ -1,5 +1,6 @@
 package com.hdu.emailservice.dto;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,6 +15,7 @@ import java.util.Date;
 @Getter
 @Setter
 public class InboxParam implements Serializable {
+    private String urid;
     private String messageName;
     private String sender;
     private String recipients;
@@ -22,4 +24,10 @@ public class InboxParam implements Serializable {
     private Integer rows = 10;
     private String orderby;
     private String sortdir;
+    private Integer hasRead;
+    private Date readDate;
+    private String recipientsName;
+    private String username;
+    private Boolean isStar;
+
 }

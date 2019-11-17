@@ -18,4 +18,8 @@ public interface InboxService {
     PageView<Inbox> queryAll(InboxParam param) throws Exception;
 
     BaseReturnResult queryEmailById(InboxParam param) throws Exception;
+
+    PageView<Inbox> querySend(InboxParam param) throws Exception;
+
+    BaseReturnResult changeStar(InboxParam param) throws Exception;
 }

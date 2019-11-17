@@ -3,9 +3,11 @@
 <mapper namespace="com.hdu.email.mybatis.mapper.InboxMapper">
 
     <select id="selByRecipNonRead" resultType="inbox">
-        select T.*,K.has_read
+        select T.*,K.has_read,M.is_star
         from inbox T left join t_inbox_read K
         on T.message_name = K.message_name
+        left join t_inbox_star M
+        on T.message_name = M.message_name and T.recipients = M.username
         where T.recipients = #{recipients} and K.has_read is null
         <if test='orderby != null and orderby !="" and sortdir != null and sortdir !="" '>
             order by ${orderby} ${sortdir}
@@ -16,30 +18,102 @@
         select count(1)
         from inbox T left join t_inbox_read K
         on T.message_name = K.message_name
+        left join t_inbox_star M
+        on T.message_name = M.message_name and T.recipients = M.username
         where T.recipients = #{recipients} and K.has_read is null ;
     </select>
 
     <select id="selByRecip" resultType="inbox">
         select T.message_name,T.sender,T.message_body,T.last_updated,K.has_read,K.read_date from inbox T left join t_inbox_read K
         on T.message_name = K.message_name
+        left join t_inbox_star M
+        on T.message_name = M.message_name and T.recipients = M.username
         where T.recipients = #{recipients}
+        <if test='hasRead != null and hasRead !="" '>
+            and K.has_read = #{hasRead}
+        </if>
         <if test='orderby != null and orderby !="" and sortdir != null and sortdir !="" '>
             order by ${orderby} ${sortdir}
         </if>
+
     </select>
 
     <select id="countByRecip" resultType="java.lang.Integer">
         select count(1) from inbox T left join t_inbox_read K
         on T.message_name = K.message_name
+        left join t_inbox_star M
+        on T.message_name = M.message_name and T.recipients = M.username
         where T.recipients = #{recipients}
     </select>
 
-    <select id="selBySender" resultType="inbox">
-        select * from inbox where sender = #{sender}
-    </select>
 
     <select id="selById" resultType="inbox">
-        select T.* from inbox T
+        select T.*,K.urid,K.has_read from inbox T left join t_inbox_read K
+        on T.message_name = K.message_name
         where T.message_name = #{messageName}
     </select>
+
+    <insert id="insRead" parameterType="com.hdu.emailservice.dto.Inbox">
+        insert into t_inbox_read
+        values(#{urid},#{messageName},#{hasRead},#{readDate});
+    </insert>
+
+    <update id="updRead" parameterType="com.hdu.emailservice.dto.Inbox">
+        UPDATE t_inbox_read set read_date =#{readDate}
+        where urid  = #{urid}
+    </update>
+
+    <!--注意这里不能查询出重复记录，因为收件人为多个的时候每个收件人都会有一条记录-->
+    <select id="selBySender" parameterType="com.hdu.emailservice.dto.InboxParam" resultType="inbox">
+        select * from (
+            select T.*,M.is_star from inbox T left join t_users_name L on T.recipients = L.username
+            left join t_inbox_star M
+            on T.message_name = M.message_name and T.sender = M.username
+            where sender =#{sender}
+            <if  test='recipientsName != null and recipientsName != ""'>
+                and L.realname like concat('%', #{recipientsName},'%')
+            </if>
+            <if test='recipients != null and recipients != "" '>
+                and T.recipients like concat('%',#{recipients},'%')
+            </if>
+             group by last_updated, recipients desc
+        ) as base
+        group by last_updated
+        <if test='orderby != null and orderby !="" and sortdir != null and sortdir !="" '>
+            order by ${orderby} ${sortdir}
+        </if>
+    </select>
+    <select id="countBySender" resultType="java.lang.Integer">
+        select count(1) from
+        (select count(1) from (
+        select T.* from inbox T left join t_users_name L on T.recipients = L.username
+        left join t_inbox_star M
+        on T.message_name = M.message_name and T.sender = M.username
+        where sender =#{sender}
+        <if  test='recipientsName != null and recipientsName != ""'>
+            and L.realname like concat('%', #{recipientsName},'%')
+        </if>
+        <if test='recipients != null and recipients != "" '>
+            and T.recipients like concat('%',#{recipients},'%')
+        </if>
+        group by T.last_updated, T.recipients desc
+        )as base
+        group by last_updated) base1
+
+    </select>
+
+    <select id="selStar" resultType="inbox">
+        select T.* from t_inbox_star
+        where T.message_name = #{messageName}
+        and T.username = #{username}
+    </select>
+
+    <insert id="insStar" parameterType="com.hdu.emailservice.dto.InboxParam">
+        insert into t_inbox_star values(#{urid},#{messageName},#{username},#{isStar})
+    </insert>
+
+    <update id="updStar" parameterType="com.hdu.emailservice.dto.InboxParam">
+        update t_inbox_star set is_star = #{is_star}
+        where message_name = #{messageName} and username = #{username}
+    </update>
 </mapper>

@@ -13,11 +13,38 @@ public interface InboxMapper {
     *@return:
     */
     Inbox selById(InboxParam param);
+
+    /**
+     * 收件箱
+     * @param param
+     * @return
+     */
     List<Inbox> selByRecipNonRead(InboxParam param);
     Integer countByRecipNonRead(InboxParam param);
     List<Inbox> selByRecip(InboxParam param);
-    List<Inbox> selBySender(String sender);
     Integer countByRecip(InboxParam param);
-    List<Inbox> queryAll(InboxParam param);
 
+    /**
+     * 更新状态,已读取等等
+     * @param inbox
+     * @return
+     */
+    int insRead(Inbox inbox);
+    int updRead(Inbox inbox);
+
+    /**
+     * 发件箱
+     */
+    List<Inbox> selBySender(InboxParam param);
+    Integer countBySender(InboxParam param);
+
+
+    /**
+     * 根据messageName和username查询出当前star
+     * @param param
+     * @return
+     */
+    Inbox selStar(InboxParam param);
+    int insStar(InboxParam param);
+    int updStar(InboxParam param);
 }
