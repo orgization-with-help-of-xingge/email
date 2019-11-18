@@ -79,7 +79,7 @@ public class InboxController {
         return  pageView;
     }
 
-    @RequestMapping("/changestar")
+    @RequestMapping(value = "/changestar",method = RequestMethod.POST)
     private BaseReturnResult changeStar(@RequestHeader("X-Token")String username,List<String> messageNames){
         BaseReturnResult result = BaseReturnResult.getFailResult();
         int sumResult = 0;
