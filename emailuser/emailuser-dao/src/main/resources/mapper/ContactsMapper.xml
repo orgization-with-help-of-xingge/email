@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hdu.email.mybatis.mapper.mapper.ContactsMapper">
+
+    <select id="selByUserName" resultType="emailUserDto">
+         select T.*,K.groupname from t_user_contacts T left join t_user_group K on T.groupid = K.urid
+            where T.username = #{username}
+    </select>
+
+</mapper>

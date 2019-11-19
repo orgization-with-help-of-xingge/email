@@ -4,9 +4,11 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
+
 @Getter
 @Setter
-public class EmailUserDto implements Serializable {
+public class EmailUserParam implements Serializable {
+    private String urid;
     private String username;
     private String pwdHash;
     private String passwd;
