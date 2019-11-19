@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -80,7 +81,7 @@ public class InboxController {
     }
 
     @RequestMapping(value = "/changestar",method = RequestMethod.POST)
-    private BaseReturnResult changeStar(@RequestHeader("X-Token")String username,List<String> messageNames){
+    private BaseReturnResult changeStar(@RequestHeader("X-Token")String username, @RequestParam("messageNames") ArrayList<String> messageNames){
         BaseReturnResult result = BaseReturnResult.getFailResult();
         int sumResult = 0;
         try{

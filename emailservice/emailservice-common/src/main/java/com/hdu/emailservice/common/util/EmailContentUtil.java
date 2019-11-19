@@ -88,9 +88,6 @@ public class EmailContentUtil {
         InputStream is = new ByteArrayInputStream(mailInfo);
         Message message = new MimeMessage(null, is);
         MimeMessage msg = (MimeMessage) message;
-        //设置邮件id
-        String messageID = msg.getMessageID();
-        email.setMessageName(messageID);
         //接收者
         List<Recipients> recipients = new ArrayList<>();
         Address[] addresses = msg.getRecipients(Message.RecipientType.TO);

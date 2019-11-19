@@ -24,7 +24,7 @@
     </select>
 
     <select id="selByRecip" resultType="inbox">
-        select T.message_name,T.sender,T.message_body,T.last_updated,K.has_read,K.read_date from inbox T left join t_inbox_read K
+        select T.message_name,T.sender,T.message_body,T.last_updated,K.has_read,K.read_date,M.is_star from inbox T left join t_inbox_read K
         on T.message_name = K.message_name
         left join t_inbox_star M
         on T.message_name = M.message_name and T.recipients = M.username
@@ -44,6 +44,12 @@
         left join t_inbox_star M
         on T.message_name = M.message_name and T.recipients = M.username
         where T.recipients = #{recipients}
+        <if test='hasRead != null and hasRead !="" '>
+            and K.has_read = #{hasRead}
+        </if>
+        <if test='orderby != null and orderby !="" and sortdir != null and sortdir !="" '>
+            order by ${orderby} ${sortdir}
+        </if>
     </select>
 
 
@@ -103,7 +109,7 @@
     </select>
 
     <select id="selStar" resultType="inbox">
-        select T.* from t_inbox_star
+        select T.* from t_inbox_star T
         where T.message_name = #{messageName}
         and T.username = #{username}
     </select>
@@ -113,7 +119,7 @@
     </insert>
 
     <update id="updStar" parameterType="com.hdu.emailservice.dto.InboxParam">
-        update t_inbox_star set is_star = #{is_star}
+        update t_inbox_star set is_star = #{isStar}
         where message_name = #{messageName} and username = #{username}
     </update>
 </mapper>

@@ -72,6 +72,6 @@ public class InboxProvider implements InboxApi {
         }catch (Exception e){
             log.error(e.getMessage());
         }
-        return null;
+        return result;
     }
 }
