@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hdu.email.mybatis.mapper.mapper.UserGroupMapper">
+
+    <select id="selAllGroup" resultType="userGroup">
+        select T.* from t_user_group T
+        where T.username = #{username}
+    </select>
+
+    <select id="countAllGroup" resultType="java.lang.Integer">
+        select count(1) from t_user_group T
+        where T.username = #{username}
+    </select>
+
+    <insert id="insGroup" parameterType="userGroup">
+        insert into t_user_group
+        values(#{urid},#{username},#{groupname});
+    </insert>
+
+    <update id="updGroup" parameterType="userGroup">
+        update t_user_group
+        set groupname = #{groupname} where urid = #{urid}
+    </update>
+
+    <delete id="delGroup" parameterType="userGroup">
+        delete from t_user_group
+        where urid = #{urid}
+    </delete>
+
+</mapper>

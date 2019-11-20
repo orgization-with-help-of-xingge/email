@@ -131,6 +131,7 @@ public class InboxServiceImpl implements InboxService {
 
         pageView.setRows(inboxes);
         pageView.setTotal(total);
+
         pageView.setWhenSuccess();
         return pageView;
     }
