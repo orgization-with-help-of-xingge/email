@@ -9,5 +9,15 @@
         <setting name="lazyLoadingEnabled" value="false"/>
         <setting name="aggressiveLazyLoading" value="true"/>
         <setting name="logImpl" value="STDOUT_LOGGING"/>
+        <!--下划线到驼峰方式转化-->
+        <setting name="mapUnderscoreToCamelCase" value="true" />
     </settings>
+    <!-- 配置mybatis的分页插件PageHelper -->
+    <plugins>
+        <!-- com.github.pagehelper为PageHelper类所在包名 -->
+        <plugin interceptor="com.github.pagehelper.PageInterceptor">
+            <!-- 设置数据库类型Oracle,Mysql,MariaDB,SQLite,Hsqldb,PostgreSQL六种数据库 -->
+<!--            <property name="dialect" value="mariadb"/>-->
+        </plugin>
+    </plugins>
 </configuration>

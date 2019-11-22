@@ -20,14 +20,12 @@ public class UserGroupServiceImpl implements UserGroupService {
 
     @Override
     public PageView<UserGroup> queryAll(UserGroupParam param) {
-
         PageView<UserGroup> pageView = new PageView<>();
-            PageHelper.startPage(param.getPage(), param.getRows());
-            List<UserGroup> userGroups = userGroupMapper.selAllGroup(param);
-            pageView.setRows(userGroups);
-            pageView.setTotal(userGroupMapper.countAllGroup(param));
-            pageView.setWhenSuccess();
-
+        PageHelper.startPage(param.getPage(), param.getRows());
+        List<UserGroup> userGroups = userGroupMapper.selAllGroup(param);
+        pageView.setRows(userGroups);
+        pageView.setTotal(userGroupMapper.countAllGroup(param));
+        pageView.setWhenSuccess();
         return pageView;
     }
 }

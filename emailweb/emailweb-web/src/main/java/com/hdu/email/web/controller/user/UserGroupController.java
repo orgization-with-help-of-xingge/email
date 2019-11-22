@@ -2,6 +2,7 @@ package com.hdu.email.web.controller.user;
 
 import com.hdu.email.common.util.transfer.PageView;
 import com.hdu.email.dto.UserGroup;
+import com.hdu.email.dto.UserGroupParam;
 import com.hdu.emailuser.api.user.UserContactsApi;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,14 +24,13 @@ public class UserGroupController {
     @Autowired
     private UserContactsApi userContactsApi;
 
-
     @RequestMapping("queryall")
-    private PageView<UserGroup> getAll(@RequestHeader("X-Token")String username ){
-
+    private PageView<UserGroup> getAll(@RequestHeader("X-Token") String username,UserGroupParam userGroupParam ){
         PageView<UserGroup> pageView = new PageView<>();
         try {
-            pageView = userContactsApi.queryAllGroup(username);
-        }catch (Exception e){
+            userGroupParam.setUsername(username+"@sixl.xyz");
+            pageView = userContactsApi.queryAllGroup(userGroupParam);
+        } catch (Exception e){
             log.error(e.getMessage());
         }
         return pageView;
