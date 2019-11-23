@@ -58,6 +58,7 @@
             <tx:method name="add*"/>
             <tx:method name="upd*"/>
             <tx:method name="del*"/>
+            <tx:method name="ins*"/>
             <tx:method name="*" read-only="true"/>
         </tx:attributes>
     </tx:advice>

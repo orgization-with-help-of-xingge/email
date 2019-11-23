@@ -35,6 +35,6 @@ public class ContactsProvider implements ContactsApi {
         }catch (Exception e){
             log.error(e.getMessage());
         }
-        return null;
+        return result;
     }
 }
