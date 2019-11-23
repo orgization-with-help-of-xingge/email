@@ -8,6 +8,8 @@
     <bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping"/>
     <bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter"/>
 
+    <context:property-placeholder location="classpath:file.properties" ignore-unresolvable="true"/>
+
     <!-- 注解支持 -->
     <context:annotation-config/>
     <context:component-scan base-package="com.hdu.email.web.controller">
@@ -27,19 +29,6 @@
         <!--</property>-->
     <!--</bean>-->
 
-    <!--<import resource="classpath*:applicationContext-cache.xml" />-->
-    <!--<import resource="classpath*:applicationContext-config-consumer.xml" />-->
-    <!--<import resource="classpath*:applicationContext-fundbudsys-consumer.xml" />-->
-    <!--<import resource="classpath*:applicationContext-basecore-consumer.xml" />-->
-    <!--<import resource="classpath*:applicationContext-billsys-consumer.xml" />-->
-	<!--<import resource="classpath*:applicationContext-usercore-consumer.xml" />-->
-    <!--<import resource="classpath*:applicationContext-tasker-consumer.xml"/>-->
-    <!--<import resource="classpath*:applicationContext-workflow-consumer.xml" />-->
-    <!--<import resource="classpath*:applicationContext-intraccsys-consumer.xml" />-->
-    <!--<import resource="classpath*:applicationContext-warningser-consumer.xml" />-->
-    <!--<import resource="classpath*:applicationContext-homepage-consumer.xml" />-->
-    <!--<import resource="classpath*:applicationContext-checksys-consumer.xml" />-->
-    <!--<import resource="classpath*:applicationContext-settlesys-consumer.xml"/>-->
     <import resource="applicationContext-user-consumer.xml"/>
     <import resource="applicationContext-email-consumer.xml"/>
     <import resource="applicationContext-config-consumer.xml"/>

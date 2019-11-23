@@ -1,5 +1,6 @@
 package com.hdu.emailuser.biz.service.impl;
 
+import com.hdu.email.common.util.transfer.BaseReturnResult;
 import com.hdu.email.common.util.transfer.PageView;
 import com.hdu.email.dto.EmailContacts;
 import com.hdu.email.dto.EmailContactsParam;
@@ -7,13 +8,18 @@ import com.hdu.email.mybatis.mapper.mapper.ContactsMapper;
 import com.hdu.emailuser.biz.service.ContactsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.support.TransactionCallback;
+import org.springframework.transaction.support.TransactionTemplate;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class ContactsServiceImpl implements ContactsService {
     @Autowired
     private ContactsMapper contactsMapper;
+
 
     @Override
     public PageView<EmailContacts> queryByUserName(EmailContactsParam param) {
@@ -21,5 +27,17 @@ public class ContactsServiceImpl implements ContactsService {
         List<EmailContacts> emailContacts = contactsMapper.selByUserName(param);
         pageView.setRows(emailContacts);
         return pageView;
+    }
+
+    @Override
+    public BaseReturnResult insContacts(EmailContactsParam param) throws Exception {
+        BaseReturnResult result = BaseReturnResult.getFailResult();
+        param.setUrid(UUID.randomUUID().toString());
+        int i = contactsMapper.insContacts(param);
+        if (i < 1){
+            throw new Exception("插入失败");
+        }
+        result.setWhenSuccess();
+        return result;
     }
 }

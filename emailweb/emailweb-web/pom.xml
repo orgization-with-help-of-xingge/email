@@ -33,6 +33,11 @@
         <!-- Servlet&JSP -->
         <dependency>
             <groupId>com.hdu</groupId>
+            <artifactId>emailtools</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.hdu</groupId>
             <artifactId>emailweb-common</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
@@ -143,6 +148,13 @@
             <groupId>net.sf.json-lib</groupId>
             <artifactId>json-lib</artifactId>
             <classifier>jdk15</classifier>
+        </dependency>
+
+        <!--fileupload-->
+        <dependency>
+            <groupId>commons-fileupload</groupId>
+            <artifactId>commons-fileupload</artifactId>
+            <version>1.3.1</version>
         </dependency>
 
     </dependencies>

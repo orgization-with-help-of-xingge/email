@@ -9,4 +9,5 @@ import java.util.List;
 
 public interface ContactsMapper {
     List<EmailContacts> selByUserName(EmailContactsParam param);
+    int insContacts(EmailContactsParam param);
 }

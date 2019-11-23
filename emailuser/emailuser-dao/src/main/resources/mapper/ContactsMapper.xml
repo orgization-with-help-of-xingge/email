@@ -6,8 +6,52 @@
          select T.* from t_user_contacts T where
          T.username = #{username}
          <if test="groupid != null and groupid !=''" >
-             and T.groupid = 'group1'
+             and T.groupid = #{groupid}
          </if>
     </select>
+
+    <insert id="insContacts" parameterType="com.hdu.email.dto.EmailContactsParam">
+        insert into t_user_contacts
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="urid != null and urid !=''">
+                urid,
+            </if>
+            <if test="username != null and username !=''">
+                username,
+            </if>
+            <if test="contacts != null and contacts !=''">
+                contacts,
+            </if>
+            <if test="groupid != null and groupid !=''">
+                groupid,
+            </if>
+            <if test="contactsName != null and contactsName !=''">
+                contacts_name,
+            </if>
+            <if test="headPic != null and headPic !=''">
+                head_pic
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="urid != null and urid !=''">
+                #{urid,jdbcType = VARCHAR },
+            </if>
+            <if test="username != null and username !=''">
+                #{username,jdbcType = VARCHAR },
+            </if>
+            <if test="contacts != null and contacts !=''">
+                #{contacts,jdbcType = VARCHAR },
+            </if>
+            <if test="groupid != null and groupid !=''">
+                #{groupid,jdbcType = VARCHAR },
+            </if>
+            <if test="contactsName != null and contactsName !=''">
+                #{contactsName,jdbcType = VARCHAR },
+            </if>
+            <if test="headPic != null and headPic !=''">
+                #{headPic,jdbcType = VARCHAR },
+            </if>
+        </trim>
+    </insert>
 
 </mapper>

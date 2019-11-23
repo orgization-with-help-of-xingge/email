@@ -11,6 +11,6 @@ public class EmailContactsParam extends BaseQueryParams {
     private String username;
     private String contacts;
     private String groupid;
-    private String contacts_name;
-    private String head_pic;
+    private String contactsName;
+    private String headPic;
 }

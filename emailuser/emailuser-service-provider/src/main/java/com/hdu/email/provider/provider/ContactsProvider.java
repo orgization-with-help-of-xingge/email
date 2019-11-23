@@ -1,5 +1,6 @@
 package com.hdu.email.provider.provider;
 
+import com.hdu.email.common.util.transfer.BaseReturnResult;
 import com.hdu.email.common.util.transfer.PageView;
 import com.hdu.email.dto.EmailContacts;
 import com.hdu.email.dto.EmailContactsParam;
@@ -24,5 +25,16 @@ public class ContactsProvider implements ContactsApi {
             log.error(e.getMessage());
         }
         return pageView;
+    }
+
+    @Override
+    public BaseReturnResult insContacts(EmailContactsParam param) {
+        BaseReturnResult result = BaseReturnResult.getFailResult();
+        try {
+            result = contactsService.insContacts(param);
+        }catch (Exception e){
+            log.error(e.getMessage());
+        }
+        return null;
     }
 }
