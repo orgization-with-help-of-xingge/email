@@ -24,4 +24,6 @@
     <dubbo:service interface="com.hdu.emailuser.api.user.UserContactsApi"
                    ref="userContactsProvider" protocol="dubbo"/>
 
+    <dubbo:service interface="com.hdu.emailuser.api.user.ContactsApi" ref="contactsProvider" protocol="dubbo"/>
+
 </beans>

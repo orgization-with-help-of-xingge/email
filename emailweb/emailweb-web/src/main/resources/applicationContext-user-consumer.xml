@@ -15,6 +15,7 @@
     <!-- 账户性质-->
     <dubbo:reference id="emailUserApi" interface="com.hdu.emailuser.api.user.EmailUserApi"/>
     <dubbo:reference id="userContactsApi" interface="com.hdu.emailuser.api.user.UserContactsApi"/>
+    <dubbo:reference id="contactsApi" interface="com.hdu.emailuser.api.user.ContactsApi"/>
 
 
 </beans>
