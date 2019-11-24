@@ -8,7 +8,7 @@ systemctl start mariadb.service
 systemctl stop mariadb.service
 systemctl restart mariadb.service
 
-
+./nginx -s quit
 mariadb地址：
 主：49.232.175.59：3306  root/123456
 从：47.94.232.136：3306  root/123456

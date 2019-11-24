@@ -1,5 +1,6 @@
 package com.hdu.email.web.controller.user;
 
+import com.hdu.email.common.util.transfer.BaseReturnResult;
 import com.hdu.email.common.util.transfer.PageView;
 import com.hdu.email.dto.UserGroup;
 import com.hdu.email.dto.UserGroupParam;
@@ -24,7 +25,7 @@ public class UserGroupController {
     @Autowired
     private UserContactsApi userContactsApi;
 
-    @RequestMapping("queryall")
+    @RequestMapping(value = "/queryall",method = RequestMethod.POST)
     private PageView<UserGroup> getAll(@RequestHeader("X-Token") String username,UserGroupParam userGroupParam ){
         PageView<UserGroup> pageView = new PageView<>();
         try {
@@ -34,6 +35,41 @@ public class UserGroupController {
             log.error(e.getMessage());
         }
         return pageView;
+    }
+
+    @RequestMapping(value = "/editgroup",method = RequestMethod.POST)
+    private BaseReturnResult editGroup(UserGroupParam param){
+        BaseReturnResult result = BaseReturnResult.getFailResult();
+        try{
+
+            result= userContactsApi.updGroup(param);
+        }catch (Exception e){
+            log.error(e.getMessage());
+        }
+        return result;
+    }
+
+    @RequestMapping(value = "/insgroup",method = RequestMethod.POST)
+    private BaseReturnResult insGroup(@RequestHeader("X-Token") String username,UserGroupParam param){
+        BaseReturnResult result = BaseReturnResult.getFailResult();
+        try{
+            param.setUsername(username+"@sixl.xyz");
+            result = userContactsApi.insGroup(param);
+        }catch (Exception e){
+            log.error(e.getMessage());
+        }
+        return result;
+    }
+
+    @RequestMapping(value = "/delgroup",method = RequestMethod.POST)
+    private BaseReturnResult delGroup(@RequestHeader("X-Token") String username,UserGroupParam param){
+        BaseReturnResult result = BaseReturnResult.getFailResult();
+        try{
+            result = userContactsApi.delGroup(param);
+        }catch (Exception e){
+            log.error(e.getMessage());
+        }
+        return result;
     }
 
 }

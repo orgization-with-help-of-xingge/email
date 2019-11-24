@@ -10,6 +10,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @Slf4j
 public class ContactsProvider implements ContactsApi {
@@ -32,6 +34,28 @@ public class ContactsProvider implements ContactsApi {
         BaseReturnResult result = BaseReturnResult.getFailResult();
         try {
             result = contactsService.insContacts(param);
+        }catch (Exception e){
+            log.error(e.getMessage());
+        }
+        return result;
+    }
+
+    @Override
+    public BaseReturnResult editContacts(EmailContactsParam param) {
+        BaseReturnResult result = BaseReturnResult.getFailResult();
+        try {
+            result = contactsService.updContacts(param);
+        }catch (Exception e){
+            log.error(e.getMessage());
+        }
+        return result;
+    }
+
+    @Override
+    public BaseReturnResult delContacts(List<String> uridin) {
+        BaseReturnResult result = BaseReturnResult.getFailResult();
+        try {
+            result = contactsService.delContatcs(uridin);
         }catch (Exception e){
             log.error(e.getMessage());
         }

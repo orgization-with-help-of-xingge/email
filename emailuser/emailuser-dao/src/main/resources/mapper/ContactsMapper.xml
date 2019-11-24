@@ -8,7 +8,27 @@
          <if test="groupid != null and groupid !=''" >
              and T.groupid = #{groupid}
          </if>
+         <if test="contacts !=null  and contacts !=''">
+             and T.contacts like concat('%',#{contacts},'%')
+         </if>
+        <if test="contactsName !=null  and contactsName !=''">
+            and T.contacts_name like concat('%',#{contactsName},'%')
+        </if>
     </select>
+    <select id="countByUserName" resultType="java.lang.Integer">
+        select count(1) from t_user_contacts T where
+        T.username = #{username}
+        <if test="groupid != null and groupid !=''" >
+            and T.groupid = #{groupid}
+        </if>
+        <if test="contacts !=null  and contacts !=''">
+            and T.contacts like concat('%',#{contacts},'%')
+        </if>
+        <if test="contactsName !=null  and contactsName !=''">
+            and T.contacts_name like concat('%',#{contactsName},'%')
+        </if>
+    </select>
+
 
     <insert id="insContacts" parameterType="com.hdu.email.dto.EmailContactsParam">
         insert into t_user_contacts
@@ -53,5 +73,37 @@
             </if>
         </trim>
     </insert>
+
+    <update id="updContacts" parameterType="emailContactsParam">
+        update t_user_contacts set
+        <if test="username !=null and username !=''">
+            username = #{username}
+        </if>
+        <if test="contacts !=null and contacts !=''">
+            contacts = #{contacts}
+        </if>
+        <if test="contactsName !=null and contactsName !=''">
+            contacts_name = #{contactsName}
+        </if>
+        <if test="groupid !=null and groupid !=''">
+            groupid = #{groupid}
+        </if>
+        <if test="headPic !=null and headPic !=''">
+            head_pic = #{headPic}
+        </if>
+        where urid = #{urid}
+    </update>
+
+    <delete id="delContatcs" parameterType="java.util.List">
+        delete from t_user_contacts
+        where urid in
+        <foreach collection="list" open="(" close=")" separator="," index="index" item="item">
+            #{item}
+        </foreach>
+    </delete>
+    <update id="updGroupIdNull">
+        UPDATE t_user_contacts set groupid = null
+        where groupid = #{groupid}
+    </update>
 
 </mapper>

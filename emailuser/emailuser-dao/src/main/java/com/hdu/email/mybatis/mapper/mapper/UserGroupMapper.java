@@ -15,10 +15,10 @@ public interface UserGroupMapper {
 
     int countAllGroup(UserGroupParam username);
 
-    int insGroup(UserGroup userGroup);
+    int insGroup(UserGroupParam userGroup);
 
-    int updGroup(UserGroup userGroup);
+    int updGroup(UserGroupParam userGroup);
 
-    int delGroup(UserGroup userGroup);
+    int delGroup(UserGroupParam userGroup);
 
 }

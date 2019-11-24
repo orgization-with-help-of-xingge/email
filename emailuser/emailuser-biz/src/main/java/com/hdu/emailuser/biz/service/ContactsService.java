@@ -11,4 +11,8 @@ public interface ContactsService {
     PageView<EmailContacts> queryByUserName(EmailContactsParam param);
 
     BaseReturnResult insContacts(EmailContactsParam param) throws Exception;
+
+    BaseReturnResult updContacts(EmailContactsParam param) throws Exception;
+
+    BaseReturnResult delContatcs(List<String> uridin) throws Exception;
 }

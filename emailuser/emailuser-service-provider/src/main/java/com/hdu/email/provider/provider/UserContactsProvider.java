@@ -1,5 +1,6 @@
 package com.hdu.email.provider.provider;
 
+import com.hdu.email.common.util.transfer.BaseReturnResult;
 import com.hdu.email.common.util.transfer.PageView;
 import com.hdu.email.dto.UserGroup;
 import com.hdu.email.dto.UserGroupParam;
@@ -26,5 +27,38 @@ public class UserContactsProvider implements UserContactsApi {
             log.error(e.getMessage());
         }
         return pageView;
+    }
+
+    @Override
+    public BaseReturnResult updGroup(UserGroupParam param) {
+        BaseReturnResult result = BaseReturnResult.getFailResult();
+        try {
+            result = userGroupService.updGroup(param);
+        }catch (Exception e){
+            log.error(e.getMessage());
+        }
+        return result;
+    }
+
+    @Override
+    public BaseReturnResult insGroup(UserGroupParam param) {
+        BaseReturnResult result = BaseReturnResult.getFailResult();
+        try {
+            result = userGroupService.insGroup(param);
+        }catch (Exception e){
+            log.error(e.getMessage());
+        }
+        return result;
+    }
+
+    @Override
+    public BaseReturnResult delGroup(UserGroupParam param) {
+        BaseReturnResult result = BaseReturnResult.getFailResult();
+        try{
+            result =   userGroupService.delGroup(param);
+        }catch (Exception e){
+            log.error(e.getMessage());
+        }
+        return result;
     }
 }

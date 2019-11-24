@@ -10,6 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RestController
 @CrossOrigin
 @RequestMapping("/contacts")
@@ -30,12 +33,37 @@ public class ContactsController {
         return pageView;
     }
 
-    @RequestMapping(value = "inscontacts",method = RequestMethod.POST)
+    @RequestMapping(value = "/inscontacts",method = RequestMethod.POST)
     private BaseReturnResult insert(@RequestHeader("X-Token") String username,EmailContactsParam param){
         BaseReturnResult result = BaseReturnResult.getFailResult();
         try{
             param.setUsername(username+"@sixl.xyz");
             result = contactsApi.insContacts(param);
+        }catch (Exception e){
+            log.error(e.getMessage());
+        }
+        return result;
+    }
+
+    @RequestMapping(value = "/editcontacts",method = RequestMethod.POST)
+    private BaseReturnResult updContacts(@RequestHeader("X-Token") String username,EmailContactsParam param){
+        BaseReturnResult result = BaseReturnResult.getFailResult();
+        try{
+            if (!param.getUsername().equals(username+"@sixl.xyz")){
+                return result;
+            }
+            result = contactsApi.editContacts(param);
+        }catch (Exception e){
+            log.error(e.getMessage());
+        }
+        return result;
+    }
+
+    @RequestMapping(value = "delcontacts",method = RequestMethod.POST)
+    private BaseReturnResult delContacts(@RequestParam("uridin") ArrayList<String> uridin){
+        BaseReturnResult result = BaseReturnResult.getFailResult();
+        try{
+            result = contactsApi.delContacts(uridin);
         }catch (Exception e){
             log.error(e.getMessage());
         }

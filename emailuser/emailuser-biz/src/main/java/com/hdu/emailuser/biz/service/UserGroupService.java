@@ -1,5 +1,6 @@
 package com.hdu.emailuser.biz.service;
 
+import com.hdu.email.common.util.transfer.BaseReturnResult;
 import com.hdu.email.common.util.transfer.PageView;
 import com.hdu.email.dto.UserGroup;
 import com.hdu.email.dto.UserGroupParam;
@@ -13,4 +14,10 @@ import java.util.List;
  */
 public interface UserGroupService {
     PageView<UserGroup> queryAll(UserGroupParam param);
+
+    BaseReturnResult updGroup(UserGroupParam param) throws Exception;
+
+    BaseReturnResult insGroup(UserGroupParam param) throws Exception;
+
+    BaseReturnResult delGroup(UserGroupParam param) throws Exception;
 }

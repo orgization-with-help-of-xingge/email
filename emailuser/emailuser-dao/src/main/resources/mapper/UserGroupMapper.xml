@@ -12,12 +12,12 @@
         where T.username = #{username}
     </select>
 
-    <insert id="insGroup" parameterType="userGroup">
+    <insert id="insGroup" parameterType="UserGroupParam">
         insert into t_user_group
         values(#{urid},#{username},#{groupname});
     </insert>
 
-    <update id="updGroup" parameterType="userGroup">
+    <update id="updGroup" parameterType="UserGroupParam">
         update t_user_group
         set groupname = #{groupname} where urid = #{urid}
     </update>
