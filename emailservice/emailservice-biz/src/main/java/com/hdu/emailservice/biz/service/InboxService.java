@@ -22,4 +22,6 @@ public interface InboxService {
     PageView<Inbox> querySend(InboxParam param) throws Exception;
 
     BaseReturnResult changeStar(InboxParam param) throws Exception;
+
+    BaseReturnResult delInbox(InboxParam param);
 }

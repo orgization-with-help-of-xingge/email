@@ -11,6 +11,8 @@ import com.hdu.emailservice.common.util.EmailContentUtil;
 import com.hdu.emailservice.dto.Inbox;
 import com.hdu.emailservice.dto.InboxParam;
 import com.hdu.emailservice.dto.Recipients;
+import com.hdu.emailservice.dto.RecycleDto;
+import com.hdu.emailservice.enums.ENMailType;
 import com.hdu.emailuser.api.user.EmailUserApi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -156,6 +158,29 @@ public class InboxServiceImpl implements InboxService {
         returnResult.setObject(result);
         returnResult.setWhenSuccess();
         return returnResult;
+    }
+
+    @Override
+    public BaseReturnResult delInbox(InboxParam param) {
+        //删除逻辑：1.先查询出邮件 2.将邮件插入到回收箱表 3.根据sender和receiver判断类型 4.删除邮件
+        BaseReturnResult result = BaseReturnResult.getFailResult();
+        //邮件id
+        List<String> messageNames = param.getMessageNames();
+        InboxParam inboxParam = new InboxParam();
+        for (String messageName : messageNames) {
+            inboxParam.setMessageName(messageName);
+            Inbox inbox = inboxMapper.selById(inboxParam);
+            RecycleDto recycleDto = new RecycleDto();
+            recycleDto.setUrid(inbox.getMessageName());
+            recycleDto.setType(inbox.getRecipients().equals(param.getUsername())? ENMailType.RECIPIENTS.getValue():ENMailType.SENDER.getValue());
+            recycleDto.setSender(inbox.getSender());
+            recycleDto.setRecipients(inbox.getRecipirnt());
+            recycleDto.setContent(inbox.getMessageBody());
+            recycleDto.setLastUpdated(inbox.getLastUpdated());
+        }
+
+
+        return result;
     }
 
 }

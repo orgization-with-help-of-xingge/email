@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 功能描述: Inboxparam类
@@ -29,5 +30,6 @@ public class InboxParam implements Serializable {
     private String recipientsName;
     private String username;
     private Boolean isStar;
+    private List<String> messageNames;
 
 }

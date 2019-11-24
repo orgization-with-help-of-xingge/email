@@ -17,4 +17,6 @@ public interface InboxApi {
     PageView<Inbox> getSend(InboxParam param);
 
     BaseReturnResult changeStar(InboxParam param);
+
+    BaseReturnResult delInbox(InboxParam param);
 }

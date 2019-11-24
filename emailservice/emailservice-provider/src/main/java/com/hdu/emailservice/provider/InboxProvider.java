@@ -74,4 +74,15 @@ public class InboxProvider implements InboxApi {
         }
         return result;
     }
+
+    @Override
+    public BaseReturnResult delInbox(InboxParam param) {
+        BaseReturnResult result = BaseReturnResult.getFailResult();
+        try{
+            result = inboxService.delInbox(param);
+        }catch (Exception e){
+            log.error(e.getMessage());
+        }
+        return result;
+    }
 }

@@ -101,4 +101,15 @@ public class InboxController {
         return result;
     }
 
+    @RequestMapping(value = "/delInbox",method = RequestMethod.POST)
+    private BaseReturnResult delInbox(InboxParam param){
+        BaseReturnResult result = BaseReturnResult.getFailResult();
+        try{
+            result = inboxApi.delInbox(param);
+        }catch (Exception e){
+            log.error(e.getMessage());
+        }
+        return result;
+    }
+
 }
