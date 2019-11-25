@@ -181,6 +181,7 @@ public class InboxServiceImpl implements InboxService {
             RecycleDto recycleDto = new RecycleDto();
             recycleDto.setUrid(UUID.randomUUID().toString());
             recycleDto.setMessageName(inbox.getMessageName());
+            recycleDto.setUsername(param.getUsername());
             recycleDto.setRectype(inbox.getRecipient().equals(param.getUsername())? ENMailType.RECIPIENTS.getValue():ENMailType.SENDER.getValue());
             recycleDto.setSender(inbox.getSender());
             recycleDto.setRecipients(inbox.getRecipient());

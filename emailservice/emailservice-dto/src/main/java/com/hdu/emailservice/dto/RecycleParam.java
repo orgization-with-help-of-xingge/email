@@ -1,18 +1,18 @@
 package com.hdu.emailservice.dto;
 
+import com.hdu.emailservice.transfer.BaseQueryParams;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 /**
  * 回收站dto
  */
 @Getter
 @Setter
-public class RecycleDto implements Serializable {
+public class RecycleParam extends BaseQueryParams {
     private String urid;
     private String messageName;
     private String username;
@@ -21,8 +21,5 @@ public class RecycleDto implements Serializable {
     private String recipients;
     private byte[] content;
     private Date lastUpdated;
-    private String subject;
-    private List<String> recipitentList;
-
 
 }
