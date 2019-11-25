@@ -102,9 +102,10 @@ public class InboxController {
     }
 
     @RequestMapping(value = "/delInbox",method = RequestMethod.POST)
-    private BaseReturnResult delInbox(InboxParam param){
+    private BaseReturnResult delInbox(@RequestHeader("X-Token")String username,InboxParam param){
         BaseReturnResult result = BaseReturnResult.getFailResult();
         try{
+            param.setUsername(username+"@sixl.xyz");
             result = inboxApi.delInbox(param);
         }catch (Exception e){
             log.error(e.getMessage());

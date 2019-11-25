@@ -5,13 +5,12 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.hdu.email.common.util.transfer.BaseReturnResult;
 import com.hdu.email.common.util.transfer.PageView;
+import com.hdu.email.mybatis.mapper.DeletedMapper;
 import com.hdu.email.mybatis.mapper.InboxMapper;
+import com.hdu.email.mybatis.mapper.RecycleMapper;
 import com.hdu.emailservice.biz.service.InboxService;
 import com.hdu.emailservice.common.util.EmailContentUtil;
-import com.hdu.emailservice.dto.Inbox;
-import com.hdu.emailservice.dto.InboxParam;
-import com.hdu.emailservice.dto.Recipients;
-import com.hdu.emailservice.dto.RecycleDto;
+import com.hdu.emailservice.dto.*;
 import com.hdu.emailservice.enums.ENMailType;
 import com.hdu.emailuser.api.user.EmailUserApi;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +19,7 @@ import org.springframework.stereotype.Service;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 
 @Service
 public class InboxServiceImpl implements InboxService {
@@ -28,6 +28,12 @@ public class InboxServiceImpl implements InboxService {
 
     @Autowired
     private EmailUserApi emailUserApi;
+
+    @Autowired
+    private DeletedMapper deletedMapper;
+
+    @Autowired
+    private RecycleMapper recycleMapper;
 
     //异常直接抛出
     @Override
@@ -162,24 +168,36 @@ public class InboxServiceImpl implements InboxService {
 
     @Override
     public BaseReturnResult delInbox(InboxParam param) {
-        //删除逻辑：1.先查询出邮件 2.将邮件插入到回收箱表 3.根据sender和receiver判断类型 4.删除邮件
+        //删除逻辑：1.先查询出邮件 2.将邮件插入到回收箱表 3.根据sender和receiver判断类型 4.将邮件id和用户建立联系，插入到t_inbox_delete表中，不在inbox表格中删除列。
         BaseReturnResult result = BaseReturnResult.getFailResult();
         //邮件id
         List<String> messageNames = param.getMessageNames();
         InboxParam inboxParam = new InboxParam();
+        DeletedDto deletedDto = new DeletedDto();
+        int i=0,j=0;
         for (String messageName : messageNames) {
             inboxParam.setMessageName(messageName);
             Inbox inbox = inboxMapper.selById(inboxParam);
             RecycleDto recycleDto = new RecycleDto();
-            recycleDto.setUrid(inbox.getMessageName());
-            recycleDto.setType(inbox.getRecipients().equals(param.getUsername())? ENMailType.RECIPIENTS.getValue():ENMailType.SENDER.getValue());
+            recycleDto.setUrid(UUID.randomUUID().toString());
+            recycleDto.setMessageName(inbox.getMessageName());
+            recycleDto.setRectype(inbox.getRecipient().equals(param.getUsername())? ENMailType.RECIPIENTS.getValue():ENMailType.SENDER.getValue());
             recycleDto.setSender(inbox.getSender());
-            recycleDto.setRecipients(inbox.getRecipirnt());
+            recycleDto.setRecipients(inbox.getRecipient());
             recycleDto.setContent(inbox.getMessageBody());
             recycleDto.setLastUpdated(inbox.getLastUpdated());
+            j+=recycleMapper.insRecycle(recycleDto);
+
+            //插入delete表
+            deletedDto.setUrid(UUID.randomUUID().toString());
+            deletedDto.setUsername(param.getUsername());
+            deletedDto.setMessageName(messageName);
+            i += deletedMapper.insDeleted(deletedDto);
         }
-
-
+        if (i<messageNames.size() || j<messageNames.size()){
+            return result;
+        }
+        result.setWhenSuccess();
         return result;
     }
 

@@ -24,7 +24,7 @@ public class Inbox implements Serializable {
     private String senderName;
     private List<Recipients> recipients;
     private List<Recipients> copys;
-    private String recipirnt;
+    private String recipient;
     private String remoteHosts;
     private String remoteAddr;
     private byte[] messageBody;
