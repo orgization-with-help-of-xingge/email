@@ -1,6 +1,7 @@
 package com.hdu.emailservice.common.util;
 import com.hdu.emailservice.dto.Inbox;
 import com.hdu.emailservice.dto.Recipients;
+import com.hdu.emailservice.dto.RecycleDto;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.mail.*;
@@ -125,6 +126,28 @@ public class EmailContentUtil {
         } else {
             return address;
         }
+    }
+
+    public void getRecycleContent(RecycleDto email) throws Exception {
+        StringBuffer content = new StringBuffer(300);
+        byte[] mailInfo = email.getContent();
+        InputStream is = new ByteArrayInputStream(mailInfo);
+        Message message = new MimeMessage(null, is);
+        MimeMessage msg = (MimeMessage) message;
+        //接收者
+        List<Recipients> recipients = new ArrayList<>();
+        Address[] addresses = msg.getRecipients(Message.RecipientType.TO);
+        for (Address address : addresses) {
+            Recipients recipient = new Recipients();
+            recipient.setRecipients(getRealFromAddress(address.toString()));
+            recipients.add(recipient);
+        }
+        email.setRecipitentList(recipients);
+
+        int size = msg.getSize();
+        email.setSubject(msg.getSubject());
+        getMailTextContent(msg, content);
+        email.setMailContent(content.toString());
     }
 
 }

@@ -5,5 +5,5 @@ import com.hdu.emailservice.dto.RecycleDto;
 import com.hdu.emailservice.dto.RecycleParam;
 
 public interface RecycleService {
-    PageView<RecycleDto> selRecycle(RecycleParam param);
+    PageView<RecycleDto> selRecycle(RecycleParam param) throws Exception;
 }

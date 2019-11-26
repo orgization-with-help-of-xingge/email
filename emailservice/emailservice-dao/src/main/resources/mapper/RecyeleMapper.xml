@@ -10,6 +10,9 @@
             <if test="messageName != null and messageName !=''">
                 message_name,
             </if>
+            <if test="username != null and username !=''">
+                username,
+            </if>
             <if test="rectype != null and rectype !=''">
                 rectype,
             </if>
@@ -33,8 +36,11 @@
             <if test="messageName != null and messageName !=''">
                 #{messageName,jdbcType = VARCHAR},
             </if>
+            <if test="username != null and username !=''">
+                #{username,jdbcType = VARCHAR },
+            </if>
             <if test="rectype != null and rectype !=''">
-                #{rectype,jdbcType = INTEGER },
+                #{rectype,jdbcType = VARCHAR },
             </if>
             <if test="sender != null and sender !=''">
                 #{sender,jdbcType = VARCHAR },

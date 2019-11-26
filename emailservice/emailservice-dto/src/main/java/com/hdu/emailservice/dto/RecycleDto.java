@@ -16,13 +16,14 @@ public class RecycleDto implements Serializable {
     private String urid;
     private String messageName;
     private String username;
-    private Integer rectype;
+    private String rectype;
     private String sender;
     private String recipients;
     private byte[] content;
+    private String mailContent;
     private Date lastUpdated;
     private String subject;
-    private List<String> recipitentList;
+    private List<Recipients> recipitentList;
 
 
 }
