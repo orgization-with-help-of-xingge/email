@@ -2,6 +2,8 @@ package com.hdu.email.mybatis.mapper;
 
 import com.hdu.emailservice.dto.DeletedDto;
 
+import java.util.List;
+
 /**
  * 功能描述: 删除邮件
  * @Author: sixl
@@ -10,4 +12,5 @@ import com.hdu.emailservice.dto.DeletedDto;
 public interface DeletedMapper {
     //记录用户删除邮件
     int insDeleted(DeletedDto deletedDto);
+    int delDeleted(List<String> messageNames,String username);
 }

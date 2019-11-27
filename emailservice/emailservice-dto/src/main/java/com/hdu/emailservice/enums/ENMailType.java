@@ -4,8 +4,8 @@ package com.hdu.emailservice.enums;
  * 读取标识
  */
 public enum ENMailType {
-    SENDER("0"),
-    RECIPIENTS("1");
+    SENDER("send"),
+    RECIPIENTS("receive");
 
     private String code;
     ENMailType(String code){

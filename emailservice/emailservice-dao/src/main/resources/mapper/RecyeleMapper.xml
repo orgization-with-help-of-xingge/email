@@ -57,12 +57,43 @@
         </trim>
     </insert>
 
-    <select id="selAll" resultType="recycleDto">
+    <select id="selRecycle" resultType="recycleDto">
         select T.* from t_recycle T where 1=1
         and T.username = #{username}
-        <if test="lastUpdated !=null ">
-            T.last_updated = #{lastUpdated}
+        <if test="rectype !=null and rectype !=''">
+            and T.rectype = #{rectype}
+        </if>
+        <if test="lastUpdatedStart !=null">
+            and T.last_updated <![CDATA[ >= ]]> #{lastUpdatedStart,jdbcType = DATE}
+        </if>
+        <if test="lastUpdatedEnd !=null">
+            and T.last_updated <![CDATA[ <= ]]> #{lastUpdatedEnd,jdbcType = DATE}
         </if>
     </select>
+
+    <select id="countRecycle" resultType="java.lang.Integer">
+        select count(1) from t_recycle T where 1=1
+        and T.username = #{username}
+        <if test="rectype !=null and rectype !=''">
+            and T.rectype = #{rectype}
+        </if>
+        <if test="lastUpdatedStart !=null">
+            and T.last_updated <![CDATA[ >= ]]> #{lastUpdatedStart,jdbcType = DATE}
+        </if>
+        <if test="lastUpdatedEnd !=null">
+            and T.last_updated <![CDATA[ <= ]]> #{lastUpdatedEnd,jdbcType = DATE}
+        </if>
+    </select>
+
+    <delete id="delRecycle" >
+        delete from t_recycle
+        where 1=1
+        and username = #{username}
+        and message_name in
+        <foreach collection="list" open="(" close=")" separator="," index="index" item="item">
+            #{item}
+        </foreach>
+
+    </delete>
 
 </mapper>

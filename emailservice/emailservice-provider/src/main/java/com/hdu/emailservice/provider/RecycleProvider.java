@@ -1,5 +1,6 @@
 package com.hdu.emailservice.provider;
 
+import com.hdu.email.common.util.transfer.BaseReturnResult;
 import com.hdu.email.common.util.transfer.PageView;
 import com.hdu.emailservice.api.RecycleApi;
 import com.hdu.emailservice.biz.service.RecycleService;
@@ -25,5 +26,27 @@ public class RecycleProvider implements RecycleApi {
             log.error(e.getMessage());
         }
         return pageView;
+    }
+
+    @Override
+    public BaseReturnResult delRecycle(RecycleParam param) {
+        BaseReturnResult result = BaseReturnResult.getFailResult();
+        try{
+            result = recycleService.delRecycle(param);
+        }catch (Exception e){
+            log.error(e.getMessage());
+        }
+        return result;
+    }
+
+    @Override
+    public BaseReturnResult revokeRecycle(RecycleParam param) {
+        BaseReturnResult result = BaseReturnResult.getFailResult();
+        try{
+            result = recycleService.revokeRecycle(param);
+        }catch (Exception e){
+            log.error(e.getMessage());
+        }
+        return result;
     }
 }

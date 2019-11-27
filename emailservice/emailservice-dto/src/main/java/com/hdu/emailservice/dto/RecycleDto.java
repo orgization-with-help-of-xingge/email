@@ -18,6 +18,7 @@ public class RecycleDto implements Serializable {
     private String username;
     private String rectype;
     private String sender;
+    private String senderName;
     private String recipients;
     private byte[] content;
     private String mailContent;

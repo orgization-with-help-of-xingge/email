@@ -14,7 +14,8 @@ import java.util.List;
 public interface RecycleMapper {
 
     List<RecycleDto> selRecycle(RecycleParam param);
+    Integer countRecycle(RecycleParam param);
     int insRecycle(RecycleDto recycleDto);
 
-
+    int delRecycle(List<String> messageNames,String username);
 }
