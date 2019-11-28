@@ -5,8 +5,10 @@ import com.hdu.email.common.util.transfer.BaseReturnResult;
 import com.hdu.email.common.util.transfer.PageView;
 import com.hdu.email.dto.EmailUserDto;
 import com.hdu.emailservice.api.InboxApi;
+import com.hdu.emailservice.dto.FileDto;
 import com.hdu.emailservice.dto.Inbox;
 import com.hdu.emailservice.dto.InboxParam;
+import com.hdu.emailservice.dto.SendMailDto;
 import com.hdu.emailservice.enums.ENReadCode;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -111,6 +113,13 @@ public class InboxController {
             log.error(e.getMessage());
         }
         return result;
+    }
+
+    @RequestMapping(value = "/sendmail",method = RequestMethod.POST)
+    private BaseReturnResult sendMail(@RequestHeader("X-Token")String username, SendMailDto sendMailDto/*,
+                                      @RequestParam(value = "fileList[]",required = false)List<String> fileLists*/){
+        return null;
+
     }
 
 }

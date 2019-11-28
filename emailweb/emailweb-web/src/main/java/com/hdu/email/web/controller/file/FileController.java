@@ -113,9 +113,8 @@ public class FileController {
                     {
                         InputStream inputStream = file.getInputStream();
                         String originalFilename = file.getOriginalFilename();
-                        String substring = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
-                        String filename = originalFilename;
-//                        String filename = IDUtils.genImageName() + ".png";
+                        String suffix = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
+                        String filename = IDUtils.genImageName()+suffix;
                         flag = FtpUtil.uploadFile(ip, Integer.parseInt(port), username, password, basePath, filePath, filename, inputStream);
                         fileurl = "http://"+ip+"/"+ filePath +"/"+filename;
                         if (!flag){
