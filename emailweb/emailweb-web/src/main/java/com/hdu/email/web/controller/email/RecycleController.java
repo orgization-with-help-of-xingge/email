@@ -41,7 +41,7 @@ public class RecycleController {
     private BaseReturnResult delrecycle(@RequestHeader(value = "X-Token")String username, RecycleParam param){
         BaseReturnResult result = BaseReturnResult.getFailResult();
         try{
-            param.setUsername(username+"@sixl.com");
+            param.setUsername(username+"@sixl.xyz");
             result = recycleApi.delRecycle(param);
         }catch (Exception e){
             log.error(e.getMessage());
@@ -53,7 +53,7 @@ public class RecycleController {
     private BaseReturnResult revoke(@RequestHeader(value = "X-Token")String username, RecycleParam param){
         BaseReturnResult result = BaseReturnResult.getFailResult();
         try{
-            param.setUsername(username+"@sixl.com");
+            param.setUsername(username+"@sixl.xyz");
             result = recycleApi.revokeRecycle(param);
         }catch (Exception e){
             log.error(e.getMessage());

@@ -90,7 +90,7 @@
         where 1=1
         and username = #{username}
         and message_name in
-        <foreach collection="list" open="(" close=")" separator="," index="index" item="item">
+        <foreach collection="messageNames" open="(" close=")" separator="," index="index" item="item">
             #{item}
         </foreach>
 

@@ -61,7 +61,7 @@ public class RecycleServiceImpl implements RecycleService {
     @Override
     public BaseReturnResult delRecycle(RecycleParam param) throws Exception {
         BaseReturnResult result = BaseReturnResult.getFailResult();
-        int i = recycleMapper.delRecycle(param.getMessageNames(),param.getUsername());
+        int i = recycleMapper.delRecycle(param);
         if (i<1){
             throw new Exception("操作失败");
         }
@@ -73,8 +73,8 @@ public class RecycleServiceImpl implements RecycleService {
     public BaseReturnResult revokeRecycle(RecycleParam param) throws Exception {
         //插销逻辑 1.从delete表中删除， 2.从recycle表中删除
         BaseReturnResult result = BaseReturnResult.getFailResult();
-        int i = recycleMapper.delRecycle(param.getMessageNames(),param.getUsername());
-        int j = deletedMapper.delDeleted(param.getMessageNames(), param.getUsername());
+        int i = recycleMapper.delRecycle(param);
+        int j = deletedMapper.delDeleted(param);
         if (i<1 || j<1){
             throw new Exception("操作失败");
         }

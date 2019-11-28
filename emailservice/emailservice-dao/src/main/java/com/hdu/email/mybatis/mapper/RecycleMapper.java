@@ -17,5 +17,5 @@ public interface RecycleMapper {
     Integer countRecycle(RecycleParam param);
     int insRecycle(RecycleDto recycleDto);
 
-    int delRecycle(List<String> messageNames,String username);
+    int delRecycle(RecycleParam param);
 }

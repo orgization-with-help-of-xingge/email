@@ -8,11 +8,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.logging.Logger;
 
@@ -39,12 +38,13 @@ public class EmailUserController {
 
     @RequestMapping(value = "/asylogin",method = RequestMethod.POST)
     @ResponseBody
-    public BaseReturnResult asylogin(EmailUserDto emailUserDto, HttpSession session){
+    public BaseReturnResult asylogin(EmailUserDto emailUserDto, HttpServletRequest request){
         BaseReturnResult result=BaseReturnResult.getFailResult();
         try {
             result=emailUserApi.queryByUserNameAndPasswd(emailUserDto);
+            ServletContext servletContext = request.getServletContext();
             if (ENMsgCode.Success.getValue().equals(result.getCode())){
-                session.setAttribute(emailUserDto.getUsername(),(EmailUserDto)result.getObject());
+                servletContext.setAttribute(emailUserDto.getUsername(),(EmailUserDto)result.getObject());
             }
         }catch (Exception e){
             log.error(e.getMessage());
@@ -82,6 +82,24 @@ public class EmailUserController {
             result=emailUserApi.queryById(token);
         }catch (Exception e){
             log.info(e.getMessage());
+        }
+        return result;
+    }
+
+    @RequestMapping(value = "/logout",method = RequestMethod.POST)
+    @ResponseBody
+    private BaseReturnResult logout(@RequestHeader("X-Token") String username, HttpServletRequest request){
+
+        BaseReturnResult result = BaseReturnResult.getFailResult();
+        try {
+            ServletContext session = request.getServletContext();
+            Object attribute = session.getAttribute(username + "@sixl.xyz");
+            //退出登录逻辑：从session中删除对应的用户
+            session.removeAttribute(username+"@sixl.xyz");
+            Object attribute1 = session.getAttribute(username+"@sixl.xyz");
+            result.setWhenSuccess();
+        }catch (Exception e){
+            log.error(e.getMessage());
         }
         return result;
     }

@@ -1,6 +1,7 @@
 package com.hdu.email.mybatis.mapper;
 
 import com.hdu.emailservice.dto.DeletedDto;
+import com.hdu.emailservice.dto.RecycleParam;
 
 import java.util.List;
 
@@ -12,5 +13,5 @@ import java.util.List;
 public interface DeletedMapper {
     //记录用户删除邮件
     int insDeleted(DeletedDto deletedDto);
-    int delDeleted(List<String> messageNames,String username);
+    int delDeleted(RecycleParam param);
 }
