@@ -8,6 +8,7 @@ import java.io.Serializable;
 @Setter
 public class FileDto implements Serializable {
     private String urid;
-    private String name;
-    private String url;
+    private String messageName;
+    private String filename;
+    private String filepath;
 }

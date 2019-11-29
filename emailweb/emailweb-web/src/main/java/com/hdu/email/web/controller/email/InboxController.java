@@ -123,15 +123,19 @@ public class InboxController {
         BaseReturnResult result = BaseReturnResult.getFailResult();
         List<FileDto> fileDtos = new ArrayList<>();
         try {
-            for (String file : fileLists) {
-                String[] split = file.split("&");
-                FileDto fileDto = new FileDto();
-                fileDto.setName(split[0]);
-                fileDto.setUrl(split[1]);
-                fileDtos.add(fileDto);
+            if (fileLists!=null&&fileLists.size()!=0){
+                for (String file : fileLists) {
+                    String[] split = file.split("&");
+                    FileDto fileDto = new FileDto();
+                    fileDto.setFilename(split[0]);
+                    fileDto.setFilepath(split[1]);
+                    fileDtos.add(fileDto);
+                }
+                sendMailDto.setFileLists(fileDtos);
+            }else {
+                sendMailDto.setFileLists(new ArrayList<>());
             }
-            sendMailDto.setFileLists(fileDtos);
-            EmailUserDto emailUserDto = (EmailUserDto)request.getServletContext().getAttribute(username + "@sixl.com");
+            EmailUserDto emailUserDto = (EmailUserDto)request.getServletContext().getAttribute(username + "@sixl.xyz");
             result = inboxApi.sendMail(emailUserDto,sendMailDto);
         }catch (Exception e){
             log.error(e.getMessage());

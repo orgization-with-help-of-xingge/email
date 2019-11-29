@@ -7,6 +7,7 @@ import com.hdu.email.common.util.transfer.BaseReturnResult;
 import com.hdu.email.common.util.transfer.PageView;
 import com.hdu.email.dto.EmailUserDto;
 import com.hdu.email.mybatis.mapper.DeletedMapper;
+import com.hdu.email.mybatis.mapper.FileMapper;
 import com.hdu.email.mybatis.mapper.InboxMapper;
 import com.hdu.email.mybatis.mapper.RecycleMapper;
 import com.hdu.emailservice.biz.service.InboxService;
@@ -19,10 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 public class InboxServiceImpl implements InboxService {
@@ -37,6 +35,9 @@ public class InboxServiceImpl implements InboxService {
 
     @Autowired
     private RecycleMapper recycleMapper;
+
+    @Autowired
+    private FileMapper fileMapper;
 
     @Value(value = "${mail.transport.protocol}")
     private String protocol;
@@ -215,9 +216,27 @@ public class InboxServiceImpl implements InboxService {
     public BaseReturnResult sendMail(EmailUserDto emailUserDto, SendMailDto sendMailDto) throws Exception {
         //发送邮件逻辑：1.得到参数，调用方法发送邮件 2.得到这封邮件的messageName 3.建立邮件和文件之间的关系
         BaseReturnResult result = BaseReturnResult.getFailResult();
-        MailUtil.sendMail(hosts,protocol,emailUserDto.getUsername(), sendMailDto.getRecipients(),sendMailDto.getCopys(), emailUserDto.getUsername(), emailUserDto.getPasswd());
+        int sum = 0;
+        if (sendMailDto.getCopys()==null || sendMailDto.getCopys().size()==0){
+            sendMailDto.setCopys(new ArrayList<>());
+        }
+        MailUtil.sendMail(hosts,protocol,emailUserDto.getUsername()+"@sixl.xyz", sendMailDto.getRecipients(),
+                sendMailDto.getCopys(), emailUserDto.getUsername()+"@sixl.xyz",
+                emailUserDto.getPasswd(),sendMailDto.getTitle(),sendMailDto.getContent());
+        List<String> messageNames = inboxMapper.selLastMail(emailUserDto.getUsername()+"@sixl.xyz");
+        for (FileDto fileDto : sendMailDto.getFileLists()) {
+            for (String messageName : messageNames) {
+                fileDto.setUrid(UUID.randomUUID().toString());
+                fileDto.setMessageName(messageName);
+                sum += fileMapper.insFile(fileDto);
+            }
+        }
+        if (sum<sendMailDto.getFileLists().size()*messageNames.size()){
+            return result;
+        }
+        result.setWhenSuccess();
 
-        return null;
+        return result;
     }
 
 }

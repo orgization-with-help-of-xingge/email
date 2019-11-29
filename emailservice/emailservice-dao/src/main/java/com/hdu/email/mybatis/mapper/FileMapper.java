@@ -5,5 +5,5 @@ import com.hdu.emailservice.dto.FileDto;
 import java.util.List;
 
 public interface FileMapper {
-    List<FileDto> selFile(String sender);
+    Integer insFile(FileDto fileDto);
 }

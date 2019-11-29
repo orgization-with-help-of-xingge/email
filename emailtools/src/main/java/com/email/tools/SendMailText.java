@@ -12,13 +12,13 @@ import java.util.Properties;
 
 public class SendMailText {
     //发件人地址
-    public static String senderAddress = "test@sixl.xyz";
+    public static String senderAddress = "test123@sixl.xyz";
     //收件人地址
-    public static String recipientAddress = "test123@sixl.xyz";
+    public static String recipientAddress = "test1@sixl.xyz";
     //发件人账户名
-    public static String senderAccount = "test@sixl.xyz";
+    public static String senderAccount = "test123@sixl.xyz";
     //发件人账户密码
-    public static String senderPassword = "test";
+    public static String senderPassword = "test123";
 
     public static void main(String[] args) throws Exception {
         //1、连接邮件服务器的参数配置

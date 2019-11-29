@@ -23,6 +23,7 @@ public interface InboxMapper {
     Integer countByRecipNonRead(InboxParam param);
     List<Inbox> selByRecip(InboxParam param);
     Integer countByRecip(InboxParam param);
+    List<String> selLastMail(@Param(value = "username" ) String username);
 
     /**
      * 更新状态,已读取等等

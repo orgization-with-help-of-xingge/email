@@ -124,4 +124,10 @@
         update t_inbox_star set is_star = #{isStar}
         where message_name = #{messageName} and username = #{username}
     </update>
+
+    <select id="selLastMail" resultType="java.lang.String">
+        select T.message_name from inbox T where last_updated =
+        (select max(last_updated) from inbox where sender = #{username})
+        and sender = #{username}
+    </select>
 </mapper>

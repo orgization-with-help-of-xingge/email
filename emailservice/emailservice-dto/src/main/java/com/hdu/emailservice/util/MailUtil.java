@@ -18,7 +18,7 @@ import java.util.Properties;
 public class MailUtil {
     public static void sendMail( String hosts,String protocol,String senderAddress,
                                  List<String> recipientAddresses,List<String> copyAddresses,
-                                 String senderAccount,String senderPassword) throws Exception {
+                                 String senderAccount,String senderPassword,String subject,String content) throws Exception {
         //1、连接邮件服务器的参数配置
         Properties props = new Properties();
         //设置用户的认证方式
@@ -32,7 +32,7 @@ public class MailUtil {
         //设置调试信息在控制台打印出来
         session.setDebug(true);
         //3、创建邮件的实例对象
-        Message msg = getMimeMessage(session,senderAddress,recipientAddresses,copyAddresses);
+        Message msg = getMimeMessage(session,senderAddress,recipientAddresses,copyAddresses,subject,content);
         //4、根据session对象获取邮件传输对象Transport
         Transport transport = session.getTransport();
         //设置发件人的账户名和密码
@@ -55,7 +55,8 @@ public class MailUtil {
      * @throws MessagingException
      * @throws AddressException
      */
-    public static MimeMessage getMimeMessage(Session session, String senderAddress, List<String> recipientAddresses,List<String> copyAddresses) throws Exception{
+    public static MimeMessage getMimeMessage(Session session, String senderAddress, List<String> recipientAddresses,
+                                             List<String> copyAddresses,String subject,String content) throws Exception{
         //创建一封邮件的实例对象
         MimeMessage msg = new MimeMessage(session);
         //设置发件人地址
@@ -82,9 +83,9 @@ public class MailUtil {
         msg.setRecipients(MimeMessage.RecipientType.CC,copaddresses.toArray(addressescopy));
 
         //设置邮件主题
-        msg.setSubject("邮件主题","UTF-8");
+        msg.setSubject(subject,"UTF-8");
         //设置邮件正文
-        msg.setContent("简单的纯文本邮件！", "text/html;charset=UTF-8");
+        msg.setContent(content, "text/html;charset=UTF-8");
         //设置邮件的发送时间,默认立即发送
         msg.setSentDate(new Date());
 

@@ -2,10 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hdu.email.mybatis.mapper.FileMapper">
 
-    <select id="selFile" resultType="fileDto">
-        select * from inbox where last_updated =
-        (select max(last_updated) from inbox where sender = 'test@sixl.xyz')
-        and sender='test@sixl.xyz'
-
-    </select>
+    <insert id="insFile" parameterType="com.hdu.emailservice.dto.FileDto">
+        insert into t_inbox_file values
+        (#{urid},#{messageName},#{filename},#{filepath})
+    </insert>
 </mapper>
