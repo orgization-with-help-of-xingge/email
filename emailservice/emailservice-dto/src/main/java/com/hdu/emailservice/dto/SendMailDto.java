@@ -9,9 +9,9 @@ import java.util.List;
 @Getter
 @Setter
 public class SendMailDto implements Serializable {
-//        private List<FileDto> fileLists;
-        private String recipients;
-        private String copys;
+        private List<FileDto> fileLists;
+        private List<String> recipients;
+        private List<String> copys;
         private String title;
         private String content;
 }

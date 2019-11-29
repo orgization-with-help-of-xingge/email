@@ -5,6 +5,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.hdu.email.common.util.transfer.BaseReturnResult;
 import com.hdu.email.common.util.transfer.PageView;
+import com.hdu.email.dto.EmailUserDto;
 import com.hdu.email.mybatis.mapper.DeletedMapper;
 import com.hdu.email.mybatis.mapper.InboxMapper;
 import com.hdu.email.mybatis.mapper.RecycleMapper;
@@ -12,8 +13,10 @@ import com.hdu.emailservice.biz.service.InboxService;
 import com.hdu.emailservice.common.util.EmailContentUtil;
 import com.hdu.emailservice.dto.*;
 import com.hdu.emailservice.enums.ENMailType;
+import com.hdu.emailservice.util.MailUtil;
 import com.hdu.emailuser.api.user.EmailUserApi;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -34,6 +37,12 @@ public class InboxServiceImpl implements InboxService {
 
     @Autowired
     private RecycleMapper recycleMapper;
+
+    @Value(value = "${mail.transport.protocol}")
+    private String protocol;
+
+    @Value(value = "${mail.smtp.host}")
+    private String hosts;
 
     //异常直接抛出
     @Override
@@ -200,6 +209,15 @@ public class InboxServiceImpl implements InboxService {
         }
         result.setWhenSuccess();
         return result;
+    }
+
+    @Override
+    public BaseReturnResult sendMail(EmailUserDto emailUserDto, SendMailDto sendMailDto) throws Exception {
+        //发送邮件逻辑：1.得到参数，调用方法发送邮件 2.得到这封邮件的messageName 3.建立邮件和文件之间的关系
+        BaseReturnResult result = BaseReturnResult.getFailResult();
+        MailUtil.sendMail(hosts,protocol,emailUserDto.getUsername(), sendMailDto.getRecipients(),sendMailDto.getCopys(), emailUserDto.getUsername(), emailUserDto.getPasswd());
+
+        return null;
     }
 
 }

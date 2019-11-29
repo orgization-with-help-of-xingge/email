@@ -3,10 +3,12 @@ package com.hdu.emailservice.provider;
 import cn.hutool.db.Page;
 import com.hdu.email.common.util.transfer.BaseReturnResult;
 import com.hdu.email.common.util.transfer.PageView;
+import com.hdu.email.dto.EmailUserDto;
 import com.hdu.emailservice.api.InboxApi;
 import com.hdu.emailservice.biz.service.InboxService;
 import com.hdu.emailservice.dto.Inbox;
 import com.hdu.emailservice.dto.InboxParam;
+import com.hdu.emailservice.dto.SendMailDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -80,6 +82,17 @@ public class InboxProvider implements InboxApi {
         BaseReturnResult result = BaseReturnResult.getFailResult();
         try{
             result = inboxService.delInbox(param);
+        }catch (Exception e){
+            log.error(e.getMessage());
+        }
+        return result;
+    }
+
+    @Override
+    public BaseReturnResult sendMail(EmailUserDto emailUserDto, SendMailDto sendMailDto) {
+        BaseReturnResult result = BaseReturnResult.getFailResult();
+        try{
+            result = inboxService.sendMail(emailUserDto,sendMailDto);
         }catch (Exception e){
             log.error(e.getMessage());
         }

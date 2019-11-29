@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hdu.email.mybatis.mapper.FileMapper">
+
+    <select id="selFile" resultType="fileDto">
+        select * from inbox where last_updated =
+        (select max(last_updated) from inbox where sender = 'test@sixl.xyz')
+        and sender='test@sixl.xyz'
+
+    </select>
+</mapper>

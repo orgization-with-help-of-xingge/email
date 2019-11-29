@@ -2,13 +2,11 @@ package com.hdu.emailservice.util;
 
 import com.hdu.emailservice.dto.Inbox;
 
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.Session;
-import javax.mail.Transport;
+import javax.mail.*;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Properties;
@@ -18,15 +16,17 @@ import java.util.Properties;
  * sixl
  */
 public class MailUtil {
-    public static void sendMail( String senderAddress, List<String> recipientAddresses,List<String> copyAddresses,String senderAccount,String senderPassword) throws Exception {
+    public static void sendMail( String hosts,String protocol,String senderAddress,
+                                 List<String> recipientAddresses,List<String> copyAddresses,
+                                 String senderAccount,String senderPassword) throws Exception {
         //1、连接邮件服务器的参数配置
         Properties props = new Properties();
         //设置用户的认证方式
         props.setProperty("mail.smtp.auth", "true");
         //设置传输协议
-        props.setProperty("mail.transport.protocol", "smtp");
+        props.setProperty("mail.transport.protocol", protocol);
         //设置发件人的SMTP服务器地址
-        props.setProperty("mail.smtp.host", "mail.sixl.xyz");
+        props.setProperty("mail.smtp.host", hosts);
         //2、创建定义整个应用程序所需的环境信息的 Session 对象
         Session session = Session.getInstance(props);
         //设置调试信息在控制台打印出来
@@ -66,12 +66,21 @@ public class MailUtil {
          * MimeMessage.RecipientType.CC：抄送
          * MimeMessage.RecipientType.BCC：密送
          */
+        List<Address> recaddresses=new ArrayList<>();
+        List<Address> copaddresses=new ArrayList<>();
         for (String recipientAddress : recipientAddresses) {
-            msg.setRecipient(MimeMessage.RecipientType.TO,new InternetAddress(recipientAddress));
+            InternetAddress internetAddress = new InternetAddress(recipientAddress);
+            recaddresses.add(internetAddress);
         }
         for (String copyAddress : copyAddresses) {
-            msg.setRecipient(MimeMessage.RecipientType.CC,new InternetAddress(copyAddress));
+            InternetAddress internetAddress = new InternetAddress(copyAddress);
+            copaddresses.add(internetAddress);
         }
+        Address[] addressesrecipient = new Address[recaddresses.size()];
+        Address[] addressescopy = new Address[recaddresses.size()];
+        msg.setRecipients(MimeMessage.RecipientType.TO,recaddresses.toArray(addressesrecipient));
+        msg.setRecipients(MimeMessage.RecipientType.CC,copaddresses.toArray(addressescopy));
+
         //设置邮件主题
         msg.setSubject("邮件主题","UTF-8");
         //设置邮件正文

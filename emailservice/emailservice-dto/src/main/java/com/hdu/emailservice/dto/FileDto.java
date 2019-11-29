@@ -7,8 +7,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 public class FileDto implements Serializable {
-
+    private String urid;
     private String name;
-    private String uuid;
     private String url;
 }

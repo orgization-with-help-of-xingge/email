@@ -44,7 +44,9 @@ public class EmailUserController {
             result=emailUserApi.queryByUserNameAndPasswd(emailUserDto);
             ServletContext servletContext = request.getServletContext();
             if (ENMsgCode.Success.getValue().equals(result.getCode())){
-                servletContext.setAttribute(emailUserDto.getUsername(),(EmailUserDto)result.getObject());
+                EmailUserDto user = (EmailUserDto) result.getObject();
+                user.setPasswd(emailUserDto.getPasswd());
+                servletContext.setAttribute(emailUserDto.getUsername(),user);
             }
         }catch (Exception e){
             log.error(e.getMessage());

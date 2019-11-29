@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.security.Signature;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -116,9 +117,27 @@ public class InboxController {
     }
 
     @RequestMapping(value = "/sendmail",method = RequestMethod.POST)
-    private BaseReturnResult sendMail(@RequestHeader("X-Token")String username, SendMailDto sendMailDto/*,
-                                      @RequestParam(value = "fileList[]",required = false)List<String> fileLists*/){
-        return null;
+    private BaseReturnResult sendMail(@RequestHeader("X-Token")String username, SendMailDto sendMailDto,
+                                      @RequestParam(value = "fileList[]",required = false)List<String> fileLists,
+                                      HttpServletRequest request){
+        BaseReturnResult result = BaseReturnResult.getFailResult();
+        List<FileDto> fileDtos = new ArrayList<>();
+        try {
+            for (String file : fileLists) {
+                String[] split = file.split("&");
+                FileDto fileDto = new FileDto();
+                fileDto.setName(split[0]);
+                fileDto.setUrl(split[1]);
+                fileDtos.add(fileDto);
+            }
+            sendMailDto.setFileLists(fileDtos);
+            EmailUserDto emailUserDto = (EmailUserDto)request.getServletContext().getAttribute(username + "@sixl.com");
+            result = inboxApi.sendMail(emailUserDto,sendMailDto);
+        }catch (Exception e){
+            log.error(e.getMessage());
+        }
+
+        return result;
 
     }
 
