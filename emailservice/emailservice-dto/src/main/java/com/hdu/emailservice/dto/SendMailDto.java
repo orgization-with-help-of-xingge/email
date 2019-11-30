@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 @Getter
@@ -14,4 +15,9 @@ public class SendMailDto implements Serializable {
         private List<String> copys;
         private String title;
         private String content;
+        private byte[] blobContent;
+        private byte[] blobRecipients;
+        private byte[] blobCopy;
+        private byte[] blobFileLists;
+        private Date date;
 }

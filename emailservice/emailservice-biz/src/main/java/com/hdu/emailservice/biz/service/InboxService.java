@@ -7,6 +7,7 @@ import com.hdu.emailservice.dto.Inbox;
 import com.hdu.emailservice.dto.InboxParam;
 import com.hdu.emailservice.dto.SendMailDto;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 /**
@@ -28,4 +29,6 @@ public interface InboxService {
     BaseReturnResult delInbox(InboxParam param);
 
     BaseReturnResult sendMail(EmailUserDto emailUserDto, SendMailDto sendMailDto) throws Exception;
+
+    BaseReturnResult insDraft(String username, SendMailDto sendMailDto) throws UnsupportedEncodingException;
 }

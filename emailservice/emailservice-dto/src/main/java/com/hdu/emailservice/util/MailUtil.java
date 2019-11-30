@@ -77,11 +77,14 @@ public class MailUtil {
             InternetAddress internetAddress = new InternetAddress(copyAddress);
             copaddresses.add(internetAddress);
         }
-        Address[] addressesrecipient = new Address[recaddresses.size()];
-        Address[] addressescopy = new Address[recaddresses.size()];
-        msg.setRecipients(MimeMessage.RecipientType.TO,recaddresses.toArray(addressesrecipient));
-        msg.setRecipients(MimeMessage.RecipientType.CC,copaddresses.toArray(addressescopy));
-
+        if (recaddresses.size()!=0){
+            Address[] addressesrecipient = new Address[recaddresses.size()];
+            msg.setRecipients(MimeMessage.RecipientType.TO,recaddresses.toArray(addressesrecipient));
+        }
+        if (copaddresses.size()!=0){
+            Address[] addressescopy = new Address[recaddresses.size()];
+            msg.setRecipients(MimeMessage.RecipientType.CC,copaddresses.toArray(addressescopy));
+        }
         //设置邮件主题
         msg.setSubject(subject,"UTF-8");
         //设置邮件正文

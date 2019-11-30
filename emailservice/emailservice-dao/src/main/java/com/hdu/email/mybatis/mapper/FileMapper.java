@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface FileMapper {
     Integer insFile(FileDto fileDto);
+    List<FileDto> selByMessageName(String messageName);
 }

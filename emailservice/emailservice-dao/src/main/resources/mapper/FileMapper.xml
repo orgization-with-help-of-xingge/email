@@ -4,6 +4,11 @@
 
     <insert id="insFile" parameterType="com.hdu.emailservice.dto.FileDto">
         insert into t_inbox_file values
-        (#{urid},#{messageName},#{filename},#{filepath})
+        (#{urid},#{messageName},#{ftpfilename},#{filename},#{filepath})
     </insert>
+
+    <select id="selByMessageName" resultType="com.hdu.emailservice.dto.FileDto">
+        select T.* from t_inbox_file T
+        where T.message_name=#{messageName}
+    </select>
 </mapper>

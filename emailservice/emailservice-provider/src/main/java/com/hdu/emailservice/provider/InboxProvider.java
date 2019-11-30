@@ -98,4 +98,15 @@ public class InboxProvider implements InboxApi {
         }
         return result;
     }
+
+    @Override
+    public BaseReturnResult saveDraft(String username, SendMailDto sendMailDto) {
+        BaseReturnResult result = BaseReturnResult.getFailResult();
+        try{
+            result = inboxService.insDraft(username,sendMailDto);
+        }catch (Exception e){
+            log.error(e.getMessage());
+        }
+        return result;
+    }
 }

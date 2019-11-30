@@ -23,4 +23,6 @@ public interface InboxApi {
     BaseReturnResult delInbox(InboxParam param);
 
     BaseReturnResult sendMail(EmailUserDto emailUserDto, SendMailDto sendMailDto);
+
+    BaseReturnResult saveDraft(String username, SendMailDto sendMailDto);
 }

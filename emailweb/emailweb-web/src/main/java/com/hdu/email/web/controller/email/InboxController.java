@@ -10,6 +10,7 @@ import com.hdu.emailservice.dto.Inbox;
 import com.hdu.emailservice.dto.InboxParam;
 import com.hdu.emailservice.dto.SendMailDto;
 import com.hdu.emailservice.enums.ENReadCode;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -128,7 +129,10 @@ public class InboxController {
                     String[] split = file.split("&");
                     FileDto fileDto = new FileDto();
                     fileDto.setFilename(split[0]);
-                    fileDto.setFilepath(split[1]);
+                    fileDto.setFtpfilename(split[1]);
+                    String filepath = request.getScheme()+"://"+request.getServerName()+":"
+                            +request.getServerPort() + request.getContextPath()+"/emailfile/downloadFile/"+split[1];
+                    fileDto.setFilepath(filepath);
                     fileDtos.add(fileDto);
                 }
                 sendMailDto.setFileLists(fileDtos);
@@ -142,7 +146,29 @@ public class InboxController {
         }
 
         return result;
+    }
 
+    @RequestMapping(value = "/savedraft",method = RequestMethod.POST)
+    private BaseReturnResult saveDraft(@RequestHeader("X-Token")String username, SendMailDto sendMailDto,
+                                       @RequestParam(value = "fileList[]",required = false)List<String> fileLists){
+        BaseReturnResult result = BaseReturnResult.getFailResult();
+        List<FileDto> fileDtos = new ArrayList<>();
+        try {
+            if (fileLists!=null&&fileLists.size()!=0) {
+                for (String file : fileLists) {
+                    String[] split = file.split("&");
+                    FileDto fileDto = new FileDto();
+                    fileDto.setFilename(split[0]);
+                    fileDto.setFtpfilename(split[1]);
+                    fileDtos.add(fileDto);
+                }
+            }
+            sendMailDto.setFileLists(fileDtos);
+            result = inboxApi.saveDraft(username,sendMailDto);
+        }catch (Exception e){
+            log.error(e.getMessage());
+        }
+        return result;
     }
 
 }

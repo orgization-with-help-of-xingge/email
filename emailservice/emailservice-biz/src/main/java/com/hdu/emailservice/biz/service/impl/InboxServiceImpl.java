@@ -1,6 +1,7 @@
 package com.hdu.emailservice.biz.service.impl;
 
 import cn.hutool.core.util.IdUtil;
+import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.hdu.email.common.util.transfer.BaseReturnResult;
@@ -20,6 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.io.UnsupportedEncodingException;
 import java.util.*;
 
 @Service
@@ -92,6 +94,7 @@ public class InboxServiceImpl implements InboxService {
     public BaseReturnResult queryEmailById(InboxParam param) throws Exception {
         EmailContentUtil emailContentUtil = new EmailContentUtil();
         BaseReturnResult result = BaseReturnResult.getFailResult();
+        //更新已读
         Inbox inbox = inboxMapper.selById(param);
         if (inbox.getHasRead() == 0){
             inbox.setUrid(IdUtil.simpleUUID());
@@ -102,6 +105,7 @@ public class InboxServiceImpl implements InboxService {
             inbox.setReadDate(new Date());
             inboxMapper.updRead(inbox);
         }
+        //格式化邮件
         emailContentUtil.getContent(inbox);
         //设置收信人
         for (Recipients recipient : inbox.getRecipients()) {
@@ -117,10 +121,13 @@ public class InboxServiceImpl implements InboxService {
                 copy.setRecipientsName((String) nameById.getObject());
             }
         }
+        //设置发件人
         BaseReturnResult nameById = emailUserApi.getNameById(inbox.getSender());
         if (nameById.getSuccess()){
             inbox.setSenderName((String) nameById.getObject());
         }
+        //填写文件
+        inbox.setFileLists(fileMapper.selByMessageName(inbox.getMessageName()));
         inbox.setMessageBody(null);
         result.setObject(inbox);
         result.setWhenSuccess();
@@ -223,20 +230,38 @@ public class InboxServiceImpl implements InboxService {
         MailUtil.sendMail(hosts,protocol,emailUserDto.getUsername()+"@sixl.xyz", sendMailDto.getRecipients(),
                 sendMailDto.getCopys(), emailUserDto.getUsername()+"@sixl.xyz",
                 emailUserDto.getPasswd(),sendMailDto.getTitle(),sendMailDto.getContent());
-        List<String> messageNames = inboxMapper.selLastMail(emailUserDto.getUsername()+"@sixl.xyz");
-        for (FileDto fileDto : sendMailDto.getFileLists()) {
-            for (String messageName : messageNames) {
-                fileDto.setUrid(UUID.randomUUID().toString());
-                fileDto.setMessageName(messageName);
-                sum += fileMapper.insFile(fileDto);
+        new Thread(()->{
+            List<String> messageNames = inboxMapper.selLastMail(emailUserDto.getUsername()+"@sixl.xyz");
+            for (FileDto fileDto : sendMailDto.getFileLists()) {
+                for (String messageName : messageNames) {
+                    fileDto.setUrid(UUID.randomUUID().toString());
+                    fileDto.setMessageName(messageName);
+                }
             }
-        }
-        if (sum<sendMailDto.getFileLists().size()*messageNames.size()){
-            return result;
-        }
+        }).start();
+
+//        if (sum<sendMailDto.getFileLists().size()*messageNames.size()){
+//            return result;
+//        }
         result.setWhenSuccess();
 
         return result;
+    }
+
+    @Override
+    public BaseReturnResult insDraft(String username, SendMailDto sendMailDto) throws UnsupportedEncodingException {
+        BaseReturnResult result = BaseReturnResult.getFailResult();
+        //草稿箱逻辑：1.转换sendmailDto字段 2.插入表格
+        convertBlob(sendMailDto);
+        return result;
+    }
+
+    //String类型直接转换，list类型先转成json再转换
+    public void convertBlob(SendMailDto sendMailDto) throws UnsupportedEncodingException {
+        sendMailDto.setBlobContent(sendMailDto.getContent().getBytes());
+        sendMailDto.setBlobCopy(JSON.toJSONString(sendMailDto.getCopys()).getBytes("UTF8"));
+        sendMailDto.setBlobRecipients(JSON.toJSONString(sendMailDto.getRecipients()).getBytes("UTF8"));
+        sendMailDto.setBlobFileLists(JSON.toJSONString(sendMailDto.getFileLists()).getBytes("UTF8"));
     }
 
 }

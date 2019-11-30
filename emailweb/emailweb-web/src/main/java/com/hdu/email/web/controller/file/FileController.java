@@ -3,17 +3,21 @@ package com.hdu.email.web.controller.file;
 import com.email.tools.FtpUtil;
 import com.email.tools.IDUtils;
 import com.hdu.email.common.util.transfer.BaseReturnResult;
+import com.hdu.emailservice.dto.FileDto;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.apache.commons.io.FileUtils;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
-import java.io.InputStream;
+import javax.servlet.http.HttpServletResponse;
+import java.io.*;
 import java.util.Iterator;
 import java.util.Properties;
 
@@ -36,6 +40,8 @@ public class FileController {
     private String headPath = "head";
 
     private String filePath = "emailfile";
+
+    private String emailfilePath;
 
 //    private String
 
@@ -116,7 +122,8 @@ public class FileController {
                         String suffix = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
                         String filename = IDUtils.genImageName()+suffix;
                         flag = FtpUtil.uploadFile(ip, Integer.parseInt(port), username, password, basePath, filePath, filename, inputStream);
-                        fileurl = "http://"+ip+"/"+ filePath +"/"+filename;
+//                        fileurl = "http://"+ip+"/"+ filePath +"/"+filename;
+                        fileurl = filename;
                         if (!flag){
                             break;
                         }
@@ -134,6 +141,88 @@ public class FileController {
     }
 
 
+    @PostMapping(value = "/downloadFile")
+    private void download(FileDto fileDto, HttpServletRequest request, HttpServletResponse response){
+        //获取属性
+        getProperties();
+        InputStream inputStream = null;
+        OutputStream os = null;
+        String filePath=null;
+        long downloadedLength = 0l;
+        try {
+            String localPath = System.getProperty("user.dir");
+            String ftpfilename = fileDto.getFtpfilename();
+            FtpUtil.downloadFile(ip,Integer.parseInt(port),username,password,emailfilePath,ftpfilename,localPath);
+            filePath=localPath+ File.separator+ftpfilename;
+            //设置响应头和客户端保存文件名
+            response.setCharacterEncoding("utf-8");
+            response.setContentType("multipart/form-data");
+            response.setHeader("Content-Disposition", "attachment;fileName=" + ftpfilename);
+            //用于记录以完成的下载的数据量，单位是byte
+
+            //打开本地文件流
+            inputStream = new FileInputStream(filePath);
+            //激活下载操作
+            os = response.getOutputStream();
+            //循环写入输出流
+            byte[] b = new byte[2048];
+            int length;
+            while ((length = inputStream.read(b)) > 0) {
+                os.write(b, 0, length);
+                downloadedLength += b.length;
+            }
+
+        }catch (Exception e){
+            log.error(e.getMessage());
+        }finally {
+            // 这里主要关闭。
+            if (os!=null){
+                try {
+                    os.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (inputStream!=null){
+                try {
+                    inputStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (filePath != null){
+                //删除临时文件夹
+                File dir = new File(filePath);
+                dir.delete();
+            }
+        }
+
+    }
+
+//    @RequestMapping(value="/download",method = RequestMethod.POST)
+//    public ResponseEntity<byte[]> download(HttpServletRequest request, FileDto fileDto) throws Exception {
+////		//下载文件路径
+////		String path = request.getServletContext().getRealPath("/images/");
+//        //这是是绝对路径
+//        getProperties();
+//        String localPath = System.getProperty("user.dir");
+//        String ftpfilename = fileDto.getFtpfilename();
+//        FtpUtil.downloadFile(ip,Integer.parseInt(port),username,password,emailfilePath,ftpfilename,localPath);
+//        String path=localPath+ File.separator+ftpfilename;
+//
+//        File file = new File(path);
+//        HttpHeaders headers = new HttpHeaders();
+//        //下载显示的文件名，解决中文名称乱码问题
+//        String downloadFileName = new String(ftpfilename.getBytes("UTF-8"),"iso-8859-1");
+//        //通知浏览器以attachment（下载方式）打开图片
+//        headers.setContentDispositionFormData("attachment", downloadFileName);
+//        //application/octet-stream:二进制流数据（最常见的文件下载）
+//        headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+//        //201 HttpStatus.CREATED
+//        return new ResponseEntity<byte[]>(FileUtils.readFileToByteArray(file),headers, HttpStatus.CREATED);
+//    }
+
+
     //获取配置文件属性
     /**
      * 使用java.util.Properties读取
@@ -149,7 +238,7 @@ public class FileController {
             username=config.getProperty("ftp.username");
             password=config.getProperty("ftp.password");
             basePath=config.getProperty("ftp.basePath");
-            System.out.println("name:" + config.getProperty("name"));
+            emailfilePath=config.getProperty("ftp.emailfile");
         } catch (IOException e) {
             e.printStackTrace();
         }

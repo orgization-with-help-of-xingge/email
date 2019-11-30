@@ -9,6 +9,7 @@ import java.io.Serializable;
 public class FileDto implements Serializable {
     private String urid;
     private String messageName;
+    private String ftpfilename;
     private String filename;
     private String filepath;
 }
