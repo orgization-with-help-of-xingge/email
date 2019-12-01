@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hdu.email.mybatis.mapper.DraftMapper">
+    <insert id="insDraft" parameterType="sendmailDto">
+        insert into t_draftbox
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="urid != null and urid !=''">
+                urid,
+            </if>
+            <if test="title != null and title !=''">
+                title,
+            </if>
+            <if test="blobContent != null ">
+                mail_content,
+            </if>
+            <if test="blobRecipients != null ">
+                recipients,
+            </if>
+            <if test="blobCopy != null">
+                copy,
+            </if>
+            <if test="blobFileLists != null ">
+                file_list,
+            </if>
+            <if test="date != null">
+                savedate,
+            </if>
+            <if test="username != null">
+                username,
+            </if>
+            <if test="lastUpdated != null">
+                last_updated
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="urid != null and urid !=''">
+                #{urid,jdbcType = VARCHAR },
+            </if>
+            <if test="title != null and title !=''">
+                #{title,jdbcType = VARCHAR },
+            </if>
+            <if test="blobContent != null ">
+                #{blobContent,jdbcType = BLOB },
+            </if>
+            <if test="blobRecipients != null ">
+                #{blobRecipients,jdbcType = BLOB },
+            </if>
+            <if test="blobCopy != null">
+                #{blobCopy,jdbcType = BLOB },
+            </if>
+            <if test="blobFileLists != null ">
+                #{blobFileLists,jdbcType = BLOB },
+            </if>
+            <if test="date != null">
+                #{date,jdbcType = DATETIMEOFFSET },
+            </if>
+            <if test="username != null">
+                #{username,jdbcType = VARCHAR },
+            </if>
+            <if test="lastUpdated != null">
+                #{lastUpdated,jdbcType = DATETIMEOFFSET },
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updDraft" parameterType="sendMailDto">
+        update t_draftbox set
+        <if test="title != null and title !=''">
+            title = #{title,jdbcType = VARCHAR },
+        </if>
+        <if test="blobContent != null ">
+            mail_content = #{blobContent,jdbcType = BLOB },
+        </if>
+        <if test="blobRecipients != null ">
+            recipients = #{blobRecipients,jdbcType = BLOB },
+        </if>
+        <if test="blobCopy != null">
+            copy = #{blobCopy,jdbcType = BLOB },
+        </if>
+        <if test="blobFileLists != null ">
+            file_list = #{blobFileLists,jdbcType = BLOB },
+        </if>
+        <if test="date != null">
+            savedate = #{date,jdbcType = DATETIMEOFFSET },
+        </if>
+        <if test="username != null">
+            username = #{username,jdbcType = VARCHAR },
+        </if>
+        <if test="lastUpdated != null">
+            last_updated = #{lastUpdated,jdbcType = DATETIMEOFFSET }
+        </if>
+        where
+        urid = #{urid}
+
+    </update>
+
+    <select id="selById" resultType="draftMailDto">
+        select T.* from t_draftbox T
+        where urid = #{urid}
+    </select>
+
+    <select id="selDrafts" resultType="draftMailDto">
+        select T.* from t_draftbox T
+        where username = #{username}
+        <if test="title !=null and title !=''">
+            and T.title like concat('%',#{title},'%')
+        </if>
+        <if test="lastUpdatedStartDate !=null ">
+            and T.last_updated <![CDATA[ >= ]]> #{lastUpdatedStartDate}
+        </if>
+        <if test="lastUpdatedEndDate !=null ">
+            and T.last_updated <![CDATA[ <= ]]> #{lastUpdatedEndDate}
+        </if>
+        <if test="saveDateStartDate !=null ">
+            and T.savedate <![CDATA[ >= ]]> #{saveDateStartDate}
+        </if>
+        <if test="saveDateEndDate !=null ">
+            and T.savedate <![CDATA[ <= ]]> #{saveDateEndDate}
+        </if>
+        <if test='orderby != null and orderby !="" and sortdir != null and sortdir !="" '>
+            order by ${orderby} ${sortdir}
+        </if>
+    </select>
+    <select id="countDrafts" resultType="java.lang.Integer">
+        select count(1) from t_draftbox T
+        where username = #{username}
+        <if test="title !=null and title !=''">
+            and T.title like concat('%',#{title},'%')
+        </if>
+        <if test="lastUpdatedStartDate !=null ">
+            and T.last_updated <![CDATA[ >= ]]> #{lastUpdatedStartDate}
+        </if>
+        <if test="lastUpdatedEndDate !=null ">
+            and T.last_updated <![CDATA[ <= ]]> #{lastUpdatedEndDate}
+        </if>
+        <if test="saveDateStartDate !=null ">
+            and T.savedate <![CDATA[ >= ]]> #{saveDateStartDate}
+        </if>
+        <if test="saveDateEndDate !=null ">
+            and T.savedate <![CDATA[ <= ]]> #{saveDateEndDate}
+        </if>
+    </select>
+
+    <delete id="delDraft">
+        delete  from t_draftbox
+        where urid=#{urid}
+    </delete>
+</mapper>

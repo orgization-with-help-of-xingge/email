@@ -37,5 +37,6 @@ public class Inbox implements Serializable {
     private Date readDate;
     private Boolean isStar = false;
     private List<FileDto> fileLists;
+    private Boolean isHaveFile;
 
 }

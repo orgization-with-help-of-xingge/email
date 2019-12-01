@@ -30,5 +30,5 @@ public interface InboxService {
 
     BaseReturnResult sendMail(EmailUserDto emailUserDto, SendMailDto sendMailDto) throws Exception;
 
-    BaseReturnResult insDraft(String username, SendMailDto sendMailDto) throws UnsupportedEncodingException;
+    BaseReturnResult insDraft(String username, SendMailDto sendMailDto) throws Exception;
 }

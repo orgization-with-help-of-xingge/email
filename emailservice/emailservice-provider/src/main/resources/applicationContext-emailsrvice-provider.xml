@@ -27,5 +27,8 @@
     <dubbo:service interface="com.hdu.emailservice.api.RecycleApi"
                    ref="recycleProvider" protocol="dubbo"/>
 
+    <dubbo:service interface="com.hdu.emailservice.api.DraftApi"
+                   ref="draftProvider" protocol="dubbo"/>
+
 
 </beans>

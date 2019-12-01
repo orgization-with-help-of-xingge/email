@@ -7,10 +7,7 @@ import com.github.pagehelper.PageInfo;
 import com.hdu.email.common.util.transfer.BaseReturnResult;
 import com.hdu.email.common.util.transfer.PageView;
 import com.hdu.email.dto.EmailUserDto;
-import com.hdu.email.mybatis.mapper.DeletedMapper;
-import com.hdu.email.mybatis.mapper.FileMapper;
-import com.hdu.email.mybatis.mapper.InboxMapper;
-import com.hdu.email.mybatis.mapper.RecycleMapper;
+import com.hdu.email.mybatis.mapper.*;
 import com.hdu.emailservice.biz.service.InboxService;
 import com.hdu.emailservice.common.util.EmailContentUtil;
 import com.hdu.emailservice.dto.*;
@@ -41,11 +38,15 @@ public class InboxServiceImpl implements InboxService {
     @Autowired
     private FileMapper fileMapper;
 
+    @Autowired
+    private DraftMapper draftMapper;
+
     @Value(value = "${mail.transport.protocol}")
     private String protocol;
 
     @Value(value = "${mail.smtp.host}")
     private String hosts;
+
 
     //异常直接抛出
     @Override
@@ -76,6 +77,10 @@ public class InboxServiceImpl implements InboxService {
         Integer total = inboxMapper.countByRecip(param);
         PageView<Inbox> pageView = new PageView<>();
         for (Inbox inbox : inboxes) {
+            List<FileDto> fileDtos = fileMapper.selByMessageName(inbox.getMessageName());
+            if (fileDtos!=null && fileDtos.size()>0){
+                inbox.setIsHaveFile(true);
+            }
             BaseReturnResult nameById = emailUserApi.getNameById(inbox.getSender());
             Boolean success = nameById.getSuccess();
             if (nameById.getSuccess()){
@@ -152,6 +157,11 @@ public class InboxServiceImpl implements InboxService {
             }
             //减少传输数据
             inbox.setMessageBody(null);
+            //设置有无文件
+            List<FileDto> fileDtos = fileMapper.selByMessageName(inbox.getMessageName());
+            if (fileDtos!=null && fileDtos.size()>0){
+                inbox.setIsHaveFile(true);
+            }
         }
 
         pageView.setRows(inboxes);
@@ -230,16 +240,29 @@ public class InboxServiceImpl implements InboxService {
         MailUtil.sendMail(hosts,protocol,emailUserDto.getUsername()+"@sixl.xyz", sendMailDto.getRecipients(),
                 sendMailDto.getCopys(), emailUserDto.getUsername()+"@sixl.xyz",
                 emailUserDto.getPasswd(),sendMailDto.getTitle(),sendMailDto.getContent());
+        //保证已经全部发完，异步方式完成任务
         new Thread(()->{
+            try {
+                Thread.sleep(10000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             List<String> messageNames = inboxMapper.selLastMail(emailUserDto.getUsername()+"@sixl.xyz");
             for (FileDto fileDto : sendMailDto.getFileLists()) {
                 for (String messageName : messageNames) {
                     fileDto.setUrid(UUID.randomUUID().toString());
                     fileDto.setMessageName(messageName);
+                    fileMapper.insFile(fileDto);
                 }
             }
         }).start();
 
+        if (sendMailDto.getUrid()!=null && !"".equals(sendMailDto.getUrid())){
+            int i = draftMapper.delDraft(sendMailDto.getUrid());
+            if (i<1){
+                throw new Exception("操作失败");
+            }
+        }
 //        if (sum<sendMailDto.getFileLists().size()*messageNames.size()){
 //            return result;
 //        }
@@ -249,19 +272,45 @@ public class InboxServiceImpl implements InboxService {
     }
 
     @Override
-    public BaseReturnResult insDraft(String username, SendMailDto sendMailDto) throws UnsupportedEncodingException {
+    public BaseReturnResult insDraft(String username, SendMailDto sendMailDto) throws Exception {
         BaseReturnResult result = BaseReturnResult.getFailResult();
-        //草稿箱逻辑：1.转换sendmailDto字段 2.插入表格
+        //草稿箱逻辑：1.转换sendmailDto字段 2.判断是否表格中已存在？插入表格：更新表格
+        sendMailDto.setUsername(username+"@sixl.xyz");
         convertBlob(sendMailDto);
+        Date date = new Date();
+        int i=0;
+        if (sendMailDto.getUrid()==null || draftMapper.selById(sendMailDto.getUrid())==null){
+            sendMailDto.setDate(date);
+            sendMailDto.setLastUpdated(date);
+            sendMailDto.setUrid(UUID.randomUUID().toString());
+            i = draftMapper.insDraft(sendMailDto);
+        }else {
+            sendMailDto.setLastUpdated(date);
+            i = draftMapper.updDraft(sendMailDto);
+        }
+
+        if (i<1){
+            throw new Exception("操作失败");
+        }
+        result.setWhenSuccess();
         return result;
     }
 
     //String类型直接转换，list类型先转成json再转换
     public void convertBlob(SendMailDto sendMailDto) throws UnsupportedEncodingException {
-        sendMailDto.setBlobContent(sendMailDto.getContent().getBytes());
-        sendMailDto.setBlobCopy(JSON.toJSONString(sendMailDto.getCopys()).getBytes("UTF8"));
-        sendMailDto.setBlobRecipients(JSON.toJSONString(sendMailDto.getRecipients()).getBytes("UTF8"));
-        sendMailDto.setBlobFileLists(JSON.toJSONString(sendMailDto.getFileLists()).getBytes("UTF8"));
+        if (sendMailDto.getContent()!=null && !"".equals(sendMailDto.getContent())){
+            sendMailDto.setBlobContent(sendMailDto.getContent().getBytes());
+        }
+        if (sendMailDto.getCopys()!=null&&sendMailDto.getCopys().size()>0){
+            sendMailDto.setBlobCopy(JSON.toJSONString(sendMailDto.getCopys()).getBytes("UTF8"));
+        }
+        if (sendMailDto.getRecipients()!=null&&sendMailDto.getRecipients().size()>0){
+            sendMailDto.setBlobRecipients(JSON.toJSONString(sendMailDto.getRecipients()).getBytes("UTF8"));
+
+        }
+        if (sendMailDto.getFileLists()!=null&&sendMailDto.getFileLists().size()>0){
+            sendMailDto.setBlobFileLists(JSON.toJSONString(sendMailDto.getFileLists()).getBytes("UTF8"));
+        }
     }
 
 }

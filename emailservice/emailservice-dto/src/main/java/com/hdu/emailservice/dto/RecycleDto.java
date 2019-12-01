@@ -25,6 +25,7 @@ public class RecycleDto implements Serializable {
     private Date lastUpdated;
     private String subject;
     private List<Recipients> recipitentList;
+    private Boolean isHaveFile;
 
 
 }

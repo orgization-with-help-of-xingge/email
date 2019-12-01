@@ -15,6 +15,7 @@
     <!-- 账户性质-->
     <dubbo:reference id="inboxApi" interface="com.hdu.emailservice.api.InboxApi"/>
     <dubbo:reference id="recycleApi" interface="com.hdu.emailservice.api.RecycleApi"/>
+    <dubbo:reference id="draftApi" interface="com.hdu.emailservice.api.DraftApi"/>
 
 
 </beans>

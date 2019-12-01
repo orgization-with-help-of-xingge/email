@@ -3,9 +3,11 @@ package com.hdu.emailservice.biz.service.impl;
 import com.hdu.email.common.util.transfer.BaseReturnResult;
 import com.hdu.email.common.util.transfer.PageView;
 import com.hdu.email.mybatis.mapper.DeletedMapper;
+import com.hdu.email.mybatis.mapper.FileMapper;
 import com.hdu.email.mybatis.mapper.RecycleMapper;
 import com.hdu.emailservice.biz.service.RecycleService;
 import com.hdu.emailservice.common.util.EmailContentUtil;
+import com.hdu.emailservice.dto.FileDto;
 import com.hdu.emailservice.dto.Recipients;
 import com.hdu.emailservice.dto.RecycleDto;
 import com.hdu.emailservice.dto.RecycleParam;
@@ -24,6 +26,9 @@ public class RecycleServiceImpl implements RecycleService {
 
     @Autowired
     private DeletedMapper deletedMapper;
+
+    @Autowired
+    private FileMapper fileMapper;
 
 
     @Autowired
@@ -50,6 +55,11 @@ public class RecycleServiceImpl implements RecycleService {
             BaseReturnResult senderResult = emailUserApi.getNameById(recycleDto.getSender());
             if (senderResult.getSuccess()){
                 recycleDto.setSenderName((String) senderResult.getObject());
+            }
+            //附件判断
+            List<FileDto> fileDtos = fileMapper.selByMessageName(recycleDto.getMessageName());
+            if (fileDtos!=null && fileDtos.size()>0){
+                recycleDto.setIsHaveFile(true);
             }
         }
         pageView.setRows(recycleDtos);

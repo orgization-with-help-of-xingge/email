@@ -150,7 +150,7 @@ public class InboxController {
 
     @RequestMapping(value = "/savedraft",method = RequestMethod.POST)
     private BaseReturnResult saveDraft(@RequestHeader("X-Token")String username, SendMailDto sendMailDto,
-                                       @RequestParam(value = "fileList[]",required = false)List<String> fileLists){
+                                       @RequestParam(value = "fileList[]",required = false)List<String> fileLists,HttpServletRequest request){
         BaseReturnResult result = BaseReturnResult.getFailResult();
         List<FileDto> fileDtos = new ArrayList<>();
         try {
@@ -160,6 +160,9 @@ public class InboxController {
                     FileDto fileDto = new FileDto();
                     fileDto.setFilename(split[0]);
                     fileDto.setFtpfilename(split[1]);
+                    String filepath = request.getScheme()+"://"+request.getServerName()+":"
+                            +request.getServerPort() + request.getContextPath()+"/emailfile/downloadFile/"+split[1];
+                    fileDto.setFilepath(filepath);
                     fileDtos.add(fileDto);
                 }
             }

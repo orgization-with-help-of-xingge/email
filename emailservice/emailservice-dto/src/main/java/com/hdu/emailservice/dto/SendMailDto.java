@@ -10,6 +10,7 @@ import java.util.List;
 @Getter
 @Setter
 public class SendMailDto implements Serializable {
+        private String urid;
         private List<FileDto> fileLists;
         private List<String> recipients;
         private List<String> copys;
@@ -20,4 +21,6 @@ public class SendMailDto implements Serializable {
         private byte[] blobCopy;
         private byte[] blobFileLists;
         private Date date;
+        private Date lastUpdated;
+        private String username;
 }
