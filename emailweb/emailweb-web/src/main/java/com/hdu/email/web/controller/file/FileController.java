@@ -141,8 +141,8 @@ public class FileController {
     }
 
 
-    @GetMapping(value = "/downloadFile/{filename}")
-    private void download(@PathVariable(value = "filename")String filename, FileDto fileDto, HttpServletResponse response){
+    @GetMapping(value = "/downloadFile")
+    private void download(FileDto fileDto, HttpServletResponse response){
         //获取属性
         getProperties();
         InputStream inputStream = null;
@@ -151,7 +151,7 @@ public class FileController {
         long downloadedLength = 0l;
         try {
             String localPath = System.getProperty("user.dir");
-            String ftpfilename = filename+"."+fileDto.getFilename().split(".")[1];
+            String ftpfilename = fileDto.getFtpfilename();
             FtpUtil.downloadFile(ip,Integer.parseInt(port),username,password,emailfilePath,ftpfilename,localPath);
             filePath=localPath+ File.separator+ftpfilename;
             //设置响应头和客户端保存文件名
