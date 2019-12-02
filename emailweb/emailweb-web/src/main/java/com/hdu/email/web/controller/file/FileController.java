@@ -1,7 +1,7 @@
 package com.hdu.email.web.controller.file;
 
-import com.email.tools.FtpUtil;
 import com.email.tools.IDUtils;
+import com.emailweb.util.FtpUtil;
 import com.hdu.email.common.util.transfer.BaseReturnResult;
 import com.hdu.emailservice.dto.FileDto;
 import lombok.extern.slf4j.Slf4j;
@@ -141,8 +141,8 @@ public class FileController {
     }
 
 
-    @PostMapping(value = "/downloadFile")
-    private void download(FileDto fileDto, HttpServletRequest request, HttpServletResponse response){
+    @GetMapping(value = "/downloadFile/{filename}")
+    private void download(@PathVariable(value = "filename")String filename, FileDto fileDto, HttpServletResponse response){
         //获取属性
         getProperties();
         InputStream inputStream = null;
@@ -151,17 +151,81 @@ public class FileController {
         long downloadedLength = 0l;
         try {
             String localPath = System.getProperty("user.dir");
-            String ftpfilename = fileDto.getFtpfilename();
+            String ftpfilename = filename+"."+fileDto.getFilename().split(".")[1];
             FtpUtil.downloadFile(ip,Integer.parseInt(port),username,password,emailfilePath,ftpfilename,localPath);
             filePath=localPath+ File.separator+ftpfilename;
             //设置响应头和客户端保存文件名
-            response.setCharacterEncoding("utf-8");
-            response.setContentType("multipart/form-data");
-            response.setHeader("Content-Disposition", "attachment;fileName=" + ftpfilename);
+            response.setHeader("content-type", "application/octet-stream");
+            response.setContentType("application/octet-stream");
+            response.setHeader("Content-Disposition", "attachment;filename=" + fileDto.getFilename());
+//            response.setCharacterEncoding("utf-8");
+//            response.setContentType("multipart/octet-stream");
+//            response.setHeader("Content-Disposition", "attachment;fileName=" + ftpfilename);
             //用于记录以完成的下载的数据量，单位是byte
 
             //打开本地文件流
             inputStream = new FileInputStream(filePath);
+            //激活下载操作
+            os = response.getOutputStream();
+            //循环写入输出流
+            byte[] b = new byte[2048];
+            int length;
+            while ((length = inputStream.read(b)) > 0) {
+                os.write(b, 0, length);
+                downloadedLength += b.length;
+            }
+
+        }catch (Exception e){
+            log.error(e.getMessage());
+        }finally {
+            // 这里主要关闭。
+            if (os!=null){
+                try {
+                    os.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (inputStream!=null){
+                try {
+                    inputStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (filePath != null){
+                //删除临时文件夹
+                File dir = new File(filePath);
+                dir.delete();
+            }
+        }
+
+    }
+
+
+    @GetMapping(value = "/downloadFile1")
+    private void download1(String filename, HttpServletResponse response){
+        //获取属性
+        getProperties();
+        InputStream inputStream = null;
+        OutputStream os = null;
+        String filePath=null;
+        long downloadedLength = 0l;
+        try {
+            String localPath = System.getProperty("user.dir");
+            FtpUtil.downloadFile(ip,Integer.parseInt(port),username,password,emailfilePath,filename,localPath);
+            filePath=localPath+ File.separator+filename;
+            //设置响应头和客户端保存文件名
+            response.setHeader("content-type", "application/octet-stream");
+            response.setContentType("application/octet-stream");
+            response.setHeader("Content-Disposition", "attachment;filename=" + filename);
+//            response.setCharacterEncoding("utf-8");
+//            response.setContentType("multipart/octet-stream");
+//            response.setHeader("Content-Disposition", "attachment;fileName=" + ftpfilename);
+            //用于记录以完成的下载的数据量，单位是byte
+
+            //打开本地文件流
+            inputStream = new BufferedInputStream(new FileInputStream(filePath));
             //激活下载操作
             os = response.getOutputStream();
             //循环写入输出流
