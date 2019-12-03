@@ -25,4 +25,9 @@
         (#{username},#{pwdHash},#{pwdAlgorithm},#{useForwarding},#{forwardDestination},#{useAlias},#{alias})
     </insert>
 
+    <update id="updateUser" parameterType="emailUserDto">
+        update users set pwdHash = #{pwdHash}
+        where username = #{username}
+    </update>
+
 </mapper>

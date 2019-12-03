@@ -16,4 +16,6 @@ public interface EmailUserApi {
     *@return:
     */
     BaseReturnResult getNameById(String username);
+
+    BaseReturnResult changePasswd(EmailUserDto emailUserDto);
 }

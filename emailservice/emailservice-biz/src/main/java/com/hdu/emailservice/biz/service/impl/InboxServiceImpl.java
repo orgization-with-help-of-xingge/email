@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import javax.crypto.spec.OAEPParameterSpec;
 import java.io.UnsupportedEncodingException;
 import java.util.*;
 
@@ -292,6 +293,31 @@ public class InboxServiceImpl implements InboxService {
         if (i<1){
             throw new Exception("操作失败");
         }
+        result.setWhenSuccess();
+        return result;
+    }
+
+    @Override
+    public BaseReturnResult selNumber(String s) {
+        BaseReturnResult result = BaseReturnResult.getFailResult();
+        InboxNumber inboxNumber = new InboxNumber();
+        //收件箱
+        InboxParam param = new InboxParam();
+        param.setRecipients(s);
+        Integer rec = inboxMapper.countByRecip(param);
+        //发件箱
+        InboxParam param1 = new InboxParam();
+        param1.setSender(s);
+        Integer outbox = inboxMapper.countBySender(param1);
+
+        //草稿箱
+        DraftMailParam param2 = new DraftMailParam();
+        param2.setUsername(s);
+        int draft = draftMapper.countDrafts(param2);
+        inboxNumber.setDraftcount(draft);
+        inboxNumber.setInboxcount(rec);
+        inboxNumber.setOutboxcount(outbox);
+        result.setObject(inboxNumber);
         result.setWhenSuccess();
         return result;
     }

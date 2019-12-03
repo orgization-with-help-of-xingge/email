@@ -16,4 +16,5 @@ public interface EmailUserMapper {
 
     int insertUser(EmailUserDto emailUserDto);
 
+    int updateUser(EmailUserDto emailUserDto);
 }

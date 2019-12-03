@@ -106,5 +106,17 @@ public class EmailUserController {
         return result;
     }
 
+    @RequestMapping(value = "/changepasswd",method = RequestMethod.POST)
+    @ResponseBody
+    private BaseReturnResult changePassWord(EmailUserDto emailUserDto){
+        BaseReturnResult result = BaseReturnResult.getFailResult();
+        try {
+            result = emailUserApi.changePasswd(emailUserDto);
+        }catch (Exception e){
+            log.error(e.getMessage());
+        }
+        return result;
+    }
+
 
 }

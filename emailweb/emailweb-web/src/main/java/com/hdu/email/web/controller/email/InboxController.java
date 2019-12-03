@@ -174,4 +174,15 @@ public class InboxController {
         return result;
     }
 
+    @RequestMapping(value = "/getnumber",method = RequestMethod.POST)
+    private BaseReturnResult getNumber(@RequestHeader("X-Token")String username){
+        BaseReturnResult result = BaseReturnResult.getFailResult();
+        try {
+            result = inboxApi.getNumber(username+"@sixl.xyz");
+        }catch (Exception e){
+            log.error(e.getMessage());
+        }
+        return result;
+    }
+
 }

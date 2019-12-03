@@ -60,6 +60,7 @@ public class EmailUserServiceImpl implements EmailUserService {
     public BaseReturnResult addUser(EmailUserDto emailUserDto) {
         BaseReturnResult result = BaseReturnResult.getFailResult();
         try {
+            emailUserDto.setUsername(emailUserDto.getUsername().split("@")[0]);
             emailUserDto.setPwdAlgorithm(pwdAlgorithm);
             emailUserDto.setPwdHash(DigestUtil.digestString(emailUserDto.getPasswd(),emailUserDto.getPwdAlgorithm()));
             emailUserDto.setUseForwarding(useForwarding);
@@ -84,6 +85,31 @@ public class EmailUserServiceImpl implements EmailUserService {
         }catch (Exception e){
             log.info(e.getMessage());
         }
+        return result;
+    }
+
+    @Override
+    public BaseReturnResult updPassword(EmailUserDto emailUserDto) throws NoSuchAlgorithmException {
+        BaseReturnResult result = BaseReturnResult.getFailResult();
+        emailUserDto.setUsername(emailUserDto.getUsername().split("@")[0]);
+        //查询原密码对不对
+        EmailUserDto param = new EmailUserDto();
+        param.setUsername(emailUserDto.getUsername());
+        param.setPwdHash(DigestUtil.digestString(emailUserDto.getOrginPassword(),pwdAlgorithm));
+        EmailUserDto emailUserDto1 = emailUserMapper.selByUserNameAndPasswd(param);
+        //更改密码逻辑
+        if (emailUserDto1!=null){
+            emailUserDto.setPwdHash(DigestUtil.digestString(emailUserDto.getPasswd(),pwdAlgorithm));
+            int value=emailUserMapper.updateUser(emailUserDto);
+            if (value<=0){
+                result.setWhenFail("更改失败");
+                return result;
+            }
+            result.setWhenSuccess("更改成功");
+        }else {
+            result.setWhenFail("原密码输入错误");
+        }
+
         return result;
     }
 }

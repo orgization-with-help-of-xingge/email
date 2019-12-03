@@ -18,5 +18,6 @@ public class EmailUserDto implements Serializable {
     private String token="admin";
     private String groupid;
     private String groupname;
+    private String orginPassword;
 
 }
