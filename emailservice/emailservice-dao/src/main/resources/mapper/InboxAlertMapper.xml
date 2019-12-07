@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hdu.email.mybatis.mapper.InboxAlertMapper">
+    <insert id="insAlert" parameterType="inboxAlertDto">
+        insert into t_inbox_alert values(#{urid},#{username},#{inboxNumber})
+    </insert>
+
+    <update id="updAlert" parameterType="inboxAlertDto">
+        update t_inbox_alert set inbox_number =#{inboxNumber} where username =#{username}
+    </update>
+
+    <select id="selNumberByUsername" parameterType="java.lang.String" resultType="java.lang.Integer">
+        select T.inbox_number from t_inbox_alert T where T.username =#{username}
+    </select>
+</mapper>

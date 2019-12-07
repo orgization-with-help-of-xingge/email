@@ -120,4 +120,15 @@ public class InboxProvider implements InboxApi {
         }
         return result;
     }
+
+    @Override
+    public BaseReturnResult getAlert(String s) {
+        BaseReturnResult result = BaseReturnResult.getFailResult();
+        try{
+            result = inboxService.selAlert(s);
+        }catch (Exception e){
+            log.error(e.getMessage());
+        }
+        return result;
+    }
 }

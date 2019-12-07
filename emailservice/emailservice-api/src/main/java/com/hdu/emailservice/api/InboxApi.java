@@ -27,4 +27,6 @@ public interface InboxApi {
     BaseReturnResult saveDraft(String username, SendMailDto sendMailDto);
 
     BaseReturnResult getNumber(String s);
+
+    BaseReturnResult getAlert(String s);
 }

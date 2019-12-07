@@ -53,27 +53,33 @@
     </bean>
 
 
-<!--    <mvc:interceptors>-->
-<!--        <mvc:interceptor>-->
-<!--            <mvc:mapping path="/**"/>-->
-<!--            &lt;!&ndash;登录注册controller，跳过拦截&ndash;&gt;-->
-<!--            <mvc:exclude-mapping path="/user/login"/>-->
-<!--            <mvc:exclude-mapping path="/user/asylogin"/>-->
-<!--            <mvc:exclude-mapping path="/user/register"/>-->
-<!--            <mvc:exclude-mapping path="/user/asyregister"/>-->
-<!--            &lt;!&ndash;静态资源，跳过拦截&ndash;&gt;-->
-<!--            <mvc:exclude-mapping path="/bootstrap/**"/>-->
-<!--            <mvc:exclude-mapping path="/css/*"/>-->
-<!--            <mvc:exclude-mapping path="/font/**"/>-->
-<!--            <mvc:exclude-mapping path="/img/*"/>-->
-<!--            <mvc:exclude-mapping path="/jquery/*"/>-->
-<!--            <mvc:exclude-mapping path="/layer/**"/>-->
-<!--            <mvc:exclude-mapping path="/script/*"/>-->
-<!--            <mvc:exclude-mapping path="/ztree/**"/>-->
-<!--            <mvc:exclude-mapping path="/autoemail/**"/>-->
-<!--            <bean class="com.hdu.email.web.interceptor.EmailUserInterceptor"/>-->
-<!--        </mvc:interceptor>-->
-<!--    </mvc:interceptors>-->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <!--登录注册controller，跳过拦截-->
+            <mvc:exclude-mapping path="/user/login"/>
+            <mvc:exclude-mapping path="/user/asylogin"/>
+            <mvc:exclude-mapping path="/user/register"/>
+            <mvc:exclude-mapping path="/user/asyregister"/>
+            <mvc:exclude-mapping path="/user/userInfo"/>
+            <mvc:exclude-mapping path="/user/logout"/>
+            <mvc:exclude-mapping path="/emailfile/uploadfile"/>
+            <mvc:exclude-mapping path="/emailfile/downloadFile"/>
+            <mvc:exclude-mapping path="/emailfile/upload"/>
+
+            <!--静态资源，跳过拦截-->
+            <mvc:exclude-mapping path="/bootstrap/**"/>
+            <mvc:exclude-mapping path="/css/*"/>
+            <mvc:exclude-mapping path="/font/**"/>
+            <mvc:exclude-mapping path="/img/*"/>
+            <mvc:exclude-mapping path="/jquery/*"/>
+            <mvc:exclude-mapping path="/layer/**"/>
+            <mvc:exclude-mapping path="/script/*"/>
+            <mvc:exclude-mapping path="/ztree/**"/>
+            <mvc:exclude-mapping path="/autoemail/**"/>
+            <bean class="com.hdu.email.web.interceptor.EmailUserInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
 
 
 </beans>

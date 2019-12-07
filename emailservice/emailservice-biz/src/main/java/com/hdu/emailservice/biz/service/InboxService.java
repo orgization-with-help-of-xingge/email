@@ -33,4 +33,6 @@ public interface InboxService {
     BaseReturnResult insDraft(String username, SendMailDto sendMailDto) throws Exception;
 
     BaseReturnResult selNumber(String s);
+
+    BaseReturnResult selAlert(String s);
 }

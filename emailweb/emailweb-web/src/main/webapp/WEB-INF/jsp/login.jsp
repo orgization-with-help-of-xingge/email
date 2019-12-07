@@ -30,7 +30,7 @@
 
 <div class="container">
     <form id="loginForm" class="form-signin" action="/doLogin" role="form" method="post">
-        <h2 class="form-signin-heading"><i class="glyphicon glyphicon-user"></i> 用户登录</h2>
+        <h2 class="form-signin-heading"><i class="glyphicon glyphicon-user"></i> 管理员登录界面</h2>
         <div class="form-group has-success has-feedback">
             <input type="text" name="username" class="form-control" id="loginaccount" placeholder="请输入登录账号" onclick="autoMail()" autofocus>
             <span class="glyphicon glyphicon-user form-control-feedback"></span>
@@ -41,7 +41,6 @@
         </div>
         <div class="form-group has-success has-feedback">
             <select class="form-control" >
-                <option value="member">用户</option>
                 <option value="user">管理</option>
             </select>
         </div>

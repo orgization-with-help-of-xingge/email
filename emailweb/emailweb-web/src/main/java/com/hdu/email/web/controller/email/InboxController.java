@@ -185,4 +185,15 @@ public class InboxController {
         return result;
     }
 
+    @RequestMapping(value = "/getAlert",method = RequestMethod.POST)
+    private BaseReturnResult getAlert(@RequestHeader("X-Token")String username){
+        BaseReturnResult result = BaseReturnResult.getFailResult();
+        try {
+            result = inboxApi.getAlert(username+"@sixl.xyz");
+        }catch (Exception e){
+            log.error(e.getMessage());
+        }
+        return result;
+    }
+
 }

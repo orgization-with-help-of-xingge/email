@@ -42,6 +42,9 @@ public class InboxServiceImpl implements InboxService {
     @Autowired
     private DraftMapper draftMapper;
 
+    @Autowired
+    private InboxAlertMapper inboxAlertMapper;
+
     @Value(value = "${mail.transport.protocol}")
     private String protocol;
 
@@ -318,6 +321,44 @@ public class InboxServiceImpl implements InboxService {
         inboxNumber.setInboxcount(rec);
         inboxNumber.setOutboxcount(outbox);
         result.setObject(inboxNumber);
+        result.setWhenSuccess();
+        return result;
+    }
+
+    @Override
+    public BaseReturnResult selAlert(String username) {
+        //提醒逻辑：1，根据username查询收件箱数量 2.查询提醒表中记录user的邮件数 3.如果没有的话，新建一条为0 4.如果数据不一致，更新
+        BaseReturnResult result = BaseReturnResult.getFailResult();
+        InboxParam inboxParam = new InboxParam();
+        inboxParam.setRecipients(username);
+        Integer currentNumber = inboxMapper.countByRecip(inboxParam);
+        Integer originNumber = inboxAlertMapper.selNumberByUsername(username);
+        InboxAlertDto inboxAlertDto = new InboxAlertDto();
+        if (originNumber==null){
+            inboxAlertDto.setUrid(UUID.randomUUID().toString());
+            inboxAlertDto.setUsername(username);
+            if (currentNumber==0){
+                inboxAlertDto.setInboxNumber(0);
+                inboxAlertMapper.insAlert(inboxAlertDto);
+                result.setObject(false);
+            } else {
+                inboxAlertDto.setInboxNumber(currentNumber);
+                inboxAlertMapper.insAlert(inboxAlertDto);
+                result.setObject(true);
+            }
+        }else if (currentNumber>originNumber){
+            inboxAlertDto.setInboxNumber(currentNumber);
+            inboxAlertDto.setUsername(username);
+            inboxAlertMapper.updAlert(inboxAlertDto);
+            result.setObject(true);
+        }else if(originNumber>currentNumber){
+            inboxAlertDto.setInboxNumber(currentNumber);
+            inboxAlertDto.setUsername(username);
+            inboxAlertMapper.updAlert(inboxAlertDto);
+            result.setObject(false);
+        }else {
+            result.setObject(false);
+        }
         result.setWhenSuccess();
         return result;
     }
