@@ -17,4 +17,6 @@ public interface EmailUserMapper {
     int insertUser(EmailUserDto emailUserDto);
 
     int updateUser(EmailUserDto emailUserDto);
+
+    int delUser(List<String> usernames);
 }

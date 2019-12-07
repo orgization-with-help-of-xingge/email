@@ -4,6 +4,7 @@ import com.hdu.email.common.util.transfer.BaseReturnResult;
 import com.hdu.email.dto.EmailUserDto;
 
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 
 public interface EmailUserService {
     EmailUserDto queryById(String id);
@@ -15,4 +16,6 @@ public interface EmailUserService {
     BaseReturnResult getNameById(String username);
 
     BaseReturnResult updPassword(EmailUserDto emailUserDto) throws NoSuchAlgorithmException;
+
+    BaseReturnResult delUser(List<String> usernames);
 }

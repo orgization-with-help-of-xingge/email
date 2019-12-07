@@ -8,6 +8,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service(value = "emailUserProvider")
 @Slf4j
 public class EmailUserProvider implements EmailUserApi {
@@ -68,6 +70,17 @@ public class EmailUserProvider implements EmailUserApi {
         BaseReturnResult result = BaseReturnResult.getFailResult();
         try {
             result = emailUserService.updPassword(emailUserDto);
+        }catch (Exception e){{
+            log.error(e.getMessage());
+        }}
+        return result;
+    }
+
+    @Override
+    public BaseReturnResult delUsers(List<String> usernames) {
+        BaseReturnResult result = BaseReturnResult.getFailResult();
+        try {
+            result = emailUserService.delUser(usernames);
         }catch (Exception e){{
             log.error(e.getMessage());
         }}

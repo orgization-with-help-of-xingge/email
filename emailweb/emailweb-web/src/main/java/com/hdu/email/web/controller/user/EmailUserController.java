@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 import java.util.logging.Logger;
 
 @CrossOrigin
@@ -112,6 +113,18 @@ public class EmailUserController {
         BaseReturnResult result = BaseReturnResult.getFailResult();
         try {
             result = emailUserApi.changePasswd(emailUserDto);
+        }catch (Exception e){
+            log.error(e.getMessage());
+        }
+        return result;
+    }
+
+    @RequestMapping(value = "/deluser",method = RequestMethod.POST)
+    @ResponseBody
+    private BaseReturnResult delUser(@RequestParam("usernames[]")List<String> usernames){
+        BaseReturnResult result = BaseReturnResult.getFailResult();
+        try {
+            result = emailUserApi.delUsers(usernames);
         }catch (Exception e){
             log.error(e.getMessage());
         }

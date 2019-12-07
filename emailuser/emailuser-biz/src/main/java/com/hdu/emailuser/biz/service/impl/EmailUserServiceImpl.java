@@ -9,8 +9,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.support.TransactionTemplate;
 
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 
 @Service
 @Slf4j
@@ -110,6 +112,17 @@ public class EmailUserServiceImpl implements EmailUserService {
             result.setWhenFail("原密码输入错误");
         }
 
+        return result;
+    }
+
+    @Override
+    public BaseReturnResult delUser(List<String> usernames) {
+        BaseReturnResult result = BaseReturnResult.getFailResult();
+        int sum = emailUserMapper.delUser(usernames);
+        if (sum<1){
+            return result;
+        }
+        result.setWhenSuccess();
         return result;
     }
 }

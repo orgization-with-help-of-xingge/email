@@ -30,4 +30,10 @@
         where username = #{username}
     </update>
 
+    <delete id="delUser" parameterType="java.lang.String">
+        delete from user where username in
+        <foreach collection="usernames" open="(" close=")" separator="," index="index" item="item">
+            #{item}
+        </foreach>
+    </delete>
 </mapper>
