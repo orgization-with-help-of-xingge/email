@@ -102,7 +102,7 @@
            success:function (result) {
                 layer.close(loadingInex);
                 if (result.success==1){
-                    window.location.href="main";
+                    window.location.href="${APP_PATH}/admin/index";
                 }else {
                     layer.alert("用户名密码错误", function(index){
                         layer.close(index);

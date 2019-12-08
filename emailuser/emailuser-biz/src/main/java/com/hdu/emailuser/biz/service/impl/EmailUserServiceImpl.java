@@ -1,8 +1,12 @@
 package com.hdu.emailuser.biz.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.hdu.email.common.util.DigestUtil;
 import com.hdu.email.common.util.transfer.BaseReturnResult;
+import com.hdu.email.common.util.transfer.PageView;
 import com.hdu.email.dto.EmailUserDto;
+import com.hdu.email.dto.EmailUserParam;
 import com.hdu.email.mybatis.mapper.mapper.EmailUserMapper;
 import com.hdu.emailuser.biz.service.EmailUserService;
 import lombok.extern.slf4j.Slf4j;
@@ -13,6 +17,7 @@ import org.springframework.transaction.support.TransactionTemplate;
 
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @Slf4j
@@ -33,6 +38,8 @@ public class EmailUserServiceImpl implements EmailUserService {
     @Override
     public EmailUserDto queryById(String id) {
         EmailUserDto emailUserDto = emailUserMapper.selById(id);
+        emailUserDto.setRealname((String) getNameById(id+"@sixl.xyz").getObject());
+        emailUserDto.setEmail(id+"@six.xyz");
         if(emailUserDto ==null){
             return new EmailUserDto();
         }
@@ -68,6 +75,11 @@ public class EmailUserServiceImpl implements EmailUserService {
             emailUserDto.setUseForwarding(useForwarding);
             emailUserDto.setUseAlias(useAlias);
             int value=emailUserMapper.insertUser(emailUserDto);
+            EmailUserDto emailUserDto1 = new EmailUserDto();
+            emailUserDto1.setUrid(UUID.randomUUID().toString());
+            emailUserDto1.setUsername(emailUserDto.getUsername()+"@sixl.xyz");
+            emailUserDto1.setRealname(emailUserDto.getRealname());
+            int value1 = emailUserMapper.insertUserName(emailUserDto1);
             if (value<=0){
                 return result;
             }
@@ -120,6 +132,44 @@ public class EmailUserServiceImpl implements EmailUserService {
         BaseReturnResult result = BaseReturnResult.getFailResult();
         int sum = emailUserMapper.delUser(usernames);
         if (sum<1){
+            return result;
+        }
+        result.setWhenSuccess();
+        return result;
+    }
+
+    @Override
+    public PageView<EmailUserDto> getAll(EmailUserParam param) {
+        PageView<EmailUserDto> pageView = new PageView<>();
+        PageHelper.startPage(param.getPage(),param.getRows());
+        List<EmailUserDto> emailUserDtos = emailUserMapper.selAll();
+        PageInfo<EmailUserDto> pageInfo = new PageInfo<>(emailUserDtos);
+        //不添加额外熟悉，value当总页数，info当当前页
+        pageView.setValue(pageInfo.getPages()+"");
+        pageView.setObject(param.getPage());
+        for (EmailUserDto emailUserDto : emailUserDtos) {
+            emailUserDto.setRealname((String) getNameById(emailUserDto.getUsername()+"@sixl.xyz").getObject());
+            emailUserDto.setEmail(emailUserDto.getUsername()+"@sixl.xyz");
+        }
+        pageView.setRows(emailUserDtos);
+        pageView.setTotal(emailUserMapper.countAll());
+        pageView.setWhenSuccess();
+        return pageView;
+    }
+
+    @Override
+    public BaseReturnResult updUser(EmailUserDto emailUserDto) throws NoSuchAlgorithmException {
+        BaseReturnResult result = BaseReturnResult.getFailResult();
+        emailUserDto.setUsername(emailUserDto.getUsername().split("@")[0]);
+        if (emailUserDto.getPasswd()!=null && !"".equals(emailUserDto.getPasswd())){
+            emailUserDto.setPwdHash(DigestUtil.digestString(emailUserDto.getPasswd(),pwdAlgorithm));
+            int value=emailUserMapper.updateUser(emailUserDto);
+        }
+        EmailUserDto emailUserDto1 = new EmailUserDto();
+        emailUserDto1.setUsername(emailUserDto.getUsername()+"@sixl.xyz");
+        emailUserDto1.setRealname(emailUserDto.getRealname());
+        int i = emailUserMapper.updName(emailUserDto1);
+        if (i<0){
             return result;
         }
         result.setWhenSuccess();

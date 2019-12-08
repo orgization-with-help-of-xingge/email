@@ -7,6 +7,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 public class EmailUserDto implements Serializable {
+    private String urid;
     private String username;
     private String pwdHash;
     private String passwd;
@@ -19,5 +20,7 @@ public class EmailUserDto implements Serializable {
     private String groupid;
     private String groupname;
     private String orginPassword;
+    private String realname;
+    private String email;
 
 }

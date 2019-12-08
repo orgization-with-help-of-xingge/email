@@ -1,7 +1,9 @@
 package com.hdu.email.provider.provider;
 
 import com.hdu.email.common.util.transfer.BaseReturnResult;
+import com.hdu.email.common.util.transfer.PageView;
 import com.hdu.email.dto.EmailUserDto;
+import com.hdu.email.dto.EmailUserParam;
 import com.hdu.emailuser.api.user.EmailUserApi;
 import com.hdu.emailuser.biz.service.EmailUserService;
 import lombok.extern.slf4j.Slf4j;
@@ -81,6 +83,28 @@ public class EmailUserProvider implements EmailUserApi {
         BaseReturnResult result = BaseReturnResult.getFailResult();
         try {
             result = emailUserService.delUser(usernames);
+        }catch (Exception e){{
+            log.error(e.getMessage());
+        }}
+        return result;
+    }
+
+    @Override
+    public PageView<EmailUserDto> getAll(EmailUserParam param) {
+        PageView<EmailUserDto> pageView = new PageView<>();
+        try {
+            pageView = emailUserService.getAll(param);
+        }catch (Exception e){{
+            log.error(e.getMessage());
+        }}
+        return pageView;
+    }
+
+    @Override
+    public BaseReturnResult editUser(EmailUserDto emailUserDto) {
+        BaseReturnResult result = BaseReturnResult.getFailResult();
+        try {
+            result = emailUserService.updUser(emailUserDto);
         }catch (Exception e){{
             log.error(e.getMessage());
         }}

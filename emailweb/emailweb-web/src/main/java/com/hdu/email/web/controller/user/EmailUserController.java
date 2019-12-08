@@ -121,11 +121,12 @@ public class EmailUserController {
 
     @RequestMapping(value = "/deluser",method = RequestMethod.POST)
     @ResponseBody
-    private BaseReturnResult delUser(@RequestParam("usernames[]")List<String> usernames){
+    public BaseReturnResult delUser(@RequestParam("username")List<String> usernames){
         BaseReturnResult result = BaseReturnResult.getFailResult();
         try {
             result = emailUserApi.delUsers(usernames);
         }catch (Exception e){
+            e.printStackTrace();
             log.error(e.getMessage());
         }
         return result;

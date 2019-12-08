@@ -1,5 +1,6 @@
 package com.hdu.email.dto;
 
+import com.hdu.email.common.util.transfer.BaseQueryParams;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -7,7 +8,7 @@ import java.io.Serializable;
 
 @Getter
 @Setter
-public class EmailUserParam implements Serializable {
+public class EmailUserParam extends BaseQueryParams {
     private String urid;
     private String username;
     private String pwdHash;

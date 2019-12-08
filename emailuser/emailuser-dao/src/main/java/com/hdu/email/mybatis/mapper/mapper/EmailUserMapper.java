@@ -8,6 +8,8 @@ import java.util.List;
 public interface EmailUserMapper {
     List<EmailUserDto> selAll();
 
+    Integer countAll();
+
     EmailUserDto selById(@Param(value = "username") String username);
 
     EmailUserDto selByUserNameAndPasswd(EmailUserDto emailUserDto);
@@ -19,4 +21,7 @@ public interface EmailUserMapper {
     int updateUser(EmailUserDto emailUserDto);
 
     int delUser(List<String> usernames);
+
+    int insertUserName(EmailUserDto emailUserDto);
+    int updName(EmailUserDto emailUserDto);
 }

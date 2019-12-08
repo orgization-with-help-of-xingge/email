@@ -6,6 +6,10 @@
         select *
         from users
     </select>
+    <select id="countAll"  resultType="java.lang.Integer">
+        select count(1)
+        from users
+    </select>
 
     <select id="selById" resultType="emailUserDto">
         select * from users where username=#{username}
@@ -31,9 +35,16 @@
     </update>
 
     <delete id="delUser" parameterType="java.lang.String">
-        delete from user where username in
-        <foreach collection="usernames" open="(" close=")" separator="," index="index" item="item">
+        delete from users where username in
+        <foreach collection="list" open="(" close=")" separator="," index="index" item="item">
             #{item}
         </foreach>
     </delete>
+
+    <insert id="insertUserName" parameterType="emailUserDto">
+        insert into t_users_name values(#{urid},#{username},#{realname})
+    </insert>
+    <update id="updName" parameterType="emailUserDto">
+        update t_users_name set realname = #{realname} where username=#{username}
+    </update>
 </mapper>

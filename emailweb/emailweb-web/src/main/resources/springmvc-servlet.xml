@@ -63,6 +63,8 @@
             <mvc:exclude-mapping path="/user/asyregister"/>
             <mvc:exclude-mapping path="/user/userInfo"/>
             <mvc:exclude-mapping path="/user/logout"/>
+            <mvc:exclude-mapping path="/user/deluser"/>
+            <mvc:exclude-mapping path="/admin/asyeditUser"/>
             <mvc:exclude-mapping path="/emailfile/uploadfile"/>
             <mvc:exclude-mapping path="/emailfile/downloadFile"/>
             <mvc:exclude-mapping path="/emailfile/upload"/>

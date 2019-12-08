@@ -1,7 +1,7 @@
 package com.hdu.email.web.controller.file;
 
-import com.email.tools.IDUtils;
 import com.emailweb.util.FtpUtil;
+import com.emailweb.util.IDUtils;
 import com.hdu.email.common.util.transfer.BaseReturnResult;
 import com.hdu.emailservice.dto.FileDto;
 import lombok.extern.slf4j.Slf4j;
