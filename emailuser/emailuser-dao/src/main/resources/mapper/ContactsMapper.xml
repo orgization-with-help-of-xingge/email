@@ -80,16 +80,16 @@
             username = #{username}
         </if>
         <if test="contacts !=null and contacts !=''">
-            contacts = #{contacts}
+            ,contacts = #{contacts}
         </if>
         <if test="contactsName !=null and contactsName !=''">
-            contacts_name = #{contactsName}
+            ,contacts_name = #{contactsName}
         </if>
         <if test="groupid !=null and groupid !=''">
-            groupid = #{groupid}
+            ,groupid = #{groupid}
         </if>
         <if test="headPic !=null and headPic !=''">
-            head_pic = #{headPic}
+            ,head_pic = #{headPic}
         </if>
         where urid = #{urid}
     </update>
