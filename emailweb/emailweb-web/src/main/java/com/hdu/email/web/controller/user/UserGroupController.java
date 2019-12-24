@@ -38,10 +38,10 @@ public class UserGroupController {
     }
 
     @RequestMapping(value = "/editgroup",method = RequestMethod.POST)
-    private BaseReturnResult editGroup(UserGroupParam param){
+    private BaseReturnResult editGroup(@RequestHeader("X-Token") String username,UserGroupParam param){
         BaseReturnResult result = BaseReturnResult.getFailResult();
         try{
-
+            param.setUsername(username+"@sixl.xyz");
             result= userContactsApi.updGroup(param);
         }catch (Exception e){
             log.error(e.getMessage());

@@ -53,6 +53,7 @@ public class UserGroupServiceImpl implements UserGroupService {
         int sum=0;
         EmailContactsParam contactsParam = new EmailContactsParam();
         for (String contact : param.getContacts()) {
+            contactsParam.setUsername(param.getUsername());
             contactsParam.setGroupid(param.getUrid());
             contactsParam.setUrid(contact);
             sum += contactsMapper.updContacts(contactsParam);
