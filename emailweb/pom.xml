@@ -57,7 +57,7 @@
         <net.sf.json.version>2.4</net.sf.json.version>
 
         <!-- jackson -->
-        <jackson.version>2.8.7</jackson.version>
+        <jackson.version>2.11.0</jackson.version>
 
         <!-- rabbitmq -->
         <rabbitmq.version>3.5.1</rabbitmq.version>
