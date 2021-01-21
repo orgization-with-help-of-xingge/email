@@ -61,7 +61,7 @@
         <commons.beanutils>1.9.3</commons.beanutils>
         <commons.pool2.version>2.5.0</commons.pool2.version>
         <commons.codec.version>1.11</commons.codec.version>
-        <jackson.version>2.9.3</jackson.version>
+        <jackson.version>2.12.1</jackson.version>
         <protostuff.version>1.6.0</protostuff.version>
         <lombok.version>1.16.20</lombok.version>
         <guava.version>20.0</guava.version>
