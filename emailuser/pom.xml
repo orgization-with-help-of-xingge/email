@@ -53,7 +53,7 @@
         <zkclient.version>0.1</zkclient.version>
 
         <!-- 工具类 -->
-        <commons.io.version>2.6</commons.io.version>
+        <commons.io.version>2.7</commons.io.version>
         <commons.lang3.version>3.7</commons.lang3.version>
         <commons.beanutils>1.9.3</commons.beanutils>
         <commons.pool2.version>2.5.0</commons.pool2.version>
