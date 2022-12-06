@@ -64,7 +64,7 @@
 
         <!-- io -->
         <commons-io.version>2.4</commons-io.version>
-        <commons-net.version>3.3</commons-net.version>
+        <commons-net.version>3.9.0</commons-net.version>
 
         <!-- 缓存 -->
         <jedis.version>2.9.0</jedis.version>
